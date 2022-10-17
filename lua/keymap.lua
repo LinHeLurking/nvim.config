@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 
-local keymap_callback = {}
+local keymap = {}
 
 local auto_bind = function(lhs, rhs, opt)
   if type(rhs) == "string" then
@@ -34,7 +34,7 @@ end
 auto_bind("<C-s>", "<Cmd>:w<CR>", opts)
 auto_bind("<S-Tab>", "<Cmd>:< <CR>", opts)
 vim.keymap.set("i", "<C-h>", "<Esc>^<Insert>", opts)
-vim.keymap.set("i", "<C-l>", "<Esc>$<Insert>", opts)
+vim.keymap.set("i", "<C-l>", "<Esc>$a", opts)
 
 --
 -- Some common seetting toggle
@@ -57,6 +57,24 @@ wk.register({
   ["<A-k>"] = { "<C-w>k", "Move To Up Window" },
   ["<A-l>"] = { "<C-w>l", "Move To Right Window" },
 }, {})
+
+--
+-- Terminal Navigation
+--
+
+-- Don't know why <A-F12> is <F60> :P
+keymap.term_toggle_key = function()
+  return "<F60>"
+end
+
+keymap.set_term_keymap = function()
+  local opts = { silent = true, noremap = true, buffer = 0 }
+  vim.keymap.set("t", "<Esc>", keymap.term_toggle_key() .. "<C-n>", opts)
+  vim.keymap.set("t", "<A-h>", "<Cmd>wincmd h<CR>", opts)
+  vim.keymap.set("t", "<A-j>", "<Cmd>wincmd j<CR>", opts)
+  vim.keymap.set("t", "<A-k>", "<Cmd>wincmd k<CR>", opts)
+  vim.keymap.set("t", "<A-l>", "<Cmd>wincmd l<CR>", opts)
+end
 
 --
 -- Buffer Line Navigation
@@ -82,7 +100,7 @@ local async_format = function()
   vim.lsp.buf.format({ async = true })
 end
 
-keymap_callback.lsp_set_map = function(client, bufnr)
+keymap.lsp_set_map = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
   wk.register({
@@ -103,7 +121,7 @@ end
 --
 -- Auto Completion
 --
-keymap_callback.cmp_keys = function()
+keymap.cmp_keys = function()
   local cmp = require("cmp")
   local smart_esc = cmp.mapping(function(callback)
     if cmp.visible() then
@@ -166,7 +184,7 @@ end
 --
 -- Telescope
 --
-keymap_callback.telscope_set_map = function()
+keymap.telscope_set_map = function()
   local telescope = require("telescope.builtin")
   local project = require("telescope").extensions.project
   local show_prj = function()
@@ -185,7 +203,7 @@ end
 --
 -- Intellij Flavor Keybindings
 --
-keymap_callback.lsp_set_map_intellij = function(client, bufnr)
+keymap.lsp_set_map_intellij = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   auto_bind("<C-A-l>", async_format, bufopts)
   auto_bind("<C-q>", vim.lsp.buf.signature_help, bufopts)
@@ -194,9 +212,5 @@ keymap_callback.lsp_set_map_intellij = function(client, bufnr)
 end
 auto_bind("<A-1>", "<Cmd>NvimTreeToggle<CR>", opts) -- insert mode bind is buggy
 auto_bind("<C-_>", "<Cmd>CommentToggle<CR>", opts)
--- Don't know why <A-F12> is <F60> :P
-keymap_callback.term_toggle_key = function()
-  return "<F60>"
-end
 
-return keymap_callback
+return keymap

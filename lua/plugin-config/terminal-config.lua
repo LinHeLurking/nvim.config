@@ -22,3 +22,5 @@ require("toggleterm").setup({
   auto_scroll = true, -- automatically scroll to the bottom on terminal output
   -- This field is only relevant if direction is set to 'float'
 })
+
+vim.api.nvim_create_autocmd("TermOpen", {pattern={"term://*"}, callback= keymap.set_term_keymap})

@@ -53,6 +53,9 @@ return require("packer").startup(function(use)
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
   })
+  -- LSP Enhance
+  use({ "stevearc/dressing.nvim" })
+  use({ "SmiteshP/nvim-navic" })
 
   -- Auto complete
   use({
@@ -116,6 +119,6 @@ return require("packer").startup(function(use)
     tag = "*",
   })
 
-  -- OSC52 Support(Copy & paste through terminal. Easy integration with Windows.) 
-  use "ojroques/nvim-osc52"
+  -- OSC52 Support(Copy & paste through terminal. Easy integration with Windows.)
+  use("ojroques/nvim-osc52")
 end)

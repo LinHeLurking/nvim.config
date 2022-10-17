@@ -1,8 +1,9 @@
 -- This file contains all UI related config
 
 -- TokyoNight coloe scheme
-vim.cmd[[colorscheme tokyonight]]
-vim.o.background = "light"
+vim.g.tokyonight_transparent = true
+vim.opt.background = "light"
+vim.opt.winblend = 15
 require("tokyonight").setup({
   -- your configuration comes here
   -- or leave it empty to use the default settings
@@ -18,8 +19,8 @@ require("tokyonight").setup({
     functions = {},
     variables = {},
     -- Background styles. Can be "dark", "transparent" or "normal"
-    sidebars = "dark", -- style for sidebars, see below
-    floats = "dark", -- style for floating windows
+    sidebars = "transparent", -- style for sidebars, see below
+    floats = "transparent", -- style for floating windows
   },
   sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
   day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
@@ -38,16 +39,53 @@ require("tokyonight").setup({
   ---@param colors ColorScheme
   on_highlights = function(highlights, colors) end,
 })
+vim.cmd([[colorscheme tokyonight]])
 
+-- Naciv
+local navic = require("nvim-navic")
+navic.setup({
+  icons = {
+    File = " ",
+    Module = " ",
+    Namespace = " ",
+    Package = " ",
+    Class = " ",
+    Method = " ",
+    Property = " ",
+    Field = " ",
+    Constructor = " ",
+    Enum = "練",
+    Interface = "練",
+    Function = " ",
+    Variable = " ",
+    Constant = " ",
+    String = " ",
+    Number = " ",
+    Boolean = "◩ ",
+    Array = " ",
+    Object = " ",
+    Key = " ",
+    Null = "ﳠ ",
+    EnumMember = " ",
+    Struct = " ",
+    Event = " ",
+    Operator = " ",
+    TypeParameter = " ",
+  },
+  highlight = false,
+  separator = " > ",
+  depth_limit = 0,
+  depth_limit_indicator = "..",
+})
 
 -- Lualine config
-require("lualine").setup {
+require("lualine").setup({
   options = {
     theme = "tokyonight",
     icons_enabled = true,
-    theme = "auto",
-    component_separators = { left = "", right = ""},
-    section_separators = { left = "", right = ""},
+    -- theme = "auto",
+    component_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
     disabled_filetypes = {
       statusline = {},
       winbar = {},
@@ -59,26 +97,26 @@ require("lualine").setup {
       statusline = 1000,
       tabline = 1000,
       winbar = 1000,
-    }
+    },
   },
   sections = {
-    lualine_a = {"mode"},
-    lualine_b = {"branch", "diff", "diagnostics"},
-    lualine_c = {"filename"},
-    lualine_x = {"encoding", "fileformat", "filetype"},
-    lualine_y = {"progress"},
-    lualine_z = {"location"}
+    lualine_a = { "mode" },
+    lualine_b = { "branch", "diff", "diagnostics" },
+    lualine_c = { "filename", { navic.get_location, cond = navic.is_available } },
+    lualine_x = { "encoding", "fileformat", "filetype" },
+    lualine_y = { "progress" },
+    lualine_z = { "location" },
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {"filename"},
-    lualine_x = {"location"},
+    lualine_c = { "filename" },
+    lualine_x = { "location" },
     lualine_y = {},
-    lualine_z = {}
+    lualine_z = {},
   },
   tabline = {},
   winbar = {},
   inactive_winbar = {},
-  extensions = {}
-}
+  extensions = {},
+})

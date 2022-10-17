@@ -12,12 +12,16 @@ null_ls.setup({
 })
 require("mason-null-ls").setup()
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local navic = require("nvim-navic")
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local on_attach = function(client, bufnr)
   local keymap = require("keymap")
   keymap.lsp_set_map(client, bufnr)
   keymap.lsp_set_map_intellij(client, bufnr)
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
 end
 
 require("mason-lspconfig").setup_handlers({
@@ -26,7 +30,6 @@ require("mason-lspconfig").setup_handlers({
   -- a dedicated handler.
   function(server_name) -- default handler (optional)
     require("lspconfig")[server_name].setup({
-      capabilities = capabilities,
       on_attach = on_attach,
     })
   end,
@@ -37,7 +40,6 @@ require("mason-lspconfig").setup_handlers({
   --end
   ["sumneko_lua"] = function()
     require("lspconfig").sumneko_lua.setup({
-      capabilities = capabilities,
       on_attach = on_attach,
       settings = {
         Lua = {
@@ -50,7 +52,6 @@ require("mason-lspconfig").setup_handlers({
   end,
   ["clangd"] = function()
     require("lspconfig").clangd.setup({
-      capabilities = capabilities,
       on_attach = on_attach,
       cmd = {
         "clangd",
