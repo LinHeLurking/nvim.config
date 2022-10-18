@@ -40,12 +40,10 @@ vim.keymap.set("i", "<C-l>", "<Esc>$a", opts)
 -- Some common seetting toggle
 --
 wk.register({
-  t = {
-    name = "Toggle",
-    h = { toggle_hls, "Toggle Highlight" },
-    r = { "<Cmd>:set relativenumber!<CR>", "Toggle Relative Number" },
-  },
-}, { prefix = "<Leader>" })
+  name = "Change Settings",
+  h = { toggle_hls, "Toggle Highlight" },
+  r = { "<Cmd>:set relativenumber!<CR>", "Toggle Relative Number" },
+}, { prefix = "<Leader>c" })
 
 --
 -- Window action
@@ -59,8 +57,15 @@ wk.register({
 }, {})
 
 --
--- Terminal Navigation
+-- Terminal
 --
+
+wk.register({
+  name = "Terminal",
+  f = { "<Cmd>:ToggleTerm direction=float<CR>", "Open Float Terminal" },
+  h = { "<Cmd>:ToggleTerm direction=horizontal<CR>", "Open Horizontal Terminal" },
+  v = { "<Cmd>:ToggleTerm direction=vertical<CR>", "Open Vertical Terminal" },
+}, { prefix = "<Leader>t" })
 
 -- Don't know why <A-F12> is <F60> :P
 keymap.term_toggle_key = function()
