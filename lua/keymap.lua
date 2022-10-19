@@ -201,6 +201,7 @@ keymap.telscope_set_map = function()
     g = { telescope.live_grep, "Live Grep" },
     b = { telescope.buffers, "Buffers" },
     h = { telescope.help_tags, "Help Tags" },
+    r = { telescope.oldfiles, "Recent Files" },
     p = { show_prj, "Project" },
   }, { prefix = "<Leader>f" })
 end

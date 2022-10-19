@@ -97,12 +97,7 @@ return require("packer").startup(function(use)
       "nvim-telescope/telescope-file-browser.nvim",
     },
   })
-  --use({
-  --"nvim-telescope/telescope-frecency.nvim",
-  --requires = {
-  --"kkharji/sqlite.lua",
-  --},
-  --})
+  use({ "nvim-telescope/telescope-file-browser.nvim" })
 
   -- Hop Anywehre
   use({
@@ -121,4 +116,7 @@ return require("packer").startup(function(use)
 
   -- OSC52 Support(Copy & paste through terminal. Easy integration with Windows.)
   use("ojroques/nvim-osc52")
+
+  -- Dashboard
+  use({ "glepnir/dashboard-nvim" })
 end)
