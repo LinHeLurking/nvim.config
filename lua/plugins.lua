@@ -56,6 +56,14 @@ return require("packer").startup(function(use)
   -- LSP Enhance
   use({ "stevearc/dressing.nvim" })
   use({ "SmiteshP/nvim-navic" })
+  
+  -- Trouble
+  -- Lua
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+  }
+  use({"kyazdani42/nvim-web-devicons"})
 
   -- Auto complete
   use({
