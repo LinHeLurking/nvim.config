@@ -3,11 +3,26 @@ require("mason-lspconfig").setup()
 local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
-    null_ls.builtins.formatting.stylua,
+    -- General spell check
     null_ls.builtins.diagnostics.codespell,
+    -- Lua
+    null_ls.builtins.formatting.stylua,
+    -- Javascript/HTML/CSS
     null_ls.builtins.code_actions.eslint_d,
     null_ls.builtins.formatting.prettierd,
+    -- Json
+    null_ls.builtins.formatting.jq,
+    null_ls.builtins.diagnostics.jsonlint,
+    -- C/C++
     null_ls.builtins.formatting.clang_format,
+    -- Python
+    null_ls.builtins.formatting.black,
+    null_ls.builtins.formatting.isort,
+    null_ls.builtins.diagnostics.pylint.with({
+      -- Suppress docstring warning :P
+      -- Import checking is problematic for packages written in C. Disable it. Don't worry, pyright checks it right :P
+      extra_args = { "--disable=C0111,E0401" },
+    }),
   },
 })
 require("mason-null-ls").setup()
@@ -66,6 +81,22 @@ require("mason-lspconfig").setup_handlers({
         "--header-insertion-decorators",
         "--function-arg-placeholders",
         "--fallback-style=Google",
+      },
+    })
+  end,
+  ["pyright"] = function()
+    require("lspconfig").pyright.setup({
+      on_attach = on_attach,
+      settings = {
+        python = {
+          analysis = {
+            autoSearchPaths = true,
+            diagnosticMode = "workspace",
+            useLibraryCodeForTypes = true,
+            -- Most of code types are missing. VSCode disables it by default :P
+            typeCheckingMode = "off",
+          },
+        },
       },
     })
   end,
