@@ -1,5 +1,6 @@
 local home = os.getenv("HOME")
 local db = require("dashboard")
+local keymap = require("keymap")
 
 local icon_color = "Function"
 
@@ -60,14 +61,5 @@ db.custom_center = {
 vim.api.nvim_create_autocmd("Filetype", {
   pattern = "dashboard",
   group = vim.api.nvim_create_augroup("Dashboard_au", { clear = true }),
-  callback = function()
-    local opts = { noremap = true, silent = true }
-    local bset = vim.api.nvim_buf_set_keymap
-    bset(0, "n", "f", "<Cmd>Telescope find_files<CR>", opts)
-    bset(0, "n", "r", "<Cmd>Telescope oldfiles<CR>", opts)
-    bset(0, "n", "n", "<Cmd>DashboardNewFile<CR>", opts)
-    bset(0, "n", "u", "<Cmd>PackerUpdate<CR>", opts)
-    bset(0, "n", "s", "<Cmd>edit " .. home .. "/.config/nvim<CR>", opts)
-    bset(0, "n", "q", "<Cmd>exit<CR>", opts)
-  end,
+  callback = keymap.dashboard_set_map,
 })

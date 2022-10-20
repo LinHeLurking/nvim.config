@@ -242,6 +242,22 @@ keymap.telscope_set_map = function()
 end
 
 --
+-- Dashboard
+--
+keymap.dashboard_set_map = function()
+  local dashboard_opts = { noremap = true, silent = true }
+  local bset = vim.api.nvim_buf_set_keymap
+  local home = os.getenv("HOME")
+  bset(0, "n", "f", "<Cmd>Telescope find_files<CR>", dashboard_opts)
+  bset(0, "n", "r", "<Cmd>Telescope oldfiles<CR>", dashboard_opts)
+  bset(0, "n", "p", "<Cmd>Telescope project<CR>", dashboard_opts)
+  bset(0, "n", "n", "<Cmd>DashboardNewFile<CR>", dashboard_opts)
+  bset(0, "n", "u", "<Cmd>PackerUpdate<CR>", dashboard_opts)
+  bset(0, "n", "s", "<Cmd>edit " .. home .. "/.config/nvim<CR>", dashboard_opts)
+  bset(0, "n", "q", "<Cmd>exit<CR>", dashboard_opts)
+end
+
+--
 -- Intellij Flavor Keybindings
 --
 keymap.lsp_set_map_intellij = function(client, bufnr)
