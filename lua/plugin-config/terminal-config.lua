@@ -9,6 +9,7 @@ require("toggleterm").setup({
       return vim.o.columns * 0.4
     end
   end,
+  direction = "float",
   open_mapping = keymap.term_toggle_key(),
   autochdir = true,
   shade_terminals = false, -- NOTE: this option takes priority over highlights specified so if you specify Normal highlights you should set this to false
@@ -23,4 +24,4 @@ require("toggleterm").setup({
   -- This field is only relevant if direction is set to 'float'
 })
 
-vim.api.nvim_create_autocmd("TermOpen", {pattern={"term://*"}, callback= keymap.set_term_keymap})
+vim.api.nvim_create_autocmd("TermOpen", { pattern = { "term://*" }, callback = keymap.set_term_keymap })
