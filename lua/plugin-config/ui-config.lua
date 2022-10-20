@@ -3,7 +3,7 @@
 -- TokyoNight coloe scheme
 vim.g.tokyonight_transparent = true
 vim.opt.background = "light"
-vim.opt.winblend = 15
+-- vim.opt.winblend = 15
 require("tokyonight").setup({
   -- your configuration comes here
   -- or leave it empty to use the default settings
