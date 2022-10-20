@@ -80,16 +80,21 @@ return require("packer").startup(function(use)
   -- Tree Sitter Syntax Highlight
   use({
     "nvim-treesitter/nvim-treesitter",
+  })
+  use({
     "JoosepAlviste/nvim-ts-context-commentstring",
+    requires = {
+      "nvim-treesitter/nvim-treesitter"
+    }
   })
 
   -- Telescope
   use({
     "nvim-telescope/telescope.nvim",
     tag = "0.1.0",
-    requires = { {
+    requires = {
       "nvim-lua/plenary.nvim",
-    } },
+    },
   })
   use({
     "nvim-telescope/telescope-project.nvim",
