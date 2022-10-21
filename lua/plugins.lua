@@ -127,9 +127,6 @@ return require("packer").startup(function(use)
     tag = "*",
   })
 
-  -- OSC52 Support(Copy & paste through terminal. Easy integration with Windows.)
-  use("ojroques/nvim-osc52")
-
   -- Dashboard
   use({ "glepnir/dashboard-nvim" })
 end)

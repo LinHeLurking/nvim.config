@@ -1,14 +1,15 @@
-local function copy(lines, _)
-  require('osc52').copy(table.concat(lines, '\n'))
+-- Thanks https://mitchellt.com/2022/05/15/WSL-Neovim-Lua-and-the-Windows-Clipboard.html
+
+in_wsl = os.getenv("WSL_DISTRO_NAME") ~= nil
+
+if in_wsl then
+  local home = os.getenv("HOME")
+  local copy = { "clip.exe" }
+  local paste = { home .. "/.config/nvim/sh/nvim_paste.sh" }
+
+  vim.g.clipboard = {
+    name = "nvim-clip",
+    copy = { ["+"] = copy, ["*"] = copy },
+    paste = { ["+"] = paste, ["*"] = paste },
+  }
 end
-
-local function paste()
-  return {vim.fn.split(vim.fn.getreg(''), '\n'), vim.fn.getregtype('')}
-end
-
-vim.g.clipboard = {
-  name = 'osc52',
-  copy = {['+'] = copy, ['*'] = copy},
-  paste = {['+'] = paste, ['*'] = paste},
-}
-
