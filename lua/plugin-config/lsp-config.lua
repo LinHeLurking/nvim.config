@@ -1,4 +1,8 @@
-require("mason").setup()
+require("mason").setup({
+  ui = {
+    border = "single"
+  }
+})
 require("mason-lspconfig").setup()
 local null_ls = require("null-ls")
 null_ls.setup({
