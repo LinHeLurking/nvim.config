@@ -31,8 +31,20 @@ end
 --
 -- Misc
 --
-auto_bind("<C-s>", "<Cmd>:w<CR>", opts)
-auto_bind("<S-Tab>", "<Cmd>:< <CR>", opts)
+local smart_save = function()
+  vim.cmd("w")
+  -- Keep cursor not moving
+  local pos = vim.api.nvim_win_get_cursor(0)
+  if vim.fn.col("$") < pos[2] then
+    pos[2] = pos[2] + 1
+  end
+  vim.api.nvim_win_set_cursor(0, pos)
+end
+auto_bind("<C-s>", smart_save, opts)
+auto_bind("<S-Tab>", "<Cmd>< <CR>", opts)
+auto_bind("<C-z>", "u", opts)
+-- Don't know why it cannot bind :P
+-- auto_bind("<C-S-z>", "<C-r>", opts)
 vim.keymap.set("i", "<C-h>", "<Esc>^<Insert>", opts)
 vim.keymap.set("i", "<C-l>", "<Esc>$a", opts)
 
@@ -73,12 +85,12 @@ keymap.term_toggle_key = function()
 end
 
 keymap.set_term_keymap = function()
-  local opts = { silent = true, noremap = true, buffer = 0 }
-  vim.keymap.set("t", "<Esc>", keymap.term_toggle_key() .. "<C-n>", opts)
-  vim.keymap.set("t", "<A-h>", "<Cmd>wincmd h<CR>", opts)
-  vim.keymap.set("t", "<A-j>", "<Cmd>wincmd j<CR>", opts)
-  vim.keymap.set("t", "<A-k>", "<Cmd>wincmd k<CR>", opts)
-  vim.keymap.set("t", "<A-l>", "<Cmd>wincmd l<CR>", opts)
+  local term_opts = { silent = true, noremap = true, buffer = 0 }
+  vim.keymap.set("t", "<Esc>", keymap.term_toggle_key() .. "<C-n>", term_opts)
+  vim.keymap.set("t", "<A-h>", "<Cmd>wincmd h<CR>", term_opts)
+  vim.keymap.set("t", "<A-j>", "<Cmd>wincmd j<CR>", term_opts)
+  vim.keymap.set("t", "<A-k>", "<Cmd>wincmd k<CR>", term_opts)
+  vim.keymap.set("t", "<A-l>", "<Cmd>wincmd l<CR>", term_opts)
 end
 
 --
@@ -263,7 +275,8 @@ end
 keymap.lsp_set_map_intellij = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   auto_bind("<C-A-l>", async_format, bufopts)
-  auto_bind("<C-q>", vim.lsp.buf.signature_help, bufopts)
+  -- This <C-q> breaks VISUAL-BLOCK key :P
+  -- auto_bind("<C-q>", vim.lsp.buf.signature_help, bufopts)
   -- <F18> is <S-F6> :P
   auto_bind("<F18>", vim.lsp.buf.rename, bufopts)
 end
