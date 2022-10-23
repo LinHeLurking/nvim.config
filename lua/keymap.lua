@@ -43,10 +43,12 @@ end
 auto_bind("<C-s>", smart_save, opts)
 auto_bind("<S-Tab>", "<Cmd>< <CR>", opts)
 auto_bind("<C-z>", "u", opts)
+auto_bind("<C-a>", "ggVG", opts)
 -- Don't know why it cannot bind :P
 -- auto_bind("<C-S-z>", "<C-r>", opts)
 vim.keymap.set("i", "<C-h>", "<Esc>^<Insert>", opts)
 vim.keymap.set("i", "<C-l>", "<Esc>$a", opts)
+vim.keymap.set("v", "<C-c>", "y", opts)
 
 --
 -- Some common seetting toggle

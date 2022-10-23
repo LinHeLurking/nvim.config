@@ -56,14 +56,14 @@ return require("packer").startup(function(use)
   -- LSP Enhance
   use({ "stevearc/dressing.nvim" })
   use({ "SmiteshP/nvim-navic" })
-  
+
   -- Trouble
   -- Lua
-  use {
+  use({
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
-  }
-  use({"kyazdani42/nvim-web-devicons"})
+  })
+  use({ "kyazdani42/nvim-web-devicons" })
 
   -- Auto complete
   use({
@@ -92,8 +92,8 @@ return require("packer").startup(function(use)
   use({
     "JoosepAlviste/nvim-ts-context-commentstring",
     requires = {
-      "nvim-treesitter/nvim-treesitter"
-    }
+      "nvim-treesitter/nvim-treesitter",
+    },
   })
 
   -- Telescope
@@ -120,6 +120,9 @@ return require("packer").startup(function(use)
       require("hop").setup({})
     end,
   })
+
+  -- OSC52 supper for better copy action (in SSH)
+  use({ "ojroques/nvim-osc52" })
 
   -- Terminal
   use({
