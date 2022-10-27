@@ -1,3 +1,5 @@
+local util = require("util")
+
 vim.g.mapleader = " "
 
 local keymap = {}
@@ -81,9 +83,13 @@ wk.register({
   v = { "<Cmd>:ToggleTerm direction=vertical<CR>", "Open Vertical Terminal" },
 }, { prefix = "<Leader>t" })
 
--- Don't know why <A-F12> is <F60> :P
+-- Don't know why <A-F12> is <F60> in WSL :P
 keymap.term_toggle_key = function()
-  return "<F60>"
+  if util.is_in_wsl() then
+    return "<F60>"
+  else
+    return "<A-F12>"
+  end
 end
 
 keymap.set_term_keymap = function()
@@ -261,13 +267,12 @@ end
 keymap.dashboard_set_map = function()
   local dashboard_opts = { noremap = true, silent = true }
   local bset = vim.api.nvim_buf_set_keymap
-  local home = os.getenv("HOME")
   bset(0, "n", "f", "<Cmd>Telescope find_files<CR>", dashboard_opts)
   bset(0, "n", "r", "<Cmd>Telescope oldfiles<CR>", dashboard_opts)
   bset(0, "n", "p", "<Cmd>Telescope project<CR>", dashboard_opts)
   bset(0, "n", "n", "<Cmd>DashboardNewFile<CR>", dashboard_opts)
   bset(0, "n", "u", "<Cmd>PackerUpdate<CR>", dashboard_opts)
-  bset(0, "n", "s", "<Cmd>edit " .. home .. "/.config/nvim<CR>", dashboard_opts)
+  bset(0, "n", "s", "<Cmd>edit " .. util.get_config_dir() .. "<CR>", dashboard_opts)
   bset(0, "n", "q", "<Cmd>exit<CR>", dashboard_opts)
 end
 
@@ -279,8 +284,12 @@ keymap.lsp_set_map_intellij = function(client, bufnr)
   auto_bind("<C-A-l>", async_format, bufopts)
   -- This <C-q> breaks VISUAL-BLOCK key :P
   -- auto_bind("<C-q>", vim.lsp.buf.signature_help, bufopts)
-  -- <F18> is <S-F6> :P
-  auto_bind("<F18>", vim.lsp.buf.rename, bufopts)
+  -- <F18> is <S-F6> in WSL :P
+  if util.is_in_wsl() then
+    auto_bind("<F18>", vim.lsp.buf.rename, bufopts)
+  else
+    auto_bind("<S-F6>", vim.lsp.buf.rename, bufopts)
+  end
 end
 auto_bind("<A-1>", "<Cmd>NvimTreeToggle<CR>", opts) -- insert mode bind is buggy
 auto_bind("<C-_>", "<Cmd>CommentToggle<CR>", opts)

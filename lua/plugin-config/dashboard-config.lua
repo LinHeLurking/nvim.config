@@ -1,6 +1,7 @@
-local home = os.getenv("HOME")
 local db = require("dashboard")
 local keymap = require("keymap")
+
+local get_config_dir = require("util").get_config_dir
 
 local icon_color = "Function"
 
@@ -46,7 +47,7 @@ db.custom_center = {
     desc = "Setting                                 ",
     shortcut = "s    ",
     icon = "  ",
-    action = "edit " .. home .. "/.config/nvim/",
+    action = "edit " .. get_config_dir() .. "<CR>",
     icon_hl = { link = icon_color },
   },
   {

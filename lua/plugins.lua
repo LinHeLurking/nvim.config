@@ -113,13 +113,13 @@ return require("packer").startup(function(use)
   use({ "nvim-telescope/telescope-file-browser.nvim" })
 
   -- Hop Anywehre
-  use({
-    "phaazon/hop.nvim",
-    -- branch = "v2", -- optional but strongly recommended
-    config = function()
-      require("hop").setup({})
-    end,
-  })
+  -- use({
+  --   "phaazon/hop.nvim",
+  --   -- branch = "v2", -- optional but strongly recommended
+  --   config = function()
+  --     require("hop").setup({})
+  --   end,
+  -- })
 
   -- OSC52 supper for better copy action (in SSH)
   use({ "ojroques/nvim-osc52" })
