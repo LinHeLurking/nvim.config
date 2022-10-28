@@ -48,9 +48,13 @@ auto_bind("<C-z>", "u", opts)
 auto_bind("<C-a>", "ggVG", opts)
 -- Don't know why it cannot bind :P
 -- auto_bind("<C-S-z>", "<C-r>", opts)
-vim.keymap.set("i", "<C-h>", "<Esc>^<Insert>", opts)
-vim.keymap.set("i", "<C-l>", "<Esc>$a", opts)
 vim.keymap.set("v", "<C-c>", "y", opts)
+vim.keymap.set("i", "<C-h>", "<Left>", opts)
+vim.keymap.set("i", "<C-j>", "<Down>", opts)
+vim.keymap.set("i", "<C-k>", "<Up>", opts)
+vim.keymap.set("i", "<C-l>", "<Right>", opts)
+-- vim.keymap.set("i", "<C-H>", "<Esc>^<Insert>", opts)
+-- vim.keymap.set("i", "<C-L>", "<Esc>$a", opts)
 
 --
 -- Some common seetting toggle
