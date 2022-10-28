@@ -20,14 +20,21 @@ require("nvim-tree").setup({
     group_empty = true,
   },
   filters = {
-    dotfiles = true,
+    dotfiles = false,
+    custom = { "^.git$" },
+  },
+  git = {
+    enable = true,
+    ignore = false,
+    show_on_dirs = true,
+    timeout = 400,
   },
   -- Integrate with project.nvim
   sync_root_with_cwd = true,
   respect_buf_cwd = true,
   update_focused_file = {
     enable = true,
-    update_root = true
+    update_root = true,
   },
 })
 
@@ -45,11 +52,11 @@ require("nvim-tree").setup({
 -- Open tree if vim is opened with a directory
 vim.api.nvim_create_autocmd("VimEnter", {
   nested = true,
-  callback = function ()
+  callback = function()
     if #vim.api.nvim_list_wins() == 1 and vim.api.nvim_buf_get_name(0):sub(-1) == "/" then
       vim.api.nvim_command(":NvimTreeOpen")
     end
-  end
+  end,
 })
 
 -- Enabling this sometimes mess up buffer lines
