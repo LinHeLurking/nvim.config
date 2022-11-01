@@ -24,6 +24,12 @@ return require("packer").startup(function(use)
     "nmac427/guess-indent.nvim",
   })
 
+  -- Hop (Easymotion)
+  use({
+    "phaazon/hop.nvim",
+    branch = "v2", -- optional but strongly recommended
+  })
+
   -- Nvim Tree File Explorer
   use({
     "nvim-tree/nvim-tree.lua",

@@ -246,7 +246,7 @@ keymap.cmp_keys = function()
 end
 
 --
--- Telescope
+-- Telescope & Hop
 --
 keymap.telscope_set_map = function()
   local telescope = require("telescope.builtin")
@@ -255,7 +255,8 @@ keymap.telscope_set_map = function()
     project.project({ display_type = "full" })
   end
   wk.register({
-    name = "Telescope",
+    name = "Find Everything",
+    c = {"<Cmd>:HopChar1<CR>","Hop Any Character"},
     f = { telescope.find_files, "Find Files" },
     g = { telescope.live_grep, "Live Grep" },
     b = { telescope.buffers, "Buffers" },

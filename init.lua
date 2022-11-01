@@ -1,5 +1,6 @@
 require("base")
 require("plugins")
+require("plugin-config.hop-config")
 require("plugin-config.guess-indent-config")
 require("plugin-config.nvim-tree-config")
 require("plugin-config.buffer-line-config")
