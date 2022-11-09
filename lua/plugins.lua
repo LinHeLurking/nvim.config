@@ -63,6 +63,17 @@ return require("packer").startup(function(use)
   use({ "stevearc/dressing.nvim" })
   use({ "SmiteshP/nvim-navic" })
 
+  -- DAP
+  use({ "mfussenegger/nvim-dap" })
+  use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+  use({
+    "theHamsta/nvim-dap-virtual-text",
+    requires = {
+      "mfussenegger/nvim-dap",
+      "nvim-treesitter/nvim-treesitter",
+    },
+  })
+
   -- Trouble
   -- Lua
   use({
@@ -112,7 +123,7 @@ return require("packer").startup(function(use)
   })
   use({
     "nvim-telescope/telescope-project.nvim",
-    reuquires = {
+    requires = {
       "nvim-telescope/telescope-file-browser.nvim",
     },
   })
@@ -129,4 +140,10 @@ return require("packer").startup(function(use)
 
   -- Dashboard
   use({ "glepnir/dashboard-nvim" })
+
+  -- CMake
+  use({
+    "Civitasv/cmake-tools.nvim",
+    requires = { "mfussenegger/nvim-dap" },
+  })
 end)

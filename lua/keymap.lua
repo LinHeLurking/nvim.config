@@ -148,6 +148,32 @@ keymap.lsp_set_map = function(client, bufnr)
 end
 
 --
+-- DAP
+--
+
+-- These keys may not be convenient. Bind other keys in Intellij section.
+local dap = require("dap")
+wk.register({
+  name = "DAP",
+  b = { dap.toggle_breakpoint, "Toggle Break Point" },
+  c = { dap.continue, "Continue" },
+  o = { dap.setp_over, "Step Over" },
+  i = { dap.setp_into, "Step Into" },
+}, { prefix = "<Leader>d" })
+
+--
+-- CMake
+--
+wk.register({
+  name = "CMake",
+  g = { "<Cmd>CMakeGenerate<CR>", "Configure" },
+  b = { "<Cmd>CMakeBuild<CR>", "Build" },
+  c = { "<Cmd>CMakeClean<CR>", "Clean" },
+  r = { "<Cmd>CMakeRun<CR>", "Run" },
+  d = { "<Cmd>CMakeDebug<CR>", "Debug" },
+}, { prefix = "<Leader>m" })
+
+--
 -- Trouble
 --
 keymap.trouble_keys = {
@@ -256,7 +282,7 @@ keymap.telscope_set_map = function()
   end
   wk.register({
     name = "Find Everything",
-    c = {"<Cmd>:HopChar1<CR>","Hop Any Character"},
+    c = { "<Cmd>:HopChar1<CR>", "Hop Any Character" },
     f = { telescope.find_files, "Find Files" },
     g = { telescope.live_grep, "Live Grep" },
     b = { telescope.buffers, "Buffers" },
