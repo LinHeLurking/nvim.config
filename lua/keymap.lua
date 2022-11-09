@@ -157,8 +157,8 @@ wk.register({
   name = "DAP",
   b = { dap.toggle_breakpoint, "Toggle Break Point" },
   c = { dap.continue, "Continue" },
-  o = { dap.setp_over, "Step Over" },
-  i = { dap.setp_into, "Step Into" },
+  o = { dap.step_over, "Step Over" },
+  i = { dap.step_into, "Step Into" },
 }, { prefix = "<Leader>d" })
 
 --
@@ -324,5 +324,9 @@ keymap.lsp_set_map_intellij = function(client, bufnr)
 end
 auto_bind("<A-1>", "<Cmd>NvimTreeToggle<CR>", opts) -- insert mode bind is buggy
 auto_bind("<C-_>", "<Cmd>CommentToggle<CR>", opts)
+vim.keymap.set("n", "<F8>", dap.step_over, opts)
+vim.keymap.set("n", "<F7>", dap.step_into, opts)
+-- <F19> is <S-F7> in WSL
+vim.keymap.set("n", "<F19>", dap.step_out, opts)
 
 return keymap
