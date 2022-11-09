@@ -1,18 +1,19 @@
 local dap = require("dap")
 
 -- Test lldb & lldb-vscode
-local has_lldb = vim.fn.executable("lldb")
-local lldb_vscode = vim.fn.executable("lldb-vscode") and "lldb-vscode" or nil
-if has_lldb and not lldb_vscode then
+local has_lldb = vim.fn.executable("lldb") == 1
+local lldb_vscode = "lldb-vscode"
+if has_lldb then
   local handle = io.popen("lldb -v")
   if handle then
     local result = handle:read("*a")
     local main_ver = string.match(result, "%d+")
     local full_ver = string.match(result, "%d+\\.%d+\\.%d+")
-    if vim.fn.executable("lldb-vscode" .. main_ver) then
-      lldb_vscode = "lldb-vscode" .. main_ver
-    elseif vim.fn.executable("lldb-vscode" .. full_ver) then
-      lldb_vscode = "lldb-vscode" .. full_ver
+    if vim.fn.executable("lldb-vscode-" .. main_ver) == 1 then
+      lldb_vscode = "lldb-vscode-" .. main_ver
+      print("Using " .. lldb_vscode)
+    elseif vim.fn.executable("lldb-vscode-" .. full_ver) == 1 then
+      lldb_vscode = "lldb-vscode-" .. full_ver
     end
     handle:close()
   end
