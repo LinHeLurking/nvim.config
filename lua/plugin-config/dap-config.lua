@@ -8,7 +8,7 @@ if has_lldb then
   if handle then
     local result = handle:read("*a")
     local main_ver = string.match(result, "%d+")
-    local full_ver = string.match(result, "%d+\.%d+\.%d+")
+    local full_ver = string.match(result, "%d+%.%d+%.%d+")
     if vim.fn.executable("lldb-vscode-" .. main_ver) == 1 then
       lldb_vscode = "lldb-vscode-" .. main_ver
       print("Using " .. lldb_vscode)
