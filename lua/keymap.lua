@@ -171,6 +171,7 @@ wk.register({
   c = { "<Cmd>CMakeClean<CR>", "Clean" },
   r = { "<Cmd>CMakeRun<CR>", "Run" },
   d = { "<Cmd>CMakeDebug<CR>", "Debug" },
+  p = { "<Cmd>CMakeSelectConfigurePreset<CR>", "Configure Presets" },
 }, { prefix = "<Leader>m" })
 
 --
@@ -324,6 +325,7 @@ keymap.lsp_set_map_intellij = function(client, bufnr)
 end
 auto_bind("<A-1>", "<Cmd>NvimTreeToggle<CR>", opts) -- insert mode bind is buggy
 auto_bind("<C-_>", "<Cmd>CommentToggle<CR>", opts)
+vim.keymap.set("n", "<F9>", dap.continue, opts)
 vim.keymap.set("n", "<F8>", dap.step_over, opts)
 vim.keymap.set("n", "<F7>", dap.step_into, opts)
 -- <F19> is <S-F7> in WSL
