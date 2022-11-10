@@ -112,6 +112,12 @@ return require("packer").startup(function(use)
       "nvim-treesitter/nvim-treesitter",
     },
   })
+  use({
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    requires = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+  })
 
   -- Telescope
   use({
@@ -145,5 +151,11 @@ return require("packer").startup(function(use)
   use({
     "Civitasv/cmake-tools.nvim",
     requires = { "mfussenegger/nvim-dap" },
+  })
+
+  -- NVim Surround
+  use({
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
   })
 end)
