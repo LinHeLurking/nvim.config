@@ -166,7 +166,7 @@ require("dapui").setup({
     {
       elements = {
         "repl",
-        "console",
+        -- "console", -- hide console. only leave dap-repl
       },
       size = 0.25, -- 25% of total lines
       position = "bottom",
