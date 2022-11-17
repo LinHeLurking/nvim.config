@@ -122,6 +122,14 @@ wk.register({
 }, { prefix = "<Leader>b" })
 
 --
+-- Buffer Line Navigation
+--
+wk.register({
+  t = { "<Cmd>BufferLineCycleNext<CR>", "Next Buffer" },
+  T = { "<Cmd>BufferLineCyclePrev<CR>", "Previous Buffer" },
+}, { prefix = "g" })
+
+--
 -- LSP
 --
 
@@ -136,7 +144,7 @@ keymap.lsp_set_map = function(client, bufnr)
     d = { vim.lsp.buf.definition, "Definition" },
     D = { vim.lsp.buf.declaration, "Declaration" },
     i = { vim.lsp.buf.implementation, "Implementation" },
-    t = { vim.lsp.buf.type_definition, "Type Definition" },
+    -- t = { vim.lsp.buf.type_definition, "Type Definition" },
   }, { prefix = "g", buffer = bufnr })
   -- Refactor related mappings
   wk.register({
