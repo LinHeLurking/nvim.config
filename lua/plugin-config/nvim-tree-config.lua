@@ -9,7 +9,7 @@ vim.g.loaded_netrwPlugin = 1
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
   view = {
-    adaptive_size = true,
+    adaptive_size = false,
     mappings = {
       list = {
         { key = "u", action = "dir_up" },
@@ -36,6 +36,17 @@ require("nvim-tree").setup({
     enable = true,
     update_root = true,
   },
+  -- Profile
+  -- log = {
+  --   enable = true,
+  --   truncate = true,
+  --   types = {
+  --     diagnostics = true,
+  --     git = true,
+  --     profile = true,
+  --     watcher = true,
+  --   },
+  -- },
 })
 
 -- Automatically close if there's only nvim tree left
