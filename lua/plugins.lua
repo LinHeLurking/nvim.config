@@ -31,12 +31,12 @@ return require("packer").startup(function(use)
   })
 
   -- Nvim Tree File Explorer
-  use({
-    "nvim-tree/nvim-tree.lua",
-    requires = {
-      "nvim-tree/nvim-web-devicons", -- optional, for file icons
-    },
-  })
+  -- use({
+  --   "nvim-tree/nvim-tree.lua",
+  --   requires = {
+  --     "nvim-tree/nvim-web-devicons", -- optional, for file icons
+  --   },
+  -- })
 
   -- Buffer Line
   use({
