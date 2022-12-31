@@ -35,6 +35,8 @@ null_ls.setup({
       extra_args = {
         -- Suppress docstring warning (C0111) :P
         --
+        -- Suppress wildcard-import warnning (W0401)
+        --
         -- Import checking is problematic for packages written in C. (E0401)
         -- Disable it. Don't worry, pyright checks it right :P
         --
@@ -42,7 +44,7 @@ null_ls.setup({
         --
         -- Suppress `undefined-variable` because pylint wrongly report it for some imports. (E0602)
         -- Don't worry, pyright still handles it.
-        "--disable=C0111,E0401,R0914,E0602",
+        "--disable=C0111,E0401,R0914,E0602,W0401",
         -- Suppress snake name check rules for 1 or 2 length names :P
         "--good-names-rgxs=^[_a-z][_a-z0-9]?$",
       },
