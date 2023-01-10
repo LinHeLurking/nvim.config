@@ -337,6 +337,10 @@ vim.keymap.set("n", "<F9>", dap.continue, opts)
 vim.keymap.set("n", "<F8>", dap.step_over, opts)
 vim.keymap.set("n", "<F7>", dap.step_into, opts)
 -- <F19> is <S-F7> in WSL
-vim.keymap.set("n", "<F19>", dap.step_out, opts)
+if util.is_in_wsl() then
+  vim.keymap.set("n", "<F19>", dap.step_out, opts)
+else
+  vim.keymap.set("n", "<S-F7>", dap.step_out, opts)
+end
 
 return keymap
