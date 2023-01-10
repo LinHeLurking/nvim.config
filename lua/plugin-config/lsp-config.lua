@@ -102,7 +102,7 @@ require("mason-lspconfig").setup_handlers({
         "--all-scopes-completion",
         "--background-index",
         "--clang-tidy",
-        "--compile-commands-dir=build",
+        -- "--compile-commands-dir=build",
         "--completion-style=bundled",
         "--header-insertion=iwyu",
         "--pretty",
