@@ -252,3 +252,11 @@ require("nvim-dap-virtual-text").setup({
   virt_text_win_col = nil, -- position the virtual text at a fixed window column (starting from the first text column) ,
   -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
 })
+
+-- Hide DAP created buffers.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "dap-repl",
+  callback = function(args)
+    vim.api.nvim_buf_set_option(args.buf, "buflisted", false)
+  end,
+})
