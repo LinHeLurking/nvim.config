@@ -57,6 +57,17 @@ vim.keymap.set("i", "<C-l>", "<Right>", opts)
 -- vim.keymap.set("i", "<C-L>", "<Esc>$a", opts)
 
 --
+-- Quick fix map
+--
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    local qf_opts = { noremap = true, silent = true }
+    vim.api.nvim_buf_set_keymap(0, "n", "q", "<Cmd>q<CR>", qf_opts)
+  end,
+})
+
+--
 -- Some common seetting toggle
 --
 wk.register({
