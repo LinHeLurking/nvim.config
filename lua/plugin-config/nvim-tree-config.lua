@@ -9,7 +9,8 @@ vim.g.loaded_netrwPlugin = 1
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
   view = {
-    adaptive_size = false,
+    adaptive_size = true,
+    width = 30,
     mappings = {
       list = {
         { key = "u", action = "dir_up" },
