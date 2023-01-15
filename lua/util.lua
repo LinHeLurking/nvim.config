@@ -14,4 +14,15 @@ util.get_config_dir = function()
   end
 end
 
+util.async_format = function()
+  vim.lsp.buf.format({
+    async = true,
+    filter = function(client)
+      -- Disable format ability for Volar, TsServer
+      local name = client.name
+      return name ~= "volar" and name ~= "tsserver"
+    end,
+  })
+end
+
 return util

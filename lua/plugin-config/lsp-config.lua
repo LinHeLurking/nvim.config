@@ -4,11 +4,6 @@ require("mason").setup({
   },
 })
 
--- Change border of documentation hover window, See https://github.com/neovim/neovim/pull/13998.
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = "rounded",
-})
-
 require("mason-lspconfig").setup()
 
 local null_ls = require("null-ls")
@@ -50,17 +45,15 @@ null_ls.setup({
       },
     }),
   },
+  border = "single",
 })
 require("mason-null-ls").setup()
 
 local navic = require("nvim-navic")
 -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
--- Globally override LSP floating window.
-require("lspconfig.ui.windows").default_options.border = "single"
-
-local on_attach = function(client, bufnr)
-  local keymap = require("keymap")
+local keymap = require("keymap")
+local on_attach_base = function(client, bufnr)
   keymap.lsp_set_map(client, bufnr)
   keymap.lsp_set_map_intellij(client, bufnr)
   if client.server_capabilities.documentSymbolProvider then
@@ -68,13 +61,15 @@ local on_attach = function(client, bufnr)
   end
 end
 
+local lsp_config = require("lspconfig")
+
 require("mason-lspconfig").setup_handlers({
   -- The first entry (without a key) will be the default handler
   -- and will be called for each installed server that doesn't have
   -- a dedicated handler.
   function(server_name) -- default handler (optional)
-    require("lspconfig")[server_name].setup({
-      on_attach = on_attach,
+    lsp_config[server_name].setup({
+      on_attach = on_attach_base,
     })
   end,
   -- Next, you can provide targeted overrides for specific servers.
@@ -83,8 +78,8 @@ require("mason-lspconfig").setup_handlers({
   --require("rust-tools").setup {}
   --end
   ["sumneko_lua"] = function()
-    require("lspconfig").sumneko_lua.setup({
-      on_attach = on_attach,
+    lsp_config.sumneko_lua.setup({
+      on_attach = on_attach_base,
       settings = {
         Lua = {
           diagnostics = {
@@ -95,14 +90,13 @@ require("mason-lspconfig").setup_handlers({
     })
   end,
   ["clangd"] = function()
-    require("lspconfig").clangd.setup({
-      on_attach = on_attach,
+    lsp_config.clangd.setup({
+      on_attach = on_attach_base,
       cmd = {
         "clangd",
         "--all-scopes-completion",
         "--background-index",
         "--clang-tidy",
-        -- "--compile-commands-dir=build",
         "--completion-style=bundled",
         "--header-insertion=iwyu",
         "--pretty",
@@ -114,8 +108,8 @@ require("mason-lspconfig").setup_handlers({
     })
   end,
   ["pyright"] = function()
-    require("lspconfig").pyright.setup({
-      on_attach = on_attach,
+    lsp_config.pyright.setup({
+      on_attach = on_attach_base,
       settings = {
         python = {
           analysis = {

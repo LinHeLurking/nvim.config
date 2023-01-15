@@ -4,6 +4,8 @@ vim.g.mapleader = " "
 
 local keymap = {}
 
+local async_format = util.async_format
+
 local auto_bind = function(lhs, rhs, opt)
   if type(rhs) == "string" then
     vim.keymap.set("n", lhs, rhs, opt)
@@ -143,10 +145,6 @@ wk.register({
 --
 -- LSP
 --
-
-local async_format = function()
-  vim.lsp.buf.format({ async = true })
-end
 
 keymap.lsp_set_map = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
