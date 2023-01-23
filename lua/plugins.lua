@@ -144,6 +144,12 @@ return require("packer").startup(function(use)
     },
   })
   use({ "nvim-telescope/telescope-file-browser.nvim" })
+  -- use({
+  --   "nvim-telescope/telescope-frecency.nvim",
+  --   requires = {
+  --     "kkharji/sqlite.lua",
+  --   },
+  -- })
 
   -- OSC52 supper for better copy action (in SSH)
   use({ "ojroques/nvim-osc52" })
