@@ -61,7 +61,7 @@ dap.configurations.cpp = {
 -- If you want to use this for Rust and C, add something like this:
 
 dap.configurations.c = dap.configurations.cpp
--- dap.configurations.rust = dap.configurations.cpp
+dap.configurations.rust = dap.configurations.cpp
 
 local dapui = require("dapui")
 dap.listeners.after.event_initialized["dapui_config"] = function()
