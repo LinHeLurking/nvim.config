@@ -62,6 +62,15 @@ return require("packer").startup(function(use)
   -- LSP Enhance
   use({ "stevearc/dressing.nvim" })
   use({ "SmiteshP/nvim-navic" })
+  -- LSP rust-tools
+  use({
+    "simrat39/rust-tools.nvim",
+    requires = {
+      "neovim/nvim-lspconfig",
+      "nvim-lua/plenary.nvim",
+      "mfussenegger/nvim-dap",
+    },
+  })
 
   -- DAP
   use({ "mfussenegger/nvim-dap" })

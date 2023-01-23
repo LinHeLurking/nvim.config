@@ -62,6 +62,8 @@ local on_attach_base = function(client, bufnr)
 end
 
 local lsp_config = require("lspconfig")
+local dap_config = require("plugin-config/dap-config")
+local rust_tools = require("rust-tools")
 
 require("mason-lspconfig").setup_handlers({
   -- The first entry (without a key) will be the default handler
@@ -74,9 +76,33 @@ require("mason-lspconfig").setup_handlers({
   end,
   -- Next, you can provide targeted overrides for specific servers.
   -- For example, a handler override for the `rust_analyzer`:
-  --["rust_analyzer"] = function ()
-  --require("rust-tools").setup {}
-  --end
+  ["rust_analyzer"] = function()
+    require("rust-tools").setup({
+      server = {
+        on_attach = function(client, bufnr)
+          on_attach_base(client, bufnr)
+          -- Overwrite some keymaps
+          -- Hover actions
+          vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
+          -- Code action groups
+          vim.keymap.set(
+            "n",
+            "<Leader>ra",
+            rust_tools.code_action_group.code_action_group,
+            { buffer = bufnr }
+          )
+        end,
+      },
+      dap = {
+        adapter = {
+          type = "executable",
+          -- Use dap-config detected full-versioned lldb-vscode
+          command = dap_config.lldb_vscode,
+          name = "rust-tools-lldb",
+        },
+      },
+    })
+  end,
   ["sumneko_lua"] = function()
     lsp_config.sumneko_lua.setup({
       on_attach = on_attach_base,

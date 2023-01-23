@@ -1,8 +1,10 @@
 local dap = require("dap")
 
+local M = {}
+
 -- Test lldb & lldb-vscode
 local has_lldb = vim.fn.executable("lldb") == 1
-local lldb_vscode = "lldb-vscode"
+local lldb_vscode = nil
 if has_lldb then
   local handle = io.popen("lldb -v")
   if handle then
@@ -11,13 +13,15 @@ if has_lldb then
     local full_ver = string.match(result, "%d+%.%d+%.%d+")
     if vim.fn.executable("lldb-vscode-" .. main_ver) == 1 then
       lldb_vscode = "lldb-vscode-" .. main_ver
-      print("Using " .. lldb_vscode)
+      -- print("Using " .. lldb_vscode)
     elseif vim.fn.executable("lldb-vscode-" .. full_ver) == 1 then
       lldb_vscode = "lldb-vscode-" .. full_ver
     end
     handle:close()
   end
 end
+
+M.lldb_vscode = lldb_vscode
 
 -- Adapter
 dap.adapters.lldb = {
@@ -69,3 +73,5 @@ end
 dap.listeners.before.event_exited["dapui_config"] = function()
   dapui.close()
 end
+
+return M
