@@ -10,7 +10,12 @@ local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
     -- General spell check
-    null_ls.builtins.diagnostics.codespell,
+    null_ls.builtins.diagnostics.codespell.with({
+      extra_args = {
+        -- Suppress warnings for some words
+        "-L ans,crate,crates",
+      },
+    }),
     -- Lua
     null_ls.builtins.formatting.stylua,
     -- Javascript/HTML/CSS
