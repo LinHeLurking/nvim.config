@@ -153,6 +153,7 @@ keymap.lsp_set_map = function(client, bufnr)
     d = { vim.lsp.buf.definition, "Definition" },
     D = { vim.lsp.buf.declaration, "Declaration" },
     i = { vim.lsp.buf.implementation, "Implementation" },
+    r = { vim.lsp.buf.references, "References" },
     -- t = { vim.lsp.buf.type_definition, "Type Definition" },
   }, { prefix = "g", buffer = bufnr })
   -- Refactor related mappings
@@ -290,7 +291,7 @@ keymap.cmp_keys = function()
 end
 
 --
--- Telescope & Hop
+-- Telescope
 --
 keymap.telscope_set_map = function()
   local telescope = require("telescope.builtin")
@@ -300,7 +301,7 @@ keymap.telscope_set_map = function()
   end
   wk.register({
     name = "Find Everything",
-    c = { "<Cmd>:HopChar1<CR>", "Hop Any Character" },
+    c = { telescope.commands, "Find Commands" },
     f = { telescope.find_files, "Find Files" },
     g = { telescope.live_grep, "Live Grep" },
     b = { telescope.buffers, "Buffers" },
@@ -324,6 +325,16 @@ keymap.dashboard_set_map = function()
   bset(0, "n", "s", "<Cmd>edit " .. util.get_config_dir() .. "<CR>", dashboard_opts)
   bset(0, "n", "q", "<Cmd>exit<CR>", dashboard_opts)
 end
+
+--
+-- Hop
+--
+wk.register({
+  name = "Hop Everywhere",
+  w = { "<Cmd>:HopWord<CR>", "Hop Any Word" },
+  c = { "<Cmd>:HopChar1<CR>", "Hop Any Character" },
+  a = { "<Cmd>:HopAnywhere<CR>", "Hop Anywhere" },
+}, { prefix = "<Leader>h" })
 
 --
 -- Intellij Flavor Keybindings
