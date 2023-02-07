@@ -50,25 +50,24 @@ require("nvim-tree").setup({
   -- },
 })
 
--- Automatically close if there's only nvim tree left
--- Copied from https://github.com/nvim-tree/nvim-tree.lua/discussions/1115
--- vim.api.nvim_create_autocmd("BufDelete", {
---   nested = true,
---   callback = function()
---     if #vim.api.nvim_list_wins() == 1 and vim.api.nvim_buf_get_name(0):match("NvimTree_") ~= nil then
---       vim.cmd "quit"
---     end
---   end
--- })
+local function open_nvim_tree(data)
+  -- buffer is a directory
+  local directory = vim.fn.isdirectory(data.file) == 1
+
+  if not directory then
+    return
+  end
+
+  -- change to the directory
+  vim.cmd.cd(data.file)
+
+  -- open the tree
+  require("nvim-tree.api").tree.open()
+end
 
 -- Open tree if vim is opened with a directory
-vim.api.nvim_create_autocmd("VimEnter", {
-  nested = true,
-  callback = function()
-    if #vim.api.nvim_list_wins() == 1 and vim.api.nvim_buf_get_name(0):sub(-1) == "/" then
-      vim.api.nvim_command(":NvimTreeOpen")
-    end
-  end,
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+  callback = open_nvim_tree,
 })
 
 -- Enabling this sometimes mess up buffer lines
