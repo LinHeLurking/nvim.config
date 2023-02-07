@@ -177,6 +177,7 @@ wk.register({
   c = { dap.continue, "Continue" },
   o = { dap.step_over, "Step Over" },
   i = { dap.step_into, "Step Into" },
+  q = { dap.terminate, "Stop" },
 }, { prefix = "<Leader>d" })
 
 --
@@ -361,6 +362,12 @@ if util.is_in_wsl() then
   vim.keymap.set("n", "<F19>", dap.step_out, opts)
 else
   vim.keymap.set("n", "<S-F7>", dap.step_out, opts)
+end
+-- <F26> is <C-F2> in WSL
+if util.is_in_wsl() then
+  vim.keymap.set("n", "<F26>", dap.terminate, opts)
+else
+  vim.keymap.set("n", "<S-F2>", dap.terminate, opts)
 end
 
 return keymap
