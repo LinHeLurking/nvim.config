@@ -10,6 +10,7 @@ util.get_config_dir = function()
   if in_wsl then
     return os.getenv("HOME") .. "/.config/nvim"
   else
+    -- Windows
     return "~/AppData/Local/nvim/"
   end
 end

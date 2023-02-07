@@ -161,7 +161,14 @@ return require("packer").startup(function(use)
   })
 
   -- Dashboard
-  use({ "glepnir/dashboard-nvim" })
+  use({
+    "glepnir/dashboard-nvim",
+    event = "VimEnter",
+    requires = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("plugin-config.dashboard-config").setup()
+    end,
+  })
 
   -- CMake
   use({

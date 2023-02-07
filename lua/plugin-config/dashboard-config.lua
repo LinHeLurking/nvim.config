@@ -1,66 +1,24 @@
-local db = require("dashboard")
+local M = {}
+
 local keymap = require("keymap")
 
-local get_config_dir = require("util").get_config_dir
+--
+-- It seems that dashboard has to be configured when plugin is loaded.
+--
 
-local icon_color = "Function"
+M.setup = function()
+  require("dashboard").setup({
+    theme = "hyper", --  theme is doom and hyper default is hyper
+    config = {
+      shortcut = keymap.dashboard_shortcut,
+      packages = { enable = true }, -- show how many plugins neovim loaded
+      -- Limit how many projects list, action when you press key or enter it will run this action.
+      -- Keep default.
+      -- project = { limit = 8, icon = " Recent Projects", label = "", action = "Telescope find_files cwd=" },
+      -- mru = { limit = 10, icon = " Recent Files", label = "" },
+      footer = { "Keep on keeping on!" }, -- footer
+    },
+  })
+end
 
-db.session_directory = vim.fn.stdpath("data") .. "/sessions"
-
-db.custom_center = {
-  {
-    icon = "  ",
-    desc = "Recent Files                            ",
-    shortcut = "r    ",
-    action = "Telescope oldfiles",
-    icon_hl = { link = icon_color },
-  },
-  {
-    icon = "  ",
-    desc = "Find Files                              ",
-    shortcut = "f    ",
-    action = "Telescope find_files",
-    icon_hl = { link = icon_color },
-  },
-  {
-    icon = "  ",
-    desc = "Open Project                            ",
-    shortcut = "p   ",
-    action = "Telescope project",
-    icon_hl = { link = icon_color },
-  },
-  {
-    desc = "New File                                ",
-    shortcut = "n    ",
-    icon = "ﱐ  ",
-    action = "DashboardNewFile",
-    icon_hl = { link = icon_color },
-  },
-  {
-    desc = "Update Plugins                          ",
-    shortcut = "u    ",
-    icon = "  ",
-    action = "PackerUpdate",
-    icon_hl = { link = icon_color },
-  },
-  {
-    desc = "Setting                                 ",
-    shortcut = "s    ",
-    icon = "  ",
-    action = "edit " .. get_config_dir() .. "<CR>",
-    icon_hl = { link = icon_color },
-  },
-  {
-    desc = "Exit                                    ",
-    shortcut = "q    ",
-    icon = "  ",
-    action = "exit",
-    icon_hl = { link = icon_color },
-  },
-}
-
-vim.api.nvim_create_autocmd("Filetype", {
-  pattern = "dashboard",
-  group = vim.api.nvim_create_augroup("Dashboard_au", { clear = true }),
-  callback = keymap.dashboard_set_map,
-})
+return M

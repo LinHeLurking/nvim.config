@@ -315,17 +315,32 @@ end
 --
 -- Dashboard
 --
-keymap.dashboard_set_map = function()
-  local dashboard_opts = { noremap = true, silent = true }
-  local bset = vim.api.nvim_buf_set_keymap
-  bset(0, "n", "f", "<Cmd>Telescope find_files<CR>", dashboard_opts)
-  bset(0, "n", "r", "<Cmd>Telescope oldfiles<CR>", dashboard_opts)
-  bset(0, "n", "p", "<Cmd>Telescope project<CR>", dashboard_opts)
-  bset(0, "n", "n", "<Cmd>DashboardNewFile<CR>", dashboard_opts)
-  bset(0, "n", "u", "<Cmd>PackerUpdate<CR>", dashboard_opts)
-  bset(0, "n", "s", "<Cmd>edit " .. util.get_config_dir() .. "<CR>", dashboard_opts)
-  bset(0, "n", "q", "<Cmd>exit<CR>", dashboard_opts)
-end
+keymap.dashboard_shortcut = {
+  {
+    desc = " Projects",
+    key = "p",
+    group = "Label",
+    action = "Telescope project",
+  },
+  {
+    desc = " Update",
+    key = "u",
+    group = "Label",
+    action = "PackerUpdate",
+  },
+  {
+    desc = " Settings",
+    key = "s",
+    group = "Label",
+    action = "edit " .. util.get_config_dir(),
+  },
+  {
+    desc = " Exit",
+    key = "q",
+    group = "Label",
+    action = "exit",
+  },
+}
 
 --
 -- Hop
