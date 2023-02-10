@@ -1,7 +1,13 @@
 local npairs = require("nvim-autopairs")
 --local Rule=require("nvim-autopairs.rule")
 
-npairs.setup({
-  check_ts = true,
-  disable_filetype = { "dap-repl" },
-})
+local M = {}
+
+M.setup = function()
+  npairs.setup({
+    check_ts = true,
+    disable_filetype = { "dap-repl" },
+  })
+end
+
+return M
