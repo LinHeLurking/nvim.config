@@ -378,9 +378,9 @@ if util.is_in_wsl() then
 else
   vim.keymap.set("n", "<S-F7>", dap.step_out, opts)
 end
--- <F26> is <C-F2> in WSL
+-- <F14> is <C-F2> in WSL
 if util.is_in_wsl() then
-  vim.keymap.set("n", "<F26>", dap.terminate, opts)
+  vim.keymap.set("n", "<F14>", dap.terminate, opts)
 else
   vim.keymap.set("n", "<S-F2>", dap.terminate, opts)
 end
