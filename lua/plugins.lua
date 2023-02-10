@@ -22,18 +22,12 @@ return require("packer").startup(function(use)
   -- Auto indent
   use({
     "nmac427/guess-indent.nvim",
-    config = function()
-      require("plugin-config.guess-indent-config").setup()
-    end,
   })
 
   -- Hop (Easymotion)
   use({
     "phaazon/hop.nvim",
     branch = "v2", -- optional but strongly recommended
-    config = function()
-      require("plugin-config.hop-config").setup()
-    end,
   })
 
   -- Nvim Tree File Explorer
@@ -42,9 +36,6 @@ return require("packer").startup(function(use)
     requires = {
       "nvim-tree/nvim-web-devicons", -- optional, for file icons
     },
-    config = function()
-      require("plugin-config.nvim-tree-config").setup()
-    end,
   })
 
   -- Buffer Line
@@ -52,16 +43,13 @@ return require("packer").startup(function(use)
     "akinsho/bufferline.nvim",
     tag = "v2.*",
     requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("plugin-config.buffer-line-config").setup()
-    end,
   })
 
   -- LSP
   use({
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
-      require("plugin-config.lsp-config").setup()
+      require("null-ls").setup()
     end,
     requires = { "nvim-lua/plenary.nvim" },
   })
@@ -85,12 +73,7 @@ return require("packer").startup(function(use)
   })
 
   -- DAP
-  use({
-    "mfussenegger/nvim-dap",
-    config = function()
-      require("plugin-config.dap-config").setup()
-    end,
-  })
+  use({ "mfussenegger/nvim-dap" })
   use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
   use({ "rcarriga/cmp-dap", requires = { "mfussenegger/nvim-dap" } })
   use({
@@ -106,9 +89,6 @@ return require("packer").startup(function(use)
   use({
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("plugin-config.trouble-config").setup()
-    end,
   })
   use({ "kyazdani42/nvim-web-devicons" })
 
@@ -121,39 +101,20 @@ return require("packer").startup(function(use)
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-vsnip",
     "hrsh7th/vim-vsnip",
-    config = function()
-      require("plugin-config.nvim-cmp-config").setup()
-    end,
   })
 
   -- Input Enhance
   use({
     "windwp/nvim-autopairs",
-    config = function()
-      require("plugin-config.autopairs-config").setup()
-    end,
-  })
-  use({
     "windwp/nvim-ts-autotag",
-    config = function()
-      require("plugin-config.nvim-ts-autotag-config").setup()
-    end,
   })
 
   -- Auto Comment
-  use({
-    "terrortylor/nvim-comment",
-    config = function()
-      require("plugin-config.comment-config").setup()
-    end,
-  })
+  use("terrortylor/nvim-comment")
 
   -- Tree Sitter Syntax Highlight
   use({
     "nvim-treesitter/nvim-treesitter",
-    config = function()
-      require("plugin-config.treesitter-config").setup()
-    end,
   })
   use({
     "JoosepAlviste/nvim-ts-context-commentstring",
@@ -175,9 +136,6 @@ return require("packer").startup(function(use)
     requires = {
       "nvim-lua/plenary.nvim",
     },
-    config = function()
-      require("plugin-config.telescope-config").setup()
-    end,
   })
   use({
     "nvim-telescope/telescope-project.nvim",
@@ -186,22 +144,20 @@ return require("packer").startup(function(use)
     },
   })
   use({ "nvim-telescope/telescope-file-browser.nvim" })
+  -- use({
+  --   "nvim-telescope/telescope-frecency.nvim",
+  --   requires = {
+  --     "kkharji/sqlite.lua",
+  --   },
+  -- })
 
   -- OSC52 supper for better copy action (in SSH)
-  use({
-    "ojroques/nvim-osc52",
-    config = function()
-      require("plugin-config.osc52-config").setup()
-    end,
-  })
+  use({ "ojroques/nvim-osc52" })
 
   -- Terminal
   use({
     "akinsho/toggleterm.nvim",
     tag = "*",
-    config = function()
-      require("plugin-config.terminal-config").setup()
-    end,
   })
 
   -- Dashboard
@@ -218,17 +174,11 @@ return require("packer").startup(function(use)
   use({
     "Civitasv/cmake-tools.nvim",
     requires = { "mfussenegger/nvim-dap" },
-    config = function()
-      require("plugin-config.cmake-config").setup()
-    end,
   })
 
   -- NVim Surround
   use({
     "kylechui/nvim-surround",
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-    config = function()
-      require("plugin-config.nvim-surround-config").setup()
-    end,
   })
 end)

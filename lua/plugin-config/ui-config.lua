@@ -1,3 +1,5 @@
+-- This file contains all UI related config
+
 -- TokyoNight coloe scheme
 vim.g.tokyonight_transparent = true
 vim.opt.background = "light"
@@ -127,7 +129,7 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 -- Globally override LSP floating window.
 require("lspconfig.ui.windows").default_options.border = "single"
 
--- Set null-ls window border
+-- Set null-ls window border 
 -- This field is set in `lsp-config.lua`
 
 -- DAP UI Configuration
