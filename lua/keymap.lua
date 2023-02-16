@@ -102,11 +102,11 @@ wk.register({
 
 -- Don't know why <A-F12> is <F60> in WSL :P
 keymap.term_toggle_key = function()
-  if util.is_in_wsl() then
-    return "<F60>"
-  else
-    return "<A-F12>"
-  end
+  -- if util.is_in_wsl() then
+  return "<F60>"
+  -- else
+  --   return "<A-F12>"
+  -- end
 end
 
 keymap.set_term_keymap = function()
@@ -256,7 +256,7 @@ keymap.cmp_keys = function()
   end)
   local smart_scroll_down = cmp.mapping(function(callback)
     if cmp.visible() then
-      return cmp.scroll_docs(-5)
+      return cmp.scroll_docs( -5)
     else
       callback()
     end
@@ -361,11 +361,11 @@ keymap.lsp_set_map_intellij = function(client, bufnr)
   -- This <C-q> breaks VISUAL-BLOCK key :P
   -- auto_bind("<C-q>", vim.lsp.buf.signature_help, bufopts)
   -- <F18> is <S-F6> in WSL :P
-  if util.is_in_wsl() then
-    auto_bind("<F18>", vim.lsp.buf.rename, bufopts)
-  else
-    auto_bind("<S-F6>", vim.lsp.buf.rename, bufopts)
-  end
+  -- if util.is_in_wsl() then
+  auto_bind("<F18>", vim.lsp.buf.rename, bufopts)
+  -- else
+  -- auto_bind("<S-F6>", vim.lsp.buf.rename, bufopts)
+  -- end
 end
 auto_bind("<A-1>", "<Cmd>NvimTreeToggle<CR>", opts) -- insert mode bind is buggy
 auto_bind("<C-_>", "<Cmd>CommentToggle<CR>", opts)
@@ -373,16 +373,16 @@ vim.keymap.set("n", "<F9>", dap.continue, opts)
 vim.keymap.set("n", "<F8>", dap.step_over, opts)
 vim.keymap.set("n", "<F7>", dap.step_into, opts)
 -- <F19> is <S-F7> in WSL
-if util.is_in_wsl() then
-  vim.keymap.set("n", "<F19>", dap.step_out, opts)
-else
-  vim.keymap.set("n", "<S-F7>", dap.step_out, opts)
-end
+-- if util.is_in_wsl() then
+vim.keymap.set("n", "<F19>", dap.step_out, opts)
+-- else
+--   vim.keymap.set("n", "<S-F7>", dap.step_out, opts)
+-- end
 -- <F14> is <C-F2> in WSL
-if util.is_in_wsl() then
-  vim.keymap.set("n", "<F14>", dap.terminate, opts)
-else
-  vim.keymap.set("n", "<S-F2>", dap.terminate, opts)
-end
+-- if util.is_in_wsl() then
+vim.keymap.set("n", "<F14>", dap.terminate, opts)
+-- else
+--   vim.keymap.set("n", "<S-F2>", dap.terminate, opts)
+-- end
 
 return keymap
