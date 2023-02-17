@@ -71,6 +71,10 @@ return require("packer").startup(function(use)
       "mfussenegger/nvim-dap",
     },
   })
+  -- Signature help when completing
+  use({
+    "ray-x/lsp_signature.nvim",
+  })
 
   -- DAP
   use({ "mfussenegger/nvim-dap" })

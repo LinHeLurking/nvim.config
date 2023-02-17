@@ -1,3 +1,15 @@
+local keymap = require("keymap")
+
+-- Function/Method signature help when completing
+require("lsp_signature").setup({
+  bind = true, -- This is mandatory, otherwise border config won't get registered.
+  handler_opts = {
+    border = "rounded",
+  },
+  select_signature_key = keymap.signature_help_select_next, -- cycle to next signature, e.g. '<M-n>' function overloading
+  hint_prefix = "🥺 ",  -- Panda for parameter, NOTE: for the terminal not support emoji, might crash
+})
+
 require("mason").setup({
   ui = {
     border = "single",
@@ -57,7 +69,6 @@ require("mason-null-ls").setup()
 local navic = require("nvim-navic")
 -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-local keymap = require("keymap")
 local on_attach_base = function(client, bufnr)
   keymap.lsp_set_map(client, bufnr)
   keymap.lsp_set_map_intellij(client, bufnr)

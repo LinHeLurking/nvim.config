@@ -149,6 +149,7 @@ wk.register({
 keymap.lsp_set_map = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+  vim.keymap.set("n", "<Leader>k", vim.lsp.buf.signature_help, bufopts)
   wk.register({
     d = { vim.lsp.buf.definition, "Definition" },
     D = { vim.lsp.buf.declaration, "Declaration" },
@@ -164,6 +165,7 @@ keymap.lsp_set_map = function(client, bufnr)
     a = { vim.lsp.buf.code_action, "Code Action" },
   }, { prefix = "<Leader>r", buffer = bufnr })
 end
+keymap.signature_help_select_next = "<A-n>"
 
 --
 -- DAP
@@ -249,7 +251,7 @@ keymap.cmp_keys = function()
   end)
   local smart_scroll_up = cmp.mapping(function(callback)
     if cmp.visible() then
-      return cmp.scroll_docs(-5)
+      return cmp.scroll_docs( -5)
     else
       callback()
     end
