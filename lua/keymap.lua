@@ -249,14 +249,14 @@ keymap.cmp_keys = function()
   end)
   local smart_scroll_up = cmp.mapping(function(callback)
     if cmp.visible() then
-      return cmp.scroll_docs(5)
+      return cmp.scroll_docs(-5)
     else
       callback()
     end
   end)
   local smart_scroll_down = cmp.mapping(function(callback)
     if cmp.visible() then
-      return cmp.scroll_docs( -5)
+      return cmp.scroll_docs(5)
     else
       callback()
     end
@@ -276,12 +276,12 @@ keymap.cmp_keys = function()
     end
   end)
   local keys = {
-    ["<C-u>"] = smart_scroll_down,
-    ["<C-d>"] = smart_scroll_up,
+    ["<C-u>"] = smart_scroll_up,
+    ["<C-d>"] = smart_scroll_down,
     ["<C-n>"] = smart_next,
-    ["<C-j>"] = smart_next,
+    -- ["<C-j>"] = smart_next,
     ["<C-p>"] = smart_prev,
-    ["<C-k>"] = smart_prev,
+    -- ["<C-k>"] = smart_prev,
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<CR>"] = smart_cr,
     ["<Tab>"] = cmp.mapping.confirm({ select = true }),
