@@ -149,7 +149,15 @@ wk.register({
 keymap.lsp_set_map = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-  vim.keymap.set("n", "<Leader>k", vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set(
+    "n",
+    "<Leader>k",
+    vim.lsp.buf.signature_help,
+    { noremap = true, silent = true, desc = "Signature Help" }
+  )
+  auto_bind("<A-x>", function()
+    require("lsp_signature").toggle_float_win()
+  end, { noremap = true, silent = true, desc = "Toggle Signature Window" })
   wk.register({
     d = { vim.lsp.buf.definition, "Definition" },
     D = { vim.lsp.buf.declaration, "Declaration" },
