@@ -110,7 +110,12 @@ return require("packer").startup(function(use)
   -- Input Enhance
   use({
     "windwp/nvim-autopairs",
+  })
+  use({
     "windwp/nvim-ts-autotag",
+    requires = {
+      "nvim-treesitter/nvim-treesitter",
+    },
   })
 
   -- Auto Comment
