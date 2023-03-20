@@ -24,14 +24,6 @@ local opts = { silent = true, noremap = true }
 
 local wk = require("which-key")
 
-local toggle_hls = function()
-  if vim.api.nvim_get_option("hls") == true then
-    vim.opt.hlsearch = false
-  else
-    vim.opt.hlsearch = true
-  end
-end
-
 --
 -- Misc
 --
@@ -56,8 +48,8 @@ vim.keymap.set("i", "<C-h>", "<Left>", opts)
 vim.keymap.set("i", "<C-j>", "<Down>", opts)
 vim.keymap.set("i", "<C-k>", "<Up>", opts)
 vim.keymap.set("i", "<C-l>", "<Right>", opts)
--- vim.keymap.set("i", "<C-H>", "<Esc>^<Insert>", opts)
--- vim.keymap.set("i", "<C-L>", "<Esc>$a", opts)
+-- Enable highlight when searching
+vim.keymap.set("n", "/", "<Cmd>:set hlsearch<CR>/", opts)
 
 --
 -- Treesitter Textobects
@@ -130,7 +122,7 @@ vim.api.nvim_create_autocmd("FileType", {
 --
 wk.register({
   name = "Change Settings",
-  h = { toggle_hls, "Toggle Highlight" },
+  h = { "<Cmd>:set hlsearch!<CR>", "Toggle Highlight" },
   r = { "<Cmd>:set relativenumber!<CR>", "Toggle Relative Number" },
 }, { prefix = "<Leader>c" })
 
