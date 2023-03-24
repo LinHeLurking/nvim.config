@@ -2,15 +2,15 @@ vim.opt.termguicolors = true
 
 require("bufferline").setup({
   options = {
-    mode = "buffers", -- "buffers" | "tabs". set to "tabs" to only show tabpages instead
-    numbers = "ordinal", -- "none" | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
-    close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-    right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-    left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
-    middle_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
+    mode = "buffers",                       -- "buffers" | "tabs". set to "tabs" to only show tabpages instead
+    numbers = "ordinal",                    -- "none" | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
+    close_command = "bdelete! %d",          -- can be a string | function, see "Mouse actions"
+    right_mouse_command = "bdelete! %d",    -- can be a string | function, see "Mouse actions"
+    left_mouse_command = "buffer %d",       -- can be a string | function, see "Mouse actions"
+    middle_mouse_command = "bdelete! %d",   -- can be a string | function, see "Mouse actions"
     indicator = {
-      icon = "▎", -- this should be omitted if indicator style is not 'icon'
-      style = "icon", -- 'icon' | 'underline' | 'none',
+      icon = "▎",                         -- this should be omitted if indicator style is not 'icon'
+      style = "icon",                       -- 'icon' | 'underline' | 'none',
     },
     buffer_close_icon = "",
     modified_icon = "●",
@@ -21,7 +21,7 @@ require("bufferline").setup({
     --- Please note some names can/will break the
     --- bufferline so use this at your discretion knowing that it has
     --- some limitations that will *NOT* be fixed.
-    name_formatter = function(buf) -- buf contains:
+    name_formatter = function(buf)   -- buf contains:
       -- name                | str        | the basename of the active file
       -- path                | str        | the full path of the active file
       -- bufnr (buffer only) | int        | the number of the active buffer
@@ -29,10 +29,10 @@ require("bufferline").setup({
       -- tabnr (tabs only)   | int        | the "handle" of the tab, can be converted to its ordinal number using: `vim.api.nvim_tabpage_get_number(buf.tabnr)`
     end,
     max_name_length = 18,
-    max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
-    truncate_names = true, -- whether or not tab names should be truncated
+    max_prefix_length = 15,     -- prefix used when a buffer is de-duplicated
+    truncate_names = true,      -- whether or not tab names should be truncated
     tab_size = 18,
-    diagnostics = "nvim_lsp", -- false | "nvim_lsp" | "coc",
+    diagnostics = "nvim_lsp",   -- false | "nvim_lsp" | "coc",
     diagnostics_update_in_insert = true,
     -- The diagnostics indicator can be set to nil to keep the buffer name highlight but delete the highlighting
     diagnostics_indicator = function(count, level, diagnostics_dict, context)
@@ -66,29 +66,29 @@ require("bufferline").setup({
       {
         filetype = "NvimTree",
         text = "File Explorer",
-        text_align = "left", -- "left" | "center" | "right"
+        text_align = "left",   -- "left" | "center" | "right"
         separator = true,
       },
     },
-    color_icons = true, -- true | false, -- whether or not to add the filetype icon highlights
-    show_buffer_icons = true, -- true | false, -- disable filetype icons for buffers
-    show_buffer_close_icons = true, -- true | false,
-    show_buffer_default_icon = false, -- true | false, -- whether or not an unrecognised filetype should show a default icon
-    show_close_icon = true, --true | false,
-    show_tab_indicators = true, -- true | false,
-    show_duplicate_prefix = true, -- true | false, -- whether to show duplicate buffer prefix
-    persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+    color_icons = true,                 -- true | false, -- whether or not to add the filetype icon highlights
+    show_buffer_icons = true,           -- true | false, -- disable filetype icons for buffers
+    show_buffer_close_icons = true,     -- true | false,
+    show_buffer_default_icon = false,   -- true | false, -- whether or not an unrecognised filetype should show a default icon
+    show_close_icon = true,             --true | false,
+    show_tab_indicators = true,         -- true | false,
+    show_duplicate_prefix = true,       -- true | false, -- whether to show duplicate buffer prefix
+    persist_buffer_sort = true,         -- whether or not custom sorted buffers should persist
     -- can also be a table containing 2 custom separators
     -- [focused and unfocused]. eg: { '|', '|' }
-    separator_style = "thick", -- "slant" | "thick" | "thin" | { 'any', 'any' },
-    enforce_regular_tabs = false, -- false | true,
-    always_show_bufferline = true, -- true | false,
+    separator_style = "thick",       -- "slant" | "thick" | "thin" | { 'any', 'any' },
+    enforce_regular_tabs = false,    -- false | true,
+    always_show_bufferline = true,   -- true | false,
     hover = {
       enabled = true,
       delay = 200,
       reveal = { "close" },
     },
-    sort_by = "insert-after_current", -- 'insert_after_current' |'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
+    sort_by = "insert-after_current",   -- 'insert_after_current' |'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
     -- add custom logic
     -- return buffer_a.modified > buffer_b.modified
     -- end

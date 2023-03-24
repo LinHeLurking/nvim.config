@@ -1,3 +1,4 @@
+local util = require("util")
 local keymap = require("keymap")
 
 require("nvim-treesitter.configs").setup({
@@ -11,7 +12,6 @@ require("nvim-treesitter.configs").setup({
         return true
       end
     end,
-
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
@@ -20,15 +20,13 @@ require("nvim-treesitter.configs").setup({
     additional_vim_regex_highlighting = true,
   },
   sync_install = false,
-  auto_install = true,
+  auto_install = not util.is_in_vscode(),
   -- Text objects plugin configs
   textobjects = {
     select = {
       enable = true,
-
       -- Automatically jump forward to textobj, similar to targets.vim
       lookahead = true,
-
       keymaps = keymap.text_objects.select_keymaps,
       -- You can choose the select mode (default is charwise 'v')
       --
@@ -39,7 +37,7 @@ require("nvim-treesitter.configs").setup({
       -- mapping query_strings to modes.
       selection_modes = {
         ["@parameter.outer"] = "v", -- charwise
-        ["@function.outer"] = "V", -- linewise
+        ["@function.outer"] = "V",  -- linewise
         ["@class.outer"] = "<c-q>", -- blockwise
       },
       -- If you set this to `true` (default is `false`) then any textobject is

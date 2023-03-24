@@ -1,9 +1,4 @@
-require("nvim-treesitter.configs").setup({
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false,
-  },
-})
+
 require("nvim_comment").setup({
   hook = function()
     local filetype = vim.api.nvim_buf_get_option(0, "filetype")

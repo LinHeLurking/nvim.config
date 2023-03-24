@@ -14,6 +14,14 @@ util.is_in_wsl = function()
   return util.is_in_linux() and os.getenv("WSL_DISTRO_NAME") ~= nil
 end
 
+util.is_in_vscode = function()
+  if vim.g.vscode then
+    return true
+  else
+    return false
+  end
+end
+
 util.get_config_dir = function()
   if util.is_in_windows() then
     -- Windows
