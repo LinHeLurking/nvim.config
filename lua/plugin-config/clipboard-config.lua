@@ -2,11 +2,13 @@ local util = require("util")
 
 local in_wsl = util.is_in_wsl()
 local in_windows = util.is_in_windows()
+local in_vscode = util.is_in_vscode()
 
 local function osc_copy(lines, _)
   require("osc52").copy(table.concat(lines, "\n"))
 end
 
+local pwsh_paste = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))'
 
 if in_wsl then
   local home = os.getenv("HOME")
@@ -18,10 +20,17 @@ if in_wsl then
     paste = { ["+"] = wsl_paste,["*"] = wsl_paste },
   }
 elseif in_windows then
-  local pwsh_paste = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))'
-  vim.g.clipboard = {
-    name = "win-clip",
-    copy = { ["+"] = { "clip.exe" },["*"] = { "clip.exe" } },
-    paste = { ["+"] = pwsh_paste,["*"] = pwsh_paste },
-  }
+  if in_vscode then
+    vim.g.clipboard = {
+      name = "vsc-clip",
+      copy = { ["+"] = { "clip.exe" },["*"] = { "clip.exe" } },
+      paste = { ["+"] = pwsh_paste,["*"] = pwsh_paste },
+    }
+  else
+    vim.g.clipboard = {
+      name = "win-clip",
+      copy = { ["+"] = osc_copy,["*"] = osc_copy },
+      paste = { ["+"] = pwsh_paste,["*"] = pwsh_paste },
+    }
+  end
 end
