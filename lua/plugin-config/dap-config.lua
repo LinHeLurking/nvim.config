@@ -16,12 +16,18 @@ if has_lldb then
       -- print("Using " .. lldb_vscode)
     elseif vim.fn.executable("lldb-vscode-" .. full_ver) == 1 then
       lldb_vscode = "lldb-vscode-" .. full_ver
+    elseif vim.fn.executable("lldb-vscode") == 1 then
+      lldb_vscode = "lldb-vscode"
     end
     handle:close()
   end
 end
 
+if lldb_vscode ~= nil then
+
 M.lldb_vscode = lldb_vscode
+
+
 
 -- Adapter
 dap.adapters.lldb = {
@@ -72,6 +78,8 @@ dap.listeners.before.event_terminated["dapui_config"] = function()
 end
 dap.listeners.before.event_exited["dapui_config"] = function()
   dapui.close()
+end
+
 end
 
 return M
