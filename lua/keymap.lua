@@ -2,6 +2,8 @@ local util = require("util")
 
 vim.g.mapleader = " "
 
+-- local not_vscode = vim.g.vscode == nil
+
 local keymap = {}
 
 local async_format = util.async_format
@@ -139,7 +141,6 @@ wk.register({
 -- Terminal
 --
 
-
 wk.register({
   name = "Terminal",
   f = { "<Cmd>:ToggleTerm direction=float<CR>", "Open Float Terminal" },
@@ -165,7 +166,6 @@ keymap.set_term_keymap = function()
   vim.keymap.set("t", "<A-l>", "<Cmd>wincmd l<CR>", term_opts)
 end
 
-
 --
 -- Buffer Line Navigation
 --
@@ -190,7 +190,6 @@ wk.register({
   t = { "<Cmd>BufferLineCycleNext<CR>", "Next Buffer" },
   T = { "<Cmd>BufferLineCyclePrev<CR>", "Previous Buffer" },
 }, { prefix = "g" })
-
 
 --
 -- LSP
@@ -225,7 +224,6 @@ keymap.lsp_set_map = function(client, bufnr)
 end
 keymap.signature_help_select_next = "<A-n>"
 
-
 --
 -- DAP
 --
@@ -255,7 +253,6 @@ wk.register({
   p = { "<Cmd>CMakeSelectConfigurePreset<CR>", "Configure Presets" },
 }, { prefix = "<Leader>m" })
 
-
 --
 -- Trouble
 --
@@ -265,23 +262,23 @@ keymap.trouble_keys = {
     -- key mappings for actions in the trouble list
     -- map to {} to remove a mapping, for example:
     -- close = {},
-    close = "q",                    -- close the list
-    cancel = "<esc>",               -- cancel the preview and get back to your last window / buffer / cursor
-    refresh = "r",                  -- manually refresh
-    jump = { "<cr>", "<tab>" },     -- jump to the diagnostic or open / close folds
-    open_split = { "<c-x>" },       -- open buffer in new split
-    open_vsplit = { "<c-v>" },      -- open buffer in new vsplit
-    open_tab = { "<c-t>" },         -- open buffer in new tab
-    jump_close = { "o" },           -- jump to the diagnostic and close the list
-    toggle_mode = "m",              -- toggle between "workspace" and "document" diagnostics mode
-    toggle_preview = "P",           -- toggle auto_preview
-    hover = "K",                    -- opens a small popup with the full multiline message
-    preview = "p",                  -- preview the diagnostic location
-    close_folds = { "zM", "zm" },   -- close all folds
-    open_folds = { "zR", "zr" },    -- open all folds
-    toggle_fold = { "zA", "za" },   -- toggle fold of current file
-    previous = "k",                 -- previous item
-    next = "j",                     -- next item
+    close = "q",                -- close the list
+    cancel = "<esc>",           -- cancel the preview and get back to your last window / buffer / cursor
+    refresh = "r",              -- manually refresh
+    jump = { "<cr>", "<tab>" }, -- jump to the diagnostic or open / close folds
+    open_split = { "<c-x>" },   -- open buffer in new split
+    open_vsplit = { "<c-v>" },  -- open buffer in new vsplit
+    open_tab = { "<c-t>" },     -- open buffer in new tab
+    jump_close = { "o" },       -- jump to the diagnostic and close the list
+    toggle_mode = "m",          -- toggle between "workspace" and "document" diagnostics mode
+    toggle_preview = "P",       -- toggle auto_preview
+    hover = "K",                -- opens a small popup with the full multiline message
+    preview = "p",              -- preview the diagnostic location
+    close_folds = { "zM", "zm" }, -- close all folds
+    open_folds = { "zR", "zr" }, -- open all folds
+    toggle_fold = { "zA", "za" }, -- toggle fold of current file
+    previous = "k",             -- previous item
+    next = "j",                 -- next item
   },
 }
 wk.register({
@@ -292,7 +289,6 @@ wk.register({
   l = { "<Cmd>TroubleToggle loclist<CR>", "Location List" },
   q = { "<Cmd>TroubleToggle quickfix<CR>", "Quick Fix" },
 }, { prefix = "<Leader>x" })
-
 
 --
 -- Auto Completion
@@ -412,7 +408,6 @@ keymap.dashboard_shortcut = {
   },
 }
 
-
 --
 -- Hop
 --
@@ -428,7 +423,6 @@ wk.register({
 -- Intellij Flavor Keybindings
 --
 
-local dap = require("dap")
 keymap.lsp_set_map_intellij = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   auto_bind("<C-A-l>", async_format, bufopts)
@@ -441,8 +435,10 @@ keymap.lsp_set_map_intellij = function(client, bufnr)
     auto_bind("<S-F6>", vim.lsp.buf.rename, bufopts)
   end
 end
-auto_bind("<A-1>", "<Cmd>NvimTreeToggle<CR>", opts)   -- insert mode bind is buggy
+auto_bind("<A-1>", "<Cmd>NvimTreeToggle<CR>", opts) -- insert mode bind is buggy
 auto_bind("<C-_>", "<Cmd>CommentToggle<CR>", opts)
+
+-- local dap = require("dap")
 vim.keymap.set("n", "<F9>", dap.continue, opts)
 vim.keymap.set("n", "<F8>", dap.step_over, opts)
 vim.keymap.set("n", "<F7>", dap.step_into, opts)
@@ -458,6 +454,5 @@ if util.is_in_linux() then
 else
   vim.keymap.set("n", "<S-F2>", dap.terminate, opts)
 end
-
 
 return keymap

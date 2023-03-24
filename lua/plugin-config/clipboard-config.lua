@@ -2,7 +2,7 @@ local util = require("util")
 
 local in_wsl = util.is_in_wsl()
 local in_windows = util.is_in_windows()
-local in_vscode = util.is_in_vscode()
+local in_vscode = vim.g.vscode ~= nil
 
 local function osc_copy(lines, _)
   require("osc52").copy(table.concat(lines, "\n"))
