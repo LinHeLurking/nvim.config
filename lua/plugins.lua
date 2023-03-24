@@ -1,6 +1,5 @@
 return require("packer").startup(function(use)
   local util = require("util")
-  local not_in_vscode = not util.is_in_vscode()
 
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
@@ -79,7 +78,7 @@ return require("packer").startup(function(use)
   use({
     "jayp0521/mason-null-ls.nvim",
     config = function()
-      require("mason-null-ls")
+      require("mason-null-ls").setup()
     end,
     requires = "williamboman/mason.nvim",
   })
@@ -92,13 +91,15 @@ return require("packer").startup(function(use)
   use({
     "williamboman/mason-lspconfig.nvim",
     config = function()
-      require("mason-lspconfig")
+      require("plugin-config.mason-lsp-config")
     end,
-    requires = "williamboman/mason.nvim",
+    requires = {
+      "williamboman/mason.nvim",
+      "neovim/nvim-lspconfig",
+    },
   })
   use({
     "neovim/nvim-lspconfig",
-
   })
   -- LSP Enhance
   use({
@@ -170,7 +171,6 @@ return require("packer").startup(function(use)
   })
   use({
     "kyazdani42/nvim-web-devicons",
-
   })
 
   -- Auto complete
@@ -182,27 +182,21 @@ return require("packer").startup(function(use)
   })
   use({
     "hrsh7th/cmp-nvim-lsp",
-
   })
   use({
     "hrsh7th/cmp-buffer",
-
   })
   use({
     "hrsh7th/cmp-path",
-
   })
   use({
     "hrsh7th/cmp-cmdline",
-
   })
   use({
     "hrsh7th/cmp-vsnip",
-
   })
   use({
     "hrsh7th/vim-vsnip",
-
   })
 
   -- Input Enhance
@@ -228,7 +222,7 @@ return require("packer").startup(function(use)
     "nvim-treesitter/nvim-treesitter",
     config = function()
       require("plugin-config.treesitter-config")
-    end
+    end,
   })
   use({
     "JoosepAlviste/nvim-ts-context-commentstring",
@@ -237,7 +231,7 @@ return require("packer").startup(function(use)
     },
     config = function()
       require("plugin-config.ts-context-comment-config")
-    end
+    end,
   })
   use({
     "nvim-treesitter/nvim-treesitter-textobjects",
@@ -251,7 +245,7 @@ return require("packer").startup(function(use)
     "terrortylor/nvim-comment",
     config = function()
       require("plugin-config.comment-config")
-    end
+    end,
   })
 
   -- Telescope
@@ -274,7 +268,7 @@ return require("packer").startup(function(use)
   })
   use({
     "nvim-telescope/telescope-file-browser.nvim",
-    requires = { "nvim-telescope/telescope.nvim", },
+    requires = { "nvim-telescope/telescope.nvim" },
   })
 
   -- OSC52 supper for better copy action (in SSH)
@@ -319,6 +313,6 @@ return require("packer").startup(function(use)
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     config = function()
       require("plugin-config.nvim-surround-config")
-    end
+    end,
   })
 end)

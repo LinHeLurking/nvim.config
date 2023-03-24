@@ -11,7 +11,7 @@ local on_attach_base = function(client, bufnr)
 end
 
 local lsp_config = require("lspconfig")
-local dap_config = require("plugin-config/dap-config")
+local dap_config = require("plugin-config.dap-config")
 local rust_tools = require("rust-tools")
 
 require("mason-lspconfig").setup()
