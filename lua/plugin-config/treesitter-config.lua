@@ -20,7 +20,7 @@ require("nvim-treesitter.configs").setup({
     additional_vim_regex_highlighting = true,
   },
   sync_install = false,
-  auto_install = not util.is_in_vscode(),
+  auto_install = true,
   -- Text objects plugin configs
   textobjects = {
     select = {
