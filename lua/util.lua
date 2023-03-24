@@ -1,12 +1,17 @@
 local util = {}
 
-util.is_in_wsl = function()
-  return os.getenv("WSL_DISTRO_NAME") ~= nil
-end
+local name = vim.loop.os_uname().sysname
 
 util.is_in_windows = function()
-  local name = vim.loop.os_uname().sysname
   return name:find("Win") and true or false
+end
+
+util.is_in_linux = function()
+  return name == "Linux"
+end
+
+util.is_in_wsl = function()
+  return util.is_in_linux() and os.getenv("WSL_DISTRO_NAME") ~= nil
 end
 
 util.get_config_dir = function()

@@ -150,11 +150,11 @@ wk.register({
 
 -- Don't know why <A-F12> is <F60> in WSL :P
 keymap.term_toggle_key = function()
-  -- if util.is_in_wsl() then
-  return "<F60>"
-  -- else
-  --   return "<A-F12>"
-  -- end
+  if util.is_in_linux() then
+    return "<F60>"
+  else
+    return "<A-F12>"
+  end
 end
 
 keymap.set_term_keymap = function()
@@ -255,26 +255,27 @@ wk.register({
 -- Trouble
 --
 keymap.trouble_keys = {
-  action_keys = { -- key mappings for actions in the trouble list
+  action_keys = {
+    -- key mappings for actions in the trouble list
     -- map to {} to remove a mapping, for example:
     -- close = {},
-    close = "q", -- close the list
-    cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-    refresh = "r", -- manually refresh
+    close = "q",                -- close the list
+    cancel = "<esc>",           -- cancel the preview and get back to your last window / buffer / cursor
+    refresh = "r",              -- manually refresh
     jump = { "<cr>", "<tab>" }, -- jump to the diagnostic or open / close folds
-    open_split = { "<c-x>" }, -- open buffer in new split
-    open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
-    open_tab = { "<c-t>" }, -- open buffer in new tab
-    jump_close = { "o" }, -- jump to the diagnostic and close the list
-    toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-    toggle_preview = "P", -- toggle auto_preview
-    hover = "K", -- opens a small popup with the full multiline message
-    preview = "p", -- preview the diagnostic location
+    open_split = { "<c-x>" },   -- open buffer in new split
+    open_vsplit = { "<c-v>" },  -- open buffer in new vsplit
+    open_tab = { "<c-t>" },     -- open buffer in new tab
+    jump_close = { "o" },       -- jump to the diagnostic and close the list
+    toggle_mode = "m",          -- toggle between "workspace" and "document" diagnostics mode
+    toggle_preview = "P",       -- toggle auto_preview
+    hover = "K",                -- opens a small popup with the full multiline message
+    preview = "p",              -- preview the diagnostic location
     close_folds = { "zM", "zm" }, -- close all folds
     open_folds = { "zR", "zr" }, -- open all folds
     toggle_fold = { "zA", "za" }, -- toggle fold of current file
-    previous = "k", -- previous item
-    next = "j", -- next item
+    previous = "k",             -- previous item
+    next = "j",                 -- next item
   },
 }
 wk.register({
@@ -307,7 +308,7 @@ keymap.cmp_keys = function()
   end)
   local smart_scroll_up = cmp.mapping(function(callback)
     if cmp.visible() then
-      return cmp.scroll_docs( -5)
+      return cmp.scroll_docs(-5)
     else
       callback()
     end
@@ -419,29 +420,29 @@ keymap.lsp_set_map_intellij = function(client, bufnr)
   auto_bind("<C-A-l>", async_format, bufopts)
   -- This <C-q> breaks VISUAL-BLOCK key :P
   -- auto_bind("<C-q>", vim.lsp.buf.signature_help, bufopts)
-  -- <F18> is <S-F6> in WSL :P
-  -- if util.is_in_wsl() then
-  auto_bind("<F18>", vim.lsp.buf.rename, bufopts)
-  -- else
-  -- auto_bind("<S-F6>", vim.lsp.buf.rename, bufopts)
-  -- end
+  -- <F18> is <S-F6> in Linux :P
+  if util.is_in_linux() then
+    auto_bind("<F18>", vim.lsp.buf.rename, bufopts)
+  else
+    auto_bind("<S-F6>", vim.lsp.buf.rename, bufopts)
+  end
 end
 auto_bind("<A-1>", "<Cmd>NvimTreeToggle<CR>", opts) -- insert mode bind is buggy
 auto_bind("<C-_>", "<Cmd>CommentToggle<CR>", opts)
 vim.keymap.set("n", "<F9>", dap.continue, opts)
 vim.keymap.set("n", "<F8>", dap.step_over, opts)
 vim.keymap.set("n", "<F7>", dap.step_into, opts)
--- <F19> is <S-F7> in WSL
--- if util.is_in_wsl() then
-vim.keymap.set("n", "<F19>", dap.step_out, opts)
--- else
---   vim.keymap.set("n", "<S-F7>", dap.step_out, opts)
--- end
--- <F14> is <C-F2> in WSL
--- if util.is_in_wsl() then
-vim.keymap.set("n", "<F14>", dap.terminate, opts)
--- else
---   vim.keymap.set("n", "<S-F2>", dap.terminate, opts)
--- end
+-- <F19> is <S-F7> in Linux
+if util.is_in_linux() then
+  vim.keymap.set("n", "<F19>", dap.step_out, opts)
+else
+  vim.keymap.set("n", "<S-F7>", dap.step_out, opts)
+end
+-- <F14> is <C-F2> in Linux
+if util.is_in_linux() then
+  vim.keymap.set("n", "<F14>", dap.terminate, opts)
+else
+  vim.keymap.set("n", "<S-F2>", dap.terminate, opts)
+end
 
 return keymap
