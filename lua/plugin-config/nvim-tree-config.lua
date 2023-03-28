@@ -36,7 +36,7 @@ require("nvim-tree").setup({
   update_focused_file = {
     enable = true,
     update_root = true,
-    ignore_list = { "toggleterm", "term" },
+    ignore_list = { "toggleterm", "term", ".cache", "node_modules" },
   },
   -- Profile
   -- log = {
