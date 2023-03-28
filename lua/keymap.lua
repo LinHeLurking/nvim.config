@@ -262,23 +262,23 @@ keymap.trouble_keys = {
     -- key mappings for actions in the trouble list
     -- map to {} to remove a mapping, for example:
     -- close = {},
-    close = "q",                -- close the list
-    cancel = "<esc>",           -- cancel the preview and get back to your last window / buffer / cursor
-    refresh = "r",              -- manually refresh
+    close = "q", -- close the list
+    cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
+    refresh = "r", -- manually refresh
     jump = { "<cr>", "<tab>" }, -- jump to the diagnostic or open / close folds
-    open_split = { "<c-x>" },   -- open buffer in new split
-    open_vsplit = { "<c-v>" },  -- open buffer in new vsplit
-    open_tab = { "<c-t>" },     -- open buffer in new tab
-    jump_close = { "o" },       -- jump to the diagnostic and close the list
-    toggle_mode = "m",          -- toggle between "workspace" and "document" diagnostics mode
-    toggle_preview = "P",       -- toggle auto_preview
-    hover = "K",                -- opens a small popup with the full multiline message
-    preview = "p",              -- preview the diagnostic location
+    open_split = { "<c-x>" }, -- open buffer in new split
+    open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
+    open_tab = { "<c-t>" }, -- open buffer in new tab
+    jump_close = { "o" }, -- jump to the diagnostic and close the list
+    toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
+    toggle_preview = "P", -- toggle auto_preview
+    hover = "K", -- opens a small popup with the full multiline message
+    preview = "p", -- preview the diagnostic location
     close_folds = { "zM", "zm" }, -- close all folds
     open_folds = { "zR", "zr" }, -- open all folds
     toggle_fold = { "zA", "za" }, -- toggle fold of current file
-    previous = "k",             -- previous item
-    next = "j",                 -- next item
+    previous = "k", -- previous item
+    next = "j", -- next item
   },
 }
 wk.register({
@@ -312,7 +312,7 @@ keymap.cmp_keys = function()
   end)
   local smart_scroll_up = cmp.mapping(function(callback)
     if cmp.visible() then
-      return cmp.scroll_docs(-5)
+      return cmp.scroll_docs( -5)
     else
       callback()
     end
@@ -360,10 +360,10 @@ end
 
 keymap.telscope_set_map = function()
   local telescope = require("telescope.builtin")
-  local project = require("telescope").extensions.project
-  local show_prj = function()
-    project.project({ display_type = "full" })
-  end
+  -- local project = require("telescope").extensions.project
+  -- local show_prj = function()
+  --   project.project({ display_type = "full" })
+  -- end
   wk.register({
     name = "Find Everything",
     c = { telescope.commands, "Find Commands" },
@@ -373,7 +373,7 @@ keymap.telscope_set_map = function()
     b = { telescope.buffers, "Buffers" },
     h = { telescope.help_tags, "Help Tags" },
     r = { telescope.oldfiles, "Recent Files" },
-    p = { show_prj, "Project" },
+    -- p = { show_prj, "Project" },
   }, { prefix = "<Leader>f" })
 end
 
@@ -382,12 +382,12 @@ end
 --
 
 keymap.dashboard_shortcut = {
-  {
-    desc = " Projects",
-    key = "p",
-    group = "Label",
-    action = "Telescope project",
-  },
+  -- {
+  --   desc = " Projects",
+  --   key = "p",
+  --   group = "Label",
+  --   action = "Telescope project",
+  -- },
   {
     desc = " Update",
     key = "u",
