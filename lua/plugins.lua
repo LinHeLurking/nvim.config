@@ -101,7 +101,6 @@ return require("packer").startup(function(use)
   })
   use({
     "neovim/nvim-lspconfig",
-
   })
   -- LSP Enhance
   use({
@@ -173,7 +172,6 @@ return require("packer").startup(function(use)
   })
   use({
     "kyazdani42/nvim-web-devicons",
-
   })
 
   -- Auto complete
@@ -185,27 +183,21 @@ return require("packer").startup(function(use)
   })
   use({
     "hrsh7th/cmp-nvim-lsp",
-
   })
   use({
     "hrsh7th/cmp-buffer",
-
   })
   use({
     "hrsh7th/cmp-path",
-
   })
   use({
     "hrsh7th/cmp-cmdline",
-
   })
   use({
     "hrsh7th/cmp-vsnip",
-
   })
   use({
     "hrsh7th/vim-vsnip",
-
   })
 
   -- Input Enhance
