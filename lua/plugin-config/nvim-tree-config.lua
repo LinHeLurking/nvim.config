@@ -30,6 +30,14 @@ require("nvim-tree").setup({
     show_on_dirs = true,
     timeout = 400,
   },
+  filesystem_watchers = {
+    enable = true,
+    debounce_delay = 100,
+    ignore_dirs = {
+      "node_modules",
+      ".cache",
+    },
+  },
   -- Integrate with project.nvim
   sync_root_with_cwd = true,
   respect_buf_cwd = true,
