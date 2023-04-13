@@ -26,7 +26,7 @@ require("nvim-tree").setup({
   },
   git = {
     enable = true,
-    ignore = false,
+    ignore = true, -- Ignore based on .gitignore file
     show_on_dirs = true,
     timeout = 400,
   },
