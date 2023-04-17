@@ -148,14 +148,15 @@ wk.register({
   v = { "<Cmd>:ToggleTerm direction=vertical<CR>", "Open Vertical Terminal" },
 }, { prefix = "<Leader>t" })
 
--- Don't know why <A-F12> is <F60> in WSL :P
+-- Don't know why <A-F12> is <F60> in WSL/MacOS :P
 keymap.term_toggle_key = function()
-  if util.is_in_linux() then
+  if util.is_in_linux() or util.is_in_macos() then
     return "<F60>"
   else
     return "<A-F12>"
   end
 end
+
 
 keymap.set_term_keymap = function()
   local term_opts = { silent = true, noremap = true, buffer = 0 }

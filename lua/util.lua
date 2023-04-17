@@ -10,6 +10,10 @@ util.is_in_linux = function()
   return name == "Linux"
 end
 
+util.is_in_macos = function()
+  return name == "Darwin"
+end
+
 util.is_in_wsl = function()
   return util.is_in_linux() and os.getenv("WSL_DISTRO_NAME") ~= nil
 end
