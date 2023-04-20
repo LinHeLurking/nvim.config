@@ -27,6 +27,7 @@ return require("packer").startup(function(use)
     "nvim-lualine/lualine.nvim",
     requires = { "kyazdani42/nvim-web-devicons", "SmiteshP/nvim-navic" },
     config = function()
+      print("LLN")
       require("plugin-config.lualine-config")
     end,
   })
@@ -89,13 +90,6 @@ return require("packer").startup(function(use)
     requires = {
       "SmiteshP/nvim-navic",
     },
-    config = function()
-      require("plugin-config.mason-config")
-      require("plugin-config.null-ls-config")
-      require("mason-null-ls").setup()
-      require("plugin-config.mason-lsp-config")
-      require("plugin-config.lsp-signature-config")
-    end,
   })
   -- LSP Enhance
   use({
