@@ -8,6 +8,10 @@ local keymap = {}
 
 local async_format = util.async_format
 
+local close_cur_buf = function()
+  util.buffer_del_switch_focus(vim.api.nvim_get_current_buf())
+end
+
 local auto_bind = function(lhs, rhs, opt)
   if type(rhs) == "string" then
     vim.keymap.set("n", lhs, rhs, opt)
@@ -175,12 +179,7 @@ wk.register({
   l = { "<Cmd>BufferLineCycleNext<CR>", "Next Buffer" },
   h = { "<Cmd>BufferLineCyclePrev<CR>", "Previous Buffer" },
   p = { "<Cmd>BufferLinePick<CR>", "Pick Buffer" },
-  c = {
-    name = "Close Buffer",
-    l = { "<Cmd>BufferLineCloseLeft<CR>", "Close Left Buffer" },
-    r = { "<Cmd>BufferLineCloseRight<CR>", "Close Left Buffer" },
-    p = { "<Cmd>BufferLinePickClose<CR>", "Close Left Buffer" },
-  },
+  c = { close_cur_buf, "Close Buffer" },
 }, { prefix = "<Leader>b" })
 
 --
@@ -312,7 +311,7 @@ keymap.cmp_keys = function()
   end)
   local smart_scroll_up = cmp.mapping(function(callback)
     if cmp.visible() then
-      return cmp.scroll_docs(-5)
+      return cmp.scroll_docs( -5)
     else
       callback()
     end

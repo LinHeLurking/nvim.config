@@ -39,4 +39,19 @@ util.async_format = function()
   })
 end
 
+util.buffer_del_switch_focus = function(bufnr)
+  local cur_bufnr = vim.api.nvim_get_current_buf()
+  vim.cmd("bdelete! " .. tostring(bufnr))
+  if cur_bufnr == bufnr then
+    for _, buf in pairs(vim.fn.getbufinfo()) do
+      if buf.name ~= "" and buf.loaded == 1 and buf.listed == 1 and buf.linecount > 1 then
+        -- print("Switch focus to buffer: " .. buf.bufnr)
+        vim.api.nvim_set_current_buf(buf.bufnr)
+        break
+      end
+    end
+  end
+  require("bufferline.ui").refresh()
+end
+
 return util
