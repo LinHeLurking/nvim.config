@@ -10,17 +10,15 @@ local on_attach_base = function(client, bufnr)
   end
 end
 
-local lsp_config = require("lspconfig")
 local dap_config = require("plugin-config.dap-config")
-local rust_tools = require("rust-tools")
 
 require("mason-lspconfig").setup()
 require("mason-lspconfig").setup_handlers({
   -- The first entry (without a key) will be the default handler
   -- and will be called for each installed server that doesn't have
   -- a dedicated handler.
-  function(server_name)   -- default handler (optional)
-    lsp_config[server_name].setup({
+  function(server_name) -- default handler (optional)
+    require("lspconfig")[server_name].setup({
       on_attach = on_attach_base,
     })
   end,
@@ -31,6 +29,8 @@ require("mason-lspconfig").setup_handlers({
       server = {
         on_attach = function(client, bufnr)
           on_attach_base(client, bufnr)
+
+          local rust_tools = require("rust-tools")
           -- Overwrite some keymaps
           -- Hover actions
           vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
@@ -54,7 +54,7 @@ require("mason-lspconfig").setup_handlers({
     })
   end,
   ["lua_ls"] = function()
-    lsp_config.lua_ls.setup({
+    require("lspconfig").lua_ls.setup({
       on_attach = on_attach_base,
       settings = {
         Lua = {
@@ -66,7 +66,7 @@ require("mason-lspconfig").setup_handlers({
     })
   end,
   ["clangd"] = function()
-    lsp_config.clangd.setup({
+    require("lspconfig").clangd.setup({
       on_attach = on_attach_base,
       cmd = {
         "clangd",
@@ -84,7 +84,7 @@ require("mason-lspconfig").setup_handlers({
     })
   end,
   ["pyright"] = function()
-    lsp_config.pyright.setup({
+    require("lspconfig").pyright.setup({
       on_attach = on_attach_base,
       settings = {
         python = {

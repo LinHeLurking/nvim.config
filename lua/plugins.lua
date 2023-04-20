@@ -79,40 +79,23 @@ return require("packer").startup(function(use)
 
   -- LSP
   use({
-    "jose-elias-alvarez/null-ls.nvim",
-    config = function()
-      require("plugin-config.null-ls-config")
-    end,
-    requires = { "nvim-lua/plenary.nvim" },
-  })
-  use({
-    "jayp0521/mason-null-ls.nvim",
-    config = function()
-      require("mason-null-ls").setup()
-    end,
-    requires = "williamboman/mason.nvim",
-  })
-  use({
     "williamboman/mason.nvim",
+    "jose-elias-alvarez/null-ls.nvim",
+    "jay-babu/mason-null-ls.nvim",
+    "neovim/nvim-lspconfig",
+    "williamboman/mason-lspconfig.nvim",
+    -- Signature help when completing
+    "ray-x/lsp_signature.nvim",
     requires = {
       "SmiteshP/nvim-navic",
     },
     config = function()
       require("plugin-config.mason-config")
-    end,
-  })
-  use({
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
+      require("plugin-config.null-ls-config")
+      require("mason-null-ls").setup()
       require("plugin-config.mason-lsp-config")
+      require("plugin-config.lsp-signature-config")
     end,
-    requires = {
-      "williamboman/mason.nvim",
-      "neovim/nvim-lspconfig",
-    },
-  })
-  use({
-    "neovim/nvim-lspconfig",
   })
   -- LSP Enhance
   use({
@@ -135,13 +118,6 @@ return require("packer").startup(function(use)
       "nvim-lua/plenary.nvim",
       "mfussenegger/nvim-dap",
     },
-  })
-  -- Signature help when completing
-  use({
-    "ray-x/lsp_signature.nvim",
-    config = function()
-      require("plugin-config.lsp-signature-config")
-    end,
   })
 
   -- DAP
