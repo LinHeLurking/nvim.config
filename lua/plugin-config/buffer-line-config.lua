@@ -1,13 +1,35 @@
 vim.opt.termguicolors = true
 
+local buffer_del_switch_focus = function(bufnr)
+  local cur_bufnr = vim.api.nvim_get_current_buf()
+  vim.cmd("bdelete! " .. tostring(bufnr))
+  if cur_bufnr == bufnr then
+    for _, buf in pairs(vim.fn.getbufinfo()) do
+      if
+          buf.name ~= ""
+          and buf.loaded == 1
+          and buf.listed == 1
+          and buf.linecount > 1
+      then
+        -- print("Switch focus to buffer: " .. buf.bufnr)
+        vim.api.nvim_set_current_buf(buf.bufnr)
+        break
+      end
+    end
+  end
+  require("bufferline.ui").refresh()
+end
+
+-- local buffer_del_switch_focus = "bdelete! %d"
+
 require("bufferline").setup({
   options = {
     mode = "buffers", -- "buffers" | "tabs". set to "tabs" to only show tabpages instead
     numbers = "ordinal", -- "none" | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
-    close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-    right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
+    close_command = buffer_del_switch_focus, -- can be a string | function, see "Mouse actions"
+    right_mouse_command = nil, -- can be a string | function, see "Mouse actions"
     left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
-    middle_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
+    middle_mouse_command = buffer_del_switch_focus, -- can be a string | function, see "Mouse actions"
     indicator = {
       icon = "▎", -- this should be omitted if indicator style is not 'icon'
       style = "icon", -- 'icon' | 'underline' | 'none',
@@ -93,16 +115,4 @@ require("bufferline").setup({
     -- return buffer_a.modified > buffer_b.modified
     -- end
   },
-})
-
--- local state = require("bufferline.state")
-
--- Reset offset after deleting a buffer
-vim.api.nvim_create_autocmd({ "BufDelete" }, {
-  callback = function()
-    local nvim_tree_api = require("nvim-tree.api")
-    if nvim_tree_api.tree.is_visible() then
-      nvim_tree_api.tree.reload()
-    end
-  end,
 })
