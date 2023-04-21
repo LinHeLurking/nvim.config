@@ -78,8 +78,9 @@ require("mason-lspconfig").setup_handlers({
         "--pretty",
         "--pch-storage=memory",
         "--header-insertion-decorators",
-        "--function-arg-placeholders",
+        "--function-arg-placeholders=true",
         "--fallback-style=Google",
+        "--enable-config",
       },
     })
   end,
