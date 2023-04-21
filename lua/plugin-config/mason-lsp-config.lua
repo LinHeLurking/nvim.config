@@ -73,7 +73,7 @@ require("mason-lspconfig").setup_handlers({
         "--all-scopes-completion",
         "--background-index",
         "--clang-tidy",
-        "--clang-tidy-checks=performance-*, bugprone-*, misc-*, google-*, modernize-*, readability-*, portability-*",
+        "--clang-tidy-checks=performance-*,bugprone-*,misc-*,google-*,modernize-*,readability-*,portability-*",
         "--completion-style=bundled",
         "--header-insertion=iwyu",
         "--pretty",
