@@ -72,7 +72,7 @@ require("mason-lspconfig").setup_handlers({
         "clangd",
         "--all-scopes-completion",
         "--background-index",
-        "-j 4",
+        "-j=4",
         "--clang-tidy",
         "--clang-tidy-checks=performance-*,bugprone-*,misc-*,google-*,modernize-*,readability-*,portability-*",
         "--completion-style=bundled",
