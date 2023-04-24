@@ -74,7 +74,6 @@ require("mason-lspconfig").setup_handlers({
         "--background-index",
         "-j=4",
         "--clang-tidy",
-        "--clang-tidy-checks=performance-*,bugprone-*,misc-*,google-*,modernize-*,readability-*,portability-*",
         "--completion-style=bundled",
         "--header-insertion=iwyu",
         "--pretty",
