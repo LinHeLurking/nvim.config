@@ -3,6 +3,7 @@ local util = require("util")
 local in_wsl = util.is_in_wsl()
 local in_windows = util.is_in_windows()
 local in_vscode = vim.g.vscode ~= nil
+local in_macos = util.is_in_macos()
 
 local function osc_copy(lines, _)
   require("osc52").copy(table.concat(lines, "\n"))
@@ -33,4 +34,10 @@ elseif in_windows then
       paste = { ["+"] = pwsh_paste,["*"] = pwsh_paste },
     }
   end
+elseif in_macos then
+  vim.g.clipboard = {
+    name = "mac-clip",
+    copy = { ["+"] = osc_copy,["*"] = osc_copy },
+    paste = { ["+"] = "pbpaste",["*"] = "pbpaste" },
+  }
 end
