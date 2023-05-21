@@ -27,12 +27,13 @@ require("mason-lspconfig").setup_handlers({
   -- Next, you can provide targeted overrides for specific servers.
   -- For example, a handler override for the `rust_analyzer`:
   ["rust_analyzer"] = function()
-    require("rust-tools").setup({
+    local rust_tools = require("rust-tools")
+    rust_tools.setup({
+      on_attach = on_attach_base,
       server = {
         on_attach = function(client, bufnr)
           on_attach_base(client, bufnr)
 
-          local rust_tools = require("rust-tools")
           -- Overwrite some keymaps
           -- Hover actions
           vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
@@ -51,6 +52,11 @@ require("mason-lspconfig").setup_handlers({
           -- Use dap-config detected full-versioned lldb-vscode
           command = dap_config.lldb_vscode,
           name = "rust-tools-lldb",
+        },
+      },
+      tools = {
+        inlay_hints = {
+          auto = true,
         },
       },
     })

@@ -1,17 +1,17 @@
 local util = {}
 
-local name = vim.loop.os_uname().sysname
+local os_name = vim.loop.os_uname().sysname
 
 util.is_in_windows = function()
-  return name:find("Win") and true or false
+  return os_name:find("Win") and true or false
 end
 
 util.is_in_linux = function()
-  return name == "Linux"
+  return os_name == "Linux"
 end
 
 util.is_in_macos = function()
-  return name == "Darwin"
+  return os_name == "Darwin"
 end
 
 util.is_in_wsl = function()
@@ -32,9 +32,11 @@ util.async_format = function()
   vim.lsp.buf.format({
     async = true,
     filter = function(client)
-      -- Disable format ability for Volar, TsServer
+      local flag = true
       local name = client.name
-      return name ~= "volar" and name ~= "tsserver"
+      -- Disable format ability for Volar, TsServer
+      flag = flag and name ~= "volar" and name ~= "tsserver"
+      return flag
     end,
   })
 end
