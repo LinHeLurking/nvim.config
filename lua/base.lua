@@ -24,3 +24,8 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.hlsearch = true
 vim.opt.showmatch = true
+
+local zsh_test_handler = io.popen("/bin/zsh --version")
+if zsh_test_handler then
+  vim.o.shell = "/bin/zsh"
+end
