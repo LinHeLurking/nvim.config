@@ -27,7 +27,6 @@ return require("packer").startup(function(use)
     "nvim-lualine/lualine.nvim",
     requires = { "kyazdani42/nvim-web-devicons", "SmiteshP/nvim-navic" },
     config = function()
-      print("LLN")
       require("plugin-config.lualine-config")
     end,
   })
