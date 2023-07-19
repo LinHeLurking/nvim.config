@@ -12,6 +12,8 @@ end
 
 local dap_config = require("plugin-config.dap-config")
 
+local num_index_cpu = math.min(math.floor(#vim.loop.cpu_info() / 2), 16)
+
 require("mason-lspconfig").setup()
 require("mason-lspconfig").setup_handlers({
   -- The first entry (without a key) will be the default handler
@@ -72,7 +74,7 @@ require("mason-lspconfig").setup_handlers({
         "clangd",
         "--all-scopes-completion",
         "--background-index",
-        "-j=4",
+        "-j=" .. num_index_cpu,
         "--clang-tidy",
         "--completion-style=bundled",
         "--header-insertion=iwyu",
