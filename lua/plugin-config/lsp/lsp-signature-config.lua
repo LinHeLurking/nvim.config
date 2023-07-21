@@ -8,5 +8,6 @@ require("lsp_signature").setup({
   },
   floating_window = false,
   select_signature_key = keymap.signature_help_select_next, -- cycle to next signature, e.g. '<M-n>' function overloading
-  hint_prefix = "🥺 ",                                    -- Panda for parameter, NOTE: for the terminal not support emoji, might crash
+  hint_prefix = "🥺 ",                                   -- Panda for parameter, NOTE: for the terminal not support emoji, might crash
 })
+

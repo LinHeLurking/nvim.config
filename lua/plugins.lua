@@ -78,40 +78,66 @@ return require("packer").startup(function(use)
   })
 
   -- LSP
+
   use({
+    -- Basic LSP
+    "neovim/nvim-lspconfig",
+    -- Mason
     "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    -- Null-ls
     "jose-elias-alvarez/null-ls.nvim",
     "jay-babu/mason-null-ls.nvim",
-    "neovim/nvim-lspconfig",
-    "williamboman/mason-lspconfig.nvim",
     -- Signature help when completing
     "ray-x/lsp_signature.nvim",
-    requires = {
-      "SmiteshP/nvim-navic",
-    },
-  })
-  -- LSP Enhance
-  use({
+    -- Pretty ui when renaming
     "stevearc/dressing.nvim",
-    config = function()
-      require("plugin-config.dressing-config")
-    end,
-  })
-  use({
+    -- Code navigation at status bar
     "SmiteshP/nvim-navic",
-    config = function()
-      require("plugin-config.nvim-navic-config")
-    end,
-  })
-  -- LSP rust-tools
-  use({
+    -- Rust tools
     "simrat39/rust-tools.nvim",
     requires = {
       "neovim/nvim-lspconfig",
-      "nvim-lua/plenary.nvim",
       "mfussenegger/nvim-dap",
     },
+    -- Many LSP related thing won't be correctly configured here.
+    -- Configure them in init.lua instead.
   })
+
+  -- use({
+  --   "williamboman/mason.nvim",
+  --   "jose-elias-alvarez/null-ls.nvim",
+  --   "jay-babu/mason-null-ls.nvim",
+  --   "neovim/nvim-lspconfig",
+  --   "williamboman/mason-lspconfig.nvim",
+  --   -- Signature help when completing
+  --   "ray-x/lsp_signature.nvim",
+  --   requires = {
+  --     "SmiteshP/nvim-navic",
+  --   },
+  -- })
+  -- -- LSP Enhance
+  -- use({
+  --   "stevearc/dressing.nvim",
+  --   config = function()
+  --     require("plugin-config.dressing-config")
+  --   end,
+  -- })
+  -- use({
+  --   "SmiteshP/nvim-navic",
+  --   config = function()
+  --     require("plugin-config.nvim-navic-config")
+  --   end,
+  -- })
+  -- -- LSP rust-tools
+  -- use({
+  --   "simrat39/rust-tools.nvim",
+  --   requires = {
+  --     "neovim/nvim-lspconfig",
+  --     "nvim-lua/plenary.nvim",
+  --     "mfussenegger/nvim-dap",
+  --   },
+  -- })
 
   -- DAP
   use({
