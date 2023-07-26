@@ -1,4 +1,25 @@
 local null_ls = require("null-ls")
+
+local eslint_cond = function(utils)
+  return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".rslintrs.yaml", ".eslintrc.yml", ".eslintrc.json" })
+end
+
+local prettier_cond = function(utils)
+  return utils.root_has_file({
+    ".prettierrc",
+    ".prettierrc.json",
+    ".prettierrc.yml",
+    ".prettierrc.yaml",
+    ".prettierrc.json5",
+    ".prettierrc.js",
+    ".prettierrc.config.js",
+    ".prettierrc.mjs",
+    ".prettierrc.cjs",
+    ".prettierrc.config.cjs",
+    ".prettierrc.toml",
+  })
+end
+
 null_ls.setup({
   sources = {
     -- General spell check
@@ -11,10 +32,18 @@ null_ls.setup({
     -- Lua
     null_ls.builtins.formatting.stylua,
     -- Javascript/HTML/CSS
-    null_ls.builtins.code_actions.eslint_d,
-    null_ls.builtins.diagnostics.eslint_d,
-    null_ls.builtins.formatting.eslint_d,
-    null_ls.builtins.formatting.prettierd,
+    null_ls.builtins.code_actions.eslint_d.with({
+      condition = eslint_cond,
+    }),
+    null_ls.builtins.diagnostics.eslint_d.with({
+      condition = eslint_cond,
+    }),
+    null_ls.builtins.formatting.eslint_d.with({
+      condition = eslint_cond,
+    }),
+    null_ls.builtins.formatting.prettierd.with({
+      condition = prettier_cond,
+    }),
     -- Json
     null_ls.builtins.formatting.jq,
     null_ls.builtins.diagnostics.jsonlint,
