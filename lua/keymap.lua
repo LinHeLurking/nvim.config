@@ -427,8 +427,8 @@ keymap.lsp_set_map_intellij = function(client, bufnr)
   auto_bind("<C-M-l>", async_format, bufopts)
   -- This <C-q> breaks VISUAL-BLOCK key :P
   -- auto_bind("<C-q>", vim.lsp.buf.signature_help, bufopts)
-  -- <F18> is <S-F6> in Linux :P
-  if util.is_in_linux() then
+  -- <F18> is <S-F6> in Linux and MacOS :P
+  if util.is_in_linux() or util.is_in_macos then
     auto_bind("<F18>", vim.lsp.buf.rename, bufopts)
   else
     auto_bind("<S-F6>", vim.lsp.buf.rename, bufopts)
