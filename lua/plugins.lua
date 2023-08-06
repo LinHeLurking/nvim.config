@@ -242,10 +242,12 @@ return require("packer").startup(function(use)
     end,
   })
   use({
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    requires = {
-      "nvim-treesitter/nvim-treesitter",
-    },
+    "Wansmer/treesj",
+    requires = { "nvim-treesitter" },
+    config = function()
+      require("treesj").setup({ --[[ your config ]]
+      })
+    end,
   })
 
   -- Auto Comment
