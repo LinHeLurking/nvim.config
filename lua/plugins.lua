@@ -47,14 +47,14 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- Hop (Easymotion)
-  use({
-    "phaazon/hop.nvim",
-    branch = "v2", -- optional but strongly recommended
-    config = function()
-      require("plugin-config.hop-config")
-    end,
-  })
+  -- -- Hop (Easymotion)
+  -- use({
+  --   "phaazon/hop.nvim",
+  --   branch = "v2", -- optional but strongly recommended
+  --   config = function()
+  --     require("plugin-config.hop-config")
+  --   end,
+  -- })
 
   -- Nvim Tree File Explorer
   use({
@@ -104,69 +104,34 @@ return require("packer").startup(function(use)
     -- Configure them in init.lua instead.
   })
 
+  -- -- DAP
   -- use({
-  --   "williamboman/mason.nvim",
-  --   "jose-elias-alvarez/null-ls.nvim",
-  --   "jay-babu/mason-null-ls.nvim",
-  --   "neovim/nvim-lspconfig",
-  --   "williamboman/mason-lspconfig.nvim",
-  --   -- Signature help when completing
-  --   "ray-x/lsp_signature.nvim",
-  --   requires = {
-  --     "SmiteshP/nvim-navic",
-  --   },
-  -- })
-  -- -- LSP Enhance
-  -- use({
-  --   "stevearc/dressing.nvim",
+  --   "mfussenegger/nvim-dap",
   --   config = function()
-  --     require("plugin-config.dressing-config")
+  --     require("plugin-config.dap-config")
   --   end,
   -- })
   -- use({
-  --   "SmiteshP/nvim-navic",
+  --   "rcarriga/nvim-dap-ui",
+  --   requires = { "mfussenegger/nvim-dap" },
   --   config = function()
-  --     require("plugin-config.nvim-navic-config")
+  --     require("plugin-config.dapui-config")
   --   end,
   -- })
-  -- -- LSP rust-tools
   -- use({
-  --   "simrat39/rust-tools.nvim",
+  --   "rcarriga/cmp-dap",
+  --   requires = { "mfussenegger/nvim-dap" },
+  -- })
+  -- use({
+  --   "theHamsta/nvim-dap-virtual-text",
   --   requires = {
-  --     "neovim/nvim-lspconfig",
-  --     "nvim-lua/plenary.nvim",
   --     "mfussenegger/nvim-dap",
+  --     "nvim-treesitter/nvim-treesitter",
   --   },
+  --   config = function()
+  --     require("plugin-config.dap-virtual-text-config")
+  --   end,
   -- })
-
-  -- DAP
-  use({
-    "mfussenegger/nvim-dap",
-    config = function()
-      require("plugin-config.dap-config")
-    end,
-  })
-  use({
-    "rcarriga/nvim-dap-ui",
-    requires = { "mfussenegger/nvim-dap" },
-    config = function()
-      require("plugin-config.dapui-config")
-    end,
-  })
-  use({
-    "rcarriga/cmp-dap",
-    requires = { "mfussenegger/nvim-dap" },
-  })
-  use({
-    "theHamsta/nvim-dap-virtual-text",
-    requires = {
-      "mfussenegger/nvim-dap",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = function()
-      require("plugin-config.dap-virtual-text-config")
-    end,
-  })
 
   -- Trouble
   -- Lua
