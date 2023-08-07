@@ -10,7 +10,7 @@ local on_attach_base = function(client, bufnr)
   end
 end
 
-local dap_config = require("plugin-config.dap-config")
+-- local dap_config = require("plugin-config.dap-config")
 
 local num_index_cpu = math.min(math.floor(#vim.loop.cpu_info() / 2), 16)
 
@@ -46,14 +46,14 @@ require("mason-lspconfig").setup_handlers({
           )
         end,
       },
-      dap = {
-        adapter = {
-          type = "executable",
-          -- Use dap-config detected full-versioned lldb-vscode
-          command = dap_config.lldb_vscode,
-          name = "rust-tools-lldb",
-        },
-      },
+      -- dap = {
+      --   adapter = {
+      --     type = "executable",
+      --     -- Use dap-config detected full-versioned lldb-vscode
+      --     command = dap_config.lldb_vscode,
+      --     name = "rust-tools-lldb",
+      --   },
+      -- },
       tools = {
         inlay_hints = {
           auto = true,

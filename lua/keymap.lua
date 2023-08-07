@@ -177,15 +177,15 @@ keymap.signature_help_select_next = "<A-n>"
 --
 
 -- These keys may not be convenient. Bind other keys in Intellij section.
-local dap = require("dap")
-wk.register({
-  name = "DAP",
-  b = { dap.toggle_breakpoint, "Toggle Break Point" },
-  c = { dap.continue, "Continue" },
-  o = { dap.step_over, "Step Over" },
-  i = { dap.step_into, "Step Into" },
-  q = { dap.terminate, "Stop" },
-}, { prefix = "<Leader>d" })
+-- local dap = require("dap")
+-- wk.register({
+--   name = "DAP",
+--   b = { dap.toggle_breakpoint, "Toggle Break Point" },
+--   c = { dap.continue, "Continue" },
+--   o = { dap.step_over, "Step Over" },
+--   i = { dap.step_into, "Step Into" },
+--   q = { dap.terminate, "Stop" },
+-- }, { prefix = "<Leader>d" })
 
 --
 -- CMake
@@ -386,21 +386,20 @@ end
 auto_bind("<A-1>", "<Cmd>NvimTreeToggle<CR>", opts) -- insert mode bind is buggy
 auto_bind("<C-_>", "<Cmd>CommentToggle<CR>", opts)
 
--- local dap = require("dap")
-vim.keymap.set("n", "<F9>", dap.continue, opts)
-vim.keymap.set("n", "<F8>", dap.step_over, opts)
-vim.keymap.set("n", "<F7>", dap.step_into, opts)
--- <F19> is <S-F7> in Linux
-if util.is_in_linux() then
-  vim.keymap.set("n", "<F19>", dap.step_out, opts)
-else
-  vim.keymap.set("n", "<S-F7>", dap.step_out, opts)
-end
--- <F14> is <C-F2> in Linux
-if util.is_in_linux() then
-  vim.keymap.set("n", "<F14>", dap.terminate, opts)
-else
-  vim.keymap.set("n", "<S-F2>", dap.terminate, opts)
-end
+-- vim.keymap.set("n", "<F9>", dap.continue, opts)
+-- vim.keymap.set("n", "<F8>", dap.step_over, opts)
+-- vim.keymap.set("n", "<F7>", dap.step_into, opts)
+-- -- <F19> is <S-F7> in Linux
+-- if util.is_in_linux() then
+--   vim.keymap.set("n", "<F19>", dap.step_out, opts)
+-- else
+--   vim.keymap.set("n", "<S-F7>", dap.step_out, opts)
+-- end
+-- -- <F14> is <C-F2> in Linux
+-- if util.is_in_linux() then
+--   vim.keymap.set("n", "<F14>", dap.terminate, opts)
+-- else
+--   vim.keymap.set("n", "<S-F2>", dap.terminate, opts)
+-- end
 
 return keymap

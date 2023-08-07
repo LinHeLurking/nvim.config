@@ -4,7 +4,10 @@ local keymap = require("keymap").cmp_keys()
 
 cmp.setup({
   enabled = function()
-    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+    local buf_filter = vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+    -- local dap_filter =require("cmp_dap").is_dap_buffer()
+    local dap_filter = false
+    return buf_filter or dap_filter
   end,
   snippet = {
     -- REQUIRED - you must specify a snippet engine
@@ -51,10 +54,10 @@ cmp.setup.cmdline(":", {
 })
 
 -- DAP completion
-cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
-  sources = {
-    { name = "dap" },
-    { name = "nvim_lsp" },
-    { name = "buffer" },
-  },
-})
+-- cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+--   sources = {
+--     { name = "dap" },
+--     { name = "nvim_lsp" },
+--     { name = "buffer" },
+--   },
+-- })

@@ -98,7 +98,7 @@ return require("packer").startup(function(use)
     "simrat39/rust-tools.nvim",
     requires = {
       "neovim/nvim-lspconfig",
-      "mfussenegger/nvim-dap",
+      -- "mfussenegger/nvim-dap",
     },
     -- Many LSP related thing won't be correctly configured here.
     -- Configure them in init.lua instead.
