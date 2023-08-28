@@ -210,23 +210,23 @@ keymap.trouble_keys = {
     -- key mappings for actions in the trouble list
     -- map to {} to remove a mapping, for example:
     -- close = {},
-    close = "q", -- close the list
-    cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-    refresh = "r", -- manually refresh
+    close = "q",                -- close the list
+    cancel = "<esc>",           -- cancel the preview and get back to your last window / buffer / cursor
+    refresh = "r",              -- manually refresh
     jump = { "<cr>", "<tab>" }, -- jump to the diagnostic or open / close folds
-    open_split = { "<c-x>" }, -- open buffer in new split
-    open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
-    open_tab = { "<c-t>" }, -- open buffer in new tab
-    jump_close = { "o" }, -- jump to the diagnostic and close the list
-    toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-    toggle_preview = "P", -- toggle auto_preview
-    hover = "K", -- opens a small popup with the full multiline message
-    preview = "p", -- preview the diagnostic location
+    open_split = { "<c-x>" },   -- open buffer in new split
+    open_vsplit = { "<c-v>" },  -- open buffer in new vsplit
+    open_tab = { "<c-t>" },     -- open buffer in new tab
+    jump_close = { "o" },       -- jump to the diagnostic and close the list
+    toggle_mode = "m",          -- toggle between "workspace" and "document" diagnostics mode
+    toggle_preview = "P",       -- toggle auto_preview
+    hover = "K",                -- opens a small popup with the full multiline message
+    preview = "p",              -- preview the diagnostic location
     close_folds = { "zM", "zm" }, -- close all folds
     open_folds = { "zR", "zr" }, -- open all folds
     toggle_fold = { "zA", "za" }, -- toggle fold of current file
-    previous = "k", -- previous item
-    next = "j", -- next item
+    previous = "k",             -- previous item
+    next = "j",                 -- next item
   },
 }
 wk.register({
@@ -371,17 +371,15 @@ wk.register({
 -- Intellij Flavor Keybindings
 --
 
-keymap.lsp_set_map_intellij = function(client, bufnr)
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  auto_bind("<C-M-l>", async_format, bufopts)
-  -- This <C-q> breaks VISUAL-BLOCK key :P
-  -- auto_bind("<C-q>", vim.lsp.buf.signature_help, bufopts)
-  -- <F18> is <S-F6> in Linux and MacOS :P
-  if util.is_in_linux() or util.is_in_macos then
-    auto_bind("<F18>", vim.lsp.buf.rename, bufopts)
-  else
-    auto_bind("<S-F6>", vim.lsp.buf.rename, bufopts)
-  end
+auto_bind("<C-M-l>", async_format, opts)
+
+-- This <C-q> breaks VISUAL-BLOCK key :P
+-- auto_bind("<C-q>", vim.lsp.buf.signature_help, bufopts)
+-- <F18> is <S-F6> in Linux and MacOS :P
+if util.is_in_linux() or util.is_in_macos then
+  auto_bind("<F18>", vim.lsp.buf.rename, opts)
+else
+  auto_bind("<S-F6>", vim.lsp.buf.rename, opts)
 end
 auto_bind("<A-1>", "<Cmd>NvimTreeToggle<CR>", opts) -- insert mode bind is buggy
 auto_bind("<C-_>", "<Cmd>CommentToggle<CR>", opts)

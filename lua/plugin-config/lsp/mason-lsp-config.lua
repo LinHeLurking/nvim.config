@@ -4,7 +4,6 @@ local navic = require("nvim-navic")
 
 local on_attach_base = function(client, bufnr)
   keymap.lsp_set_map(client, bufnr)
-  keymap.lsp_set_map_intellij(client, bufnr)
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
   end

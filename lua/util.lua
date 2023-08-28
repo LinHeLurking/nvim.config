@@ -29,6 +29,7 @@ util.get_config_dir = function()
 end
 
 util.async_format = function()
+  print("123")
   vim.lsp.buf.format({
     async = true,
     filter = function(client)
