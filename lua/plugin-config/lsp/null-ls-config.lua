@@ -62,10 +62,12 @@ null_ls.setup({
         -- Disable it. Don't worry, pyright checks it right :P
         --
         -- Suppress warning about `too many locals` (R0914)
+        -- Suppress warning about `to many arguments` (R0913)
+        -- Suppress warning about `to few public methods` (R0903)
         --
         -- Suppress `undefined-variable` because pylint wrongly report it for some imports. (E0602)
         -- Don't worry, pyright still handles it.
-        "--disable=C0111,E0401,R0914,E0602,W0401",
+        "--disable=C0111,E0401,R0914,E0602,W0401,R0913,R0903",
         -- Suppress snake name check rules for 1 or 2 length names :P
         "--good-names-rgxs=^[_a-z][_a-z0-9]?$",
       },
