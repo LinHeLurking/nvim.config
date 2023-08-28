@@ -34,7 +34,7 @@ local wk = require("which-key")
 -- Misc
 --
 local smart_save = function()
-  vim.api.nvim_command("write")
+  vim.cmd("w")
   -- Keep cursor not moving
   local pos = vim.api.nvim_win_get_cursor(0)
   if vim.fn.col("$") < pos[2] then
