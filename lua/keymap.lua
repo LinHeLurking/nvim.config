@@ -129,12 +129,32 @@ wk.register({
   D = { gs.toggle_deleted, "Toggle Deleted" },
   d = { gs.diffthis, "Diff This" },
 }, { prefix = "<Leader>g" })
+local get_v_lines = function()
+  local l1 = vim.api.nvim_buf_get_mark(0, "<")[1]
+  local l2 = vim.api.nvim_buf_get_mark(0, ">")[1]
+  print(l1, l2)
+  if l1 == nil or l2 == nil then
+    return { nil, nil }
+  end
+  if l1 > l2 then
+    l1, l2 = l2, l1
+  end
+  return { l1, l2 }
+end
 vim.keymap.set("v", "gs", function()
-  gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-end)
-vim.keymap.set("v", "gs", function()
-  gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-end)
+  local lines = get_v_lines()
+  if lines[1] == nil then
+    return
+  end
+  gs.stage_hunk(lines)
+end, { silent = true, noremap = true, desc = "Git stage visually setected lines" })
+vim.keymap.set("v", "gr", function()
+  local lines = get_v_lines()
+  if lines[1] == nil then
+    return
+  end
+  gs.reset_hunk(lines)
+end, { silent = true, noremap = true, desc = "Git reset visually setected lines" })
 vim.keymap.set("n", "[c", function()
   vim.schedule(function()
     gs.prev_hunk()
