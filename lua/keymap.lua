@@ -338,7 +338,7 @@ keymap.dashboard_shortcut = {
   --   action = "Telescope project",
   -- },
   {
-    desc = " Update",
+    desc = "󰚰 Update",
     key = "u",
     group = "Label",
     action = "PackerUpdate",
@@ -350,7 +350,7 @@ keymap.dashboard_shortcut = {
     action = "edit " .. util.get_config_dir(),
   },
   {
-    desc = " Exit",
+    desc = "󰗼 Exit",
     key = "q",
     group = "Label",
     action = "exit",
