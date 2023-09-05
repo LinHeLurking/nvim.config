@@ -392,12 +392,12 @@ keymap.dashboard_shortcut = {
 -- Hop
 --
 
-wk.register({
-  name = "Hop Everywhere",
-  w = { "<Cmd>:HopWord<CR>", "Hop Any Word" },
-  c = { "<Cmd>:HopChar1<CR>", "Hop Any Character" },
-  a = { "<Cmd>:HopAnywhere<CR>", "Hop Anywhere" },
-}, { prefix = "<Leader>h" })
+-- wk.register({
+--   name = "Hop Everywhere",
+--   w = { "<Cmd>:HopWord<CR>", "Hop Any Word" },
+--   c = { "<Cmd>:HopChar1<CR>", "Hop Any Character" },
+--   a = { "<Cmd>:HopAnywhere<CR>", "Hop Anywhere" },
+-- }, { prefix = "<Leader>h" })
 
 --
 -- Intellij Flavor Keybindings
