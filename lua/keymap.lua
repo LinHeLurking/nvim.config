@@ -116,6 +116,37 @@ keymap.set_term_keymap = function()
 end
 
 --
+-- Git
+--
+local gs = require("gitsigns")
+wk.register({
+  name = "Git All in One",
+  s = { gs.stage_hunk, "Stage Hunk" },
+  r = { gs.reset_hunk, "Reset Hunk" },
+  S = { gs.stage_buffer, "Stage Buffer" },
+  u = { gs.undo_stage_hunk, "Undo Stage Hunk" },
+  R = { gs.reset_buffer, "Reset Buffer" },
+  D = { gs.toggle_deleted, "Toggle Deleted" },
+  d = { gs.diffthis, "Diff This" },
+}, { prefix = "<Leader>g" })
+vim.keymap.set("v", "gs", function()
+  gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+end)
+vim.keymap.set("v", "gs", function()
+  gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+end)
+vim.keymap.set("n", "[c", function()
+  vim.schedule(function()
+    gs.prev_hunk()
+  end)
+end, { silent = true, noremap = true, desc = "Previous git hunk" })
+vim.keymap.set("n", "]c", function()
+  vim.schedule(function()
+    gs.next_hunk()
+  end)
+end, { silent = true, noremap = true, desc = "Next git hunk" })
+
+--
 -- Buffer Line Navigation
 --
 
