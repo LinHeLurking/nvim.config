@@ -30,3 +30,9 @@ local zsh_ver = zsh_test_handler and zsh_test_handler:read("*a")
 if zsh_ver ~= nil and zsh_ver ~= "" then
   vim.o.shell = "/bin/zsh"
 end
+
+-- Set python provider if it's in conda
+local conda = os.getenv("CONDA_PREFIX")
+if conda ~= nil and conda ~= "" then
+  vim.g.python3_host_prog = conda .. "/bin/python"
+end
