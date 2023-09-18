@@ -26,7 +26,7 @@ vim.opt.hlsearch = true
 vim.opt.showmatch = true
 
 local zsh_test_handler = io.popen("command -v zsh")
-local zsh_ver = zsh_test_handler:read("*a")
+local zsh_ver = zsh_test_handler and zsh_test_handler:read("*a")
 if zsh_ver ~= nil and zsh_ver ~= "" then
   vim.o.shell = "/bin/zsh"
 end
