@@ -86,7 +86,8 @@ return require("packer").startup(function(use)
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     -- Null-ls
-    "jose-elias-alvarez/null-ls.nvim",
+    -- "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     "jay-babu/mason-null-ls.nvim",
     -- Signature help when completing
     "ray-x/lsp_signature.nvim",
