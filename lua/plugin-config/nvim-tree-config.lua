@@ -11,9 +11,9 @@ require("nvim-tree").setup({
   view = {
     adaptive_size = true,
     width = {
-      min = 20,
-      max=50,
-      padding=2,
+      min = 15,
+      max = 35,
+      padding = 2,
     },
   },
   renderer = {
