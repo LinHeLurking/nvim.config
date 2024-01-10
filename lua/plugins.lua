@@ -22,8 +22,12 @@ return require("packer").startup(function(use)
     config = function()
       require("which-key").setup()
     end,
-    -- Load in vscode!
   })
+
+  --- Everything below won't be loaded in vscode!
+  if util.is_in_vscode() then
+    return
+  end
 
   -- Lualine
   use({
@@ -32,7 +36,6 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.lualine-config")
     end,
-    cond = util.is_not_in_vscode,
   })
 
   -- Tokyo Night Theme
@@ -41,7 +44,6 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.tokyonight-config")
     end,
-    cond = util.is_not_in_vscode,
   })
 
   -- Auto indent
@@ -50,7 +52,6 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.guess-indent-config")
     end,
-    cond = util.is_not_in_vscode,
   })
 
   -- Nvim Tree File Explorer
@@ -62,7 +63,6 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.nvim-tree-config")
     end,
-    cond = util.is_not_in_vscode,
   })
 
   -- Buffer Line
@@ -73,7 +73,6 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.buffer-line-config")
     end,
-    cond = util.is_not_in_vscode,
   })
 
   -- LSP
@@ -85,7 +84,6 @@ return require("packer").startup(function(use)
       requires = {
         "neovim/nvim-lspconfig",
       },
-      cond = util.is_not_in_vscode,
     },
     -- Mason
     {
@@ -93,14 +91,12 @@ return require("packer").startup(function(use)
       requires = {
         "neovim/nvim-lspconfig",
       },
-      cond = util.is_not_in_vscode,
     },
     {
       "williamboman/mason-lspconfig.nvim",
       requires = {
         "neovim/nvim-lspconfig",
       },
-      cond = util.is_not_in_vscode,
     },
     -- Null-ls
     -- "jose-elias-alvarez/null-ls.nvim",
@@ -109,14 +105,12 @@ return require("packer").startup(function(use)
       requires = {
         "neovim/nvim-lspconfig",
       },
-      cond = util.is_not_in_vscode,
     },
     {
       "jay-babu/mason-null-ls.nvim",
       requires = {
         "neovim/nvim-lspconfig",
       },
-      cond = util.is_not_in_vscode,
     },
     -- Signature help when completing
     {
@@ -124,7 +118,6 @@ return require("packer").startup(function(use)
       requires = {
         "neovim/nvim-lspconfig",
       },
-      cond = util.is_not_in_vscode,
     },
     -- Pretty ui when renaming
     {
@@ -132,7 +125,6 @@ return require("packer").startup(function(use)
       requires = {
         "neovim/nvim-lspconfig",
       },
-      cond = util.is_not_in_vscode,
     },
     -- Code navigation at status bar
     {
@@ -140,7 +132,6 @@ return require("packer").startup(function(use)
       requires = {
         "neovim/nvim-lspconfig",
       },
-      cond = util.is_not_in_vscode,
     },
     -- Rust tools
     {
@@ -148,7 +139,6 @@ return require("packer").startup(function(use)
       requires = {
         "neovim/nvim-lspconfig",
       },
-      cond = util.is_not_in_vscode,
     },
     -- Many LSP related thing won't be correctly configured here.
     -- Configure them in init.lua instead.
@@ -162,11 +152,9 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.trouble-config")
     end,
-    cond = util.is_not_in_vscode,
   })
   use({
     "kyazdani42/nvim-web-devicons",
-    cond = util.is_not_in_vscode,
   })
 
   -- Auto complete
@@ -175,31 +163,24 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.nvim-cmp-config")
     end,
-    cond = util.is_not_in_vscode,
   })
   use({
     "hrsh7th/cmp-nvim-lsp",
-    cond = util.is_not_in_vscode,
   })
   use({
     "hrsh7th/cmp-buffer",
-    cond = util.is_not_in_vscode,
   })
   use({
     "hrsh7th/cmp-path",
-    cond = util.is_not_in_vscode,
   })
   use({
     "hrsh7th/cmp-cmdline",
-    cond = util.is_not_in_vscode,
   })
   use({
     "hrsh7th/cmp-vsnip",
-    cond = util.is_not_in_vscode,
   })
   use({
     "hrsh7th/vim-vsnip",
-    cond = util.is_not_in_vscode,
   })
 
   -- Input Enhance
@@ -209,7 +190,6 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.autopairs-config")
     end,
-    cond = util.is_not_in_vscode,
   })
   use({
     "windwp/nvim-ts-autotag",
@@ -219,7 +199,6 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.nvim-ts-autotag-config")
     end,
-    cond = util.is_not_in_vscode,
   })
 
   -- Tree Sitter Syntax Highlight
@@ -228,7 +207,6 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.treesitter-config")
     end,
-    cond = util.is_not_in_vscode,
   })
   use({
     "JoosepAlviste/nvim-ts-context-commentstring",
@@ -238,7 +216,6 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.ts-context-comment-config")
     end,
-    cond = util.is_not_in_vscode,
   })
   use({
     "Wansmer/treesj",
@@ -248,7 +225,6 @@ return require("packer").startup(function(use)
         use_default_keymaps = false,
       })
     end,
-    cond = util.is_not_in_vscode,
   })
 
   -- Auto Comment
@@ -257,7 +233,6 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.comment-config")
     end,
-    cond = util.is_not_in_vscode,
   })
 
   -- Telescope
@@ -270,12 +245,10 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.telescope-config")
     end,
-    cond = util.is_not_in_vscode,
   })
   use({
     "nvim-telescope/telescope-file-browser.nvim",
     requires = { "nvim-telescope/telescope.nvim" },
-    cond = util.is_not_in_vscode,
   })
 
   -- OSC52 supper for better copy action (in SSH)
@@ -284,7 +257,6 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.osc52-config")
     end,
-    cond = util.is_not_in_vscode,
   })
 
   -- Terminal
@@ -294,7 +266,6 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.terminal-config")
     end,
-    cond = util.is_not_in_vscode,
   })
 
   -- Dashboard
@@ -305,7 +276,6 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.dashboard-config")
     end,
-    cond = util.is_not_in_vscode,
   })
 
   -- CMake
@@ -315,7 +285,6 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.cmake-config")
     end,
-    cond = util.is_not_in_vscode,
   })
 
   -- NVim Surround
@@ -325,7 +294,6 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.nvim-surround-config")
     end,
-    cond = util.is_not_in_vscode,
   })
 
   -- Git
@@ -335,7 +303,6 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.git")
     end,
-    cond = util.is_not_in_vscode,
   })
 
   -- Automatically set up your configuration after cloning packer.nvim
