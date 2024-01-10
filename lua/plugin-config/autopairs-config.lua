@@ -1,3 +1,7 @@
+if vim.g.vscode ~= nil then
+  return
+end
+
 local npairs = require("nvim-autopairs")
 --local Rule=require("nvim-autopairs.rule")
 

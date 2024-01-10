@@ -1,3 +1,7 @@
+if vim.g.vscode ~= nil then
+  return
+end
+
 local util = require("util")
 
 vim.opt.termguicolors = true

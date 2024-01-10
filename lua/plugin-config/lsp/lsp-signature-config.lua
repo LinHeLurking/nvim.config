@@ -1,3 +1,7 @@
+if vim.g.vscode ~= nil then
+  return
+end
+
 local keymap = require("keymap")
 
 -- Function/Method signature help when completing

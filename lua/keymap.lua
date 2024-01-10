@@ -46,14 +46,14 @@ if not_vscode then
   auto_bind("<C-s>", smart_save, opts)
   auto_bind("<S-Tab>", "<Cmd>< <CR>", opts)
   auto_bind("<C-z>", "u", opts)
-  auto_bind("<C-a>", "ggVG", opts)
-  vim.keymap.set("n", "<C-i>", "<C-a>", opts)
-  vim.keymap.set("v", "<C-c>", "y", opts)
-  vim.keymap.set("i", "<C-h>", "<Left>", opts)
-  vim.keymap.set("i", "<C-j>", "<Down>", opts)
-  vim.keymap.set("i", "<C-k>", "<Up>", opts)
-  vim.keymap.set("i", "<C-l>", "<Right>", opts)
 end
+auto_bind("<C-a>", "ggVG", opts)
+vim.keymap.set("n", "<C-i>", "<C-a>", opts)
+-- vim.keymap.set("v", "<C-c>", "y", opts)
+vim.keymap.set("i", "<C-h>", "<Left>", opts)
+vim.keymap.set("i", "<C-j>", "<Down>", opts)
+vim.keymap.set("i", "<C-k>", "<Up>", opts)
+vim.keymap.set("i", "<C-l>", "<Right>", opts)
 -- Enable highlight when searching
 vim.keymap.set("n", "/", "<Cmd>:set hlsearch<CR>/", { silent = false, noremap = true })
 
@@ -84,10 +84,10 @@ wk.register({
 --
 wk.register({
   name = "Window Action",
-      ["<A-h>"] = { "<C-w>h", "Move To Left Window" },
-      ["<A-j>"] = { "<C-w>j", "Move To Down Window" },
-      ["<A-k>"] = { "<C-w>k", "Move To Up Window" },
-      ["<A-l>"] = { "<C-w>l", "Move To Right Window" },
+  ["<A-h>"] = { "<C-w>h", "Move To Left Window" },
+  ["<A-j>"] = { "<C-w>j", "Move To Down Window" },
+  ["<A-k>"] = { "<C-w>k", "Move To Up Window" },
+  ["<A-l>"] = { "<C-w>l", "Move To Right Window" },
 }, {})
 
 --
@@ -337,17 +337,17 @@ if not_vscode then
       end
     end)
     local keys = {
-          ["<C-u>"] = smart_scroll_up,
-          ["<C-d>"] = smart_scroll_down,
-          ["<C-n>"] = smart_next,
+      ["<C-u>"] = smart_scroll_up,
+      ["<C-d>"] = smart_scroll_down,
+      ["<C-n>"] = smart_next,
       -- ["<C-j>"] = smart_next,
-          ["<C-p>"] = smart_prev,
+      ["<C-p>"] = smart_prev,
       -- ["<C-k>"] = smart_prev,
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<CR>"] = smart_cr,
-          ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-          ["<C-e>"] = cmp.mapping.abort(),
-          ["<Esc>"] = smart_esc,
+      ["<C-Space>"] = cmp.mapping.complete(),
+      ["<CR>"] = smart_cr,
+      ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+      ["<C-e>"] = cmp.mapping.abort(),
+      ["<Esc>"] = smart_esc,
     }
     return keys
   end
@@ -377,6 +377,31 @@ if not_vscode then
       -- p = { show_prj, "Project" },
     }, { prefix = "<Leader>f" })
   end
+else
+  local vsc = require("vscode-neovim")
+  local find_files = function()
+    vsc.action("workbench.action.quickOpen")
+  end
+  local find_in_files = function()
+    vsc.action("workbench.action.findInFiles")
+  end
+  local shortcuts = function()
+    vsc.action("workbench.action.openGlobalKeybindings")
+  end
+  local recent_files = function()
+    vsc.action("workbench.action.openRecent")
+  end
+  local doc_symbol = function()
+    vsc.action("workbench.action.gotoSymbol")
+  end
+  wk.register({
+    name = "Find Everything",
+    f = { find_files, "Find Files" },
+    g = { find_in_files, "Live Grep" },
+    c = { shortcuts, "Shortcuts" },
+    r = { recent_files, "Recent Files" },
+    s = { doc_symbol, "Document Symbols" },
+  }, { prefix = "<Leader>f" })
 end
 
 --

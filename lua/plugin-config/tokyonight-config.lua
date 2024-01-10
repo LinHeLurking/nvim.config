@@ -1,3 +1,8 @@
+if vim.g.vscode ~= nil then
+  return
+end
+
+
 -- TokyoNight color scheme
 vim.g.tokyonight_transparent = true
 vim.opt.background = "light"

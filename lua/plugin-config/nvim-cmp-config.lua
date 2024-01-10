@@ -1,3 +1,7 @@
+if vim.g.vscode ~= nil then
+  return
+end
+
 local cmp = require("cmp")
 
 local keymap = require("keymap").cmp_keys()

@@ -1,4 +1,10 @@
+if vim.g.vscode ~= nil then
+  return
+end
+
+-- 
 -- Naciv
+--
 local navic = require("nvim-navic")
 navic.setup({
   highlight = false,

@@ -1,3 +1,8 @@
+if vim.g.vscode ~= nil then
+  return
+end
+
+
 -- This is the default configuration
 require('guess-indent').setup {
   auto_cmd = true,       -- Set to false to disable automatic execution

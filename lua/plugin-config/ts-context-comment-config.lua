@@ -1,3 +1,7 @@
+if vim.g.vscode ~= nil then
+  return
+end
+
 require("ts_context_commentstring").setup({
   context_commentstring = {
     enable = true,

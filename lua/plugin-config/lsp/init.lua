@@ -1,3 +1,7 @@
+if vim.g.vscode ~= nil then
+  return
+end
+
 require("plugin-config.lsp.mason-config")
 require("plugin-config.lsp.null-ls-config")
 require("mason-null-ls").setup()

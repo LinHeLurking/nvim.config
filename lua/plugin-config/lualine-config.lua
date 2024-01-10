@@ -1,3 +1,8 @@
+if vim.g.vscode ~= nil then
+  return
+end
+
+
 -- Lualine config
 local navic = require("nvim-navic")
 require("lualine").setup({
