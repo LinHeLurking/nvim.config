@@ -10,6 +10,8 @@ local ensure_packer = function()
 end
 
 local packer_bootstrap = ensure_packer()
+local util = require("util")
+
 return require("packer").startup(function(use)
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
