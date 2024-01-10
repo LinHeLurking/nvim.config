@@ -32,13 +32,13 @@ elseif in_windows then
     vim.g.clipboard = {
       name = "vsc-clip",
       copy = { ["+"] = { "clip.exe" }, ["*"] = { "clip.exe" } },
-      paste = { ["+"] = pwsh_paste, ["*"] = pwsh_paste },
+      paste = { ["+"] = simple_paste, ["*"] = simple_paste },
     }
   else
     vim.g.clipboard = {
       name = "win-clip",
       copy = { ["+"] = osc_copy, ["*"] = osc_copy },
-      paste = { ["+"] = pwsh_paste, ["*"] = pwsh_paste },
+      paste = { ["+"] = simple_paste, ["*"] = simple_paste },
     }
   end
 elseif in_linux then
