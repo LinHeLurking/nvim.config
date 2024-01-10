@@ -20,6 +20,7 @@ return require("packer").startup(function(use)
     config = function()
       require("which-key").setup()
     end,
+    -- Load in vscode!
   })
 
   -- Lualine
@@ -29,6 +30,7 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.lualine-config")
     end,
+    cond = util.is_not_in_vscode,
   })
 
   -- Tokyo Night Theme
@@ -37,6 +39,7 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.tokyonight-config")
     end,
+    cond = util.is_not_in_vscode,
   })
 
   -- Auto indent
@@ -45,16 +48,8 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.guess-indent-config")
     end,
+    cond = util.is_not_in_vscode,
   })
-
-  -- -- Hop (Easymotion)
-  -- use({
-  --   "phaazon/hop.nvim",
-  --   branch = "v2", -- optional but strongly recommended
-  --   config = function()
-  --     require("plugin-config.hop-config")
-  --   end,
-  -- })
 
   -- Nvim Tree File Explorer
   use({
@@ -65,6 +60,7 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.nvim-tree-config")
     end,
+    cond = util.is_not_in_vscode,
   })
 
   -- Buffer Line
@@ -75,64 +71,86 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.buffer-line-config")
     end,
+    cond = util.is_not_in_vscode,
   })
 
   -- LSP
 
   use({
     -- Basic LSP
-    "neovim/nvim-lspconfig",
+    {
+      "neovim/nvim-lspconfig",
+      requires = {
+        "neovim/nvim-lspconfig",
+      },
+      cond = util.is_not_in_vscode,
+    },
     -- Mason
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    {
+      "williamboman/mason.nvim",
+      requires = {
+        "neovim/nvim-lspconfig",
+      },
+      cond = util.is_not_in_vscode,
+    },
+    {
+      "williamboman/mason-lspconfig.nvim",
+      requires = {
+        "neovim/nvim-lspconfig",
+      },
+      cond = util.is_not_in_vscode,
+    },
     -- Null-ls
     -- "jose-elias-alvarez/null-ls.nvim",
-    "nvimtools/none-ls.nvim",
-    "jay-babu/mason-null-ls.nvim",
+    {
+      "nvimtools/none-ls.nvim",
+      requires = {
+        "neovim/nvim-lspconfig",
+      },
+      cond = util.is_not_in_vscode,
+    },
+    {
+      "jay-babu/mason-null-ls.nvim",
+      requires = {
+        "neovim/nvim-lspconfig",
+      },
+      cond = util.is_not_in_vscode,
+    },
     -- Signature help when completing
-    "ray-x/lsp_signature.nvim",
+    {
+      "ray-x/lsp_signature.nvim",
+      requires = {
+        "neovim/nvim-lspconfig",
+      },
+      cond = util.is_not_in_vscode,
+    },
     -- Pretty ui when renaming
-    "stevearc/dressing.nvim",
+    {
+      "stevearc/dressing.nvim",
+      requires = {
+        "neovim/nvim-lspconfig",
+      },
+      cond = util.is_not_in_vscode,
+    },
     -- Code navigation at status bar
-    "SmiteshP/nvim-navic",
+    {
+      "SmiteshP/nvim-navic",
+      requires = {
+        "neovim/nvim-lspconfig",
+      },
+      cond = util.is_not_in_vscode,
+    },
     -- Rust tools
-    "simrat39/rust-tools.nvim",
-    requires = {
-      "neovim/nvim-lspconfig",
-      -- "mfussenegger/nvim-dap",
+    {
+      "simrat39/rust-tools.nvim",
+      requires = {
+        "neovim/nvim-lspconfig",
+      },
+      cond = util.is_not_in_vscode,
     },
     -- Many LSP related thing won't be correctly configured here.
     -- Configure them in init.lua instead.
   })
-
-  -- -- DAP
-  -- use({
-  --   "mfussenegger/nvim-dap",
-  --   config = function()
-  --     require("plugin-config.dap-config")
-  --   end,
-  -- })
-  -- use({
-  --   "rcarriga/nvim-dap-ui",
-  --   requires = { "mfussenegger/nvim-dap" },
-  --   config = function()
-  --     require("plugin-config.dapui-config")
-  --   end,
-  -- })
-  -- use({
-  --   "rcarriga/cmp-dap",
-  --   requires = { "mfussenegger/nvim-dap" },
-  -- })
-  -- use({
-  --   "theHamsta/nvim-dap-virtual-text",
-  --   requires = {
-  --     "mfussenegger/nvim-dap",
-  --     "nvim-treesitter/nvim-treesitter",
-  --   },
-  --   config = function()
-  --     require("plugin-config.dap-virtual-text-config")
-  --   end,
-  -- })
 
   -- Trouble
   -- Lua
@@ -142,9 +160,11 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.trouble-config")
     end,
+    cond = util.is_not_in_vscode,
   })
   use({
     "kyazdani42/nvim-web-devicons",
+    cond = util.is_not_in_vscode,
   })
 
   -- Auto complete
@@ -153,24 +173,31 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.nvim-cmp-config")
     end,
+    cond = util.is_not_in_vscode,
   })
   use({
     "hrsh7th/cmp-nvim-lsp",
+    cond = util.is_not_in_vscode,
   })
   use({
     "hrsh7th/cmp-buffer",
+    cond = util.is_not_in_vscode,
   })
   use({
     "hrsh7th/cmp-path",
+    cond = util.is_not_in_vscode,
   })
   use({
     "hrsh7th/cmp-cmdline",
+    cond = util.is_not_in_vscode,
   })
   use({
     "hrsh7th/cmp-vsnip",
+    cond = util.is_not_in_vscode,
   })
   use({
     "hrsh7th/vim-vsnip",
+    cond = util.is_not_in_vscode,
   })
 
   -- Input Enhance
@@ -180,6 +207,7 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.autopairs-config")
     end,
+    cond = util.is_not_in_vscode,
   })
   use({
     "windwp/nvim-ts-autotag",
@@ -189,6 +217,7 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.nvim-ts-autotag-config")
     end,
+    cond = util.is_not_in_vscode,
   })
 
   -- Tree Sitter Syntax Highlight
@@ -197,6 +226,7 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.treesitter-config")
     end,
+    cond = util.is_not_in_vscode,
   })
   use({
     "JoosepAlviste/nvim-ts-context-commentstring",
@@ -206,6 +236,7 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.ts-context-comment-config")
     end,
+    cond = util.is_not_in_vscode,
   })
   use({
     "Wansmer/treesj",
@@ -215,6 +246,7 @@ return require("packer").startup(function(use)
         use_default_keymaps = false,
       })
     end,
+    cond = util.is_not_in_vscode,
   })
 
   -- Auto Comment
@@ -223,6 +255,7 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.comment-config")
     end,
+    cond = util.is_not_in_vscode,
   })
 
   -- Telescope
@@ -235,17 +268,12 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.telescope-config")
     end,
+    cond = util.is_not_in_vscode,
   })
-  -- use({
-  --   "nvim-telescope/telescope-project.nvim",
-  --   requires = {
-  --     "nvim-telescope/telescope-file-browser.nvim",
-  --     "nvim-telescope/telescope.nvim",
-  --   },
-  -- })
   use({
     "nvim-telescope/telescope-file-browser.nvim",
     requires = { "nvim-telescope/telescope.nvim" },
+    cond = util.is_not_in_vscode,
   })
 
   -- OSC52 supper for better copy action (in SSH)
@@ -254,6 +282,7 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.osc52-config")
     end,
+    cond = util.is_not_in_vscode,
   })
 
   -- Terminal
@@ -263,6 +292,7 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.terminal-config")
     end,
+    cond = util.is_not_in_vscode,
   })
 
   -- Dashboard
@@ -273,6 +303,7 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.dashboard-config")
     end,
+    cond = util.is_not_in_vscode,
   })
 
   -- CMake
@@ -282,6 +313,7 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.cmake-config")
     end,
+    cond = util.is_not_in_vscode,
   })
 
   -- NVim Surround
@@ -291,6 +323,7 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.nvim-surround-config")
     end,
+    cond = util.is_not_in_vscode,
   })
 
   -- Git
@@ -300,6 +333,7 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.git")
     end,
+    cond = util.is_not_in_vscode,
   })
 
   -- Automatically set up your configuration after cloning packer.nvim

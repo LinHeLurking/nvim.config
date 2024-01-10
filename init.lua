@@ -1,6 +1,11 @@
 require("base")
-require("plugins")
 require("keymap")
+require("plugins")
+
+if vim.g.vscode then
+  return
+end
+
 require("plugin-config.clipboard-config")
 require("plugin-config.ui-config")
 
