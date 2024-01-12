@@ -3,6 +3,12 @@ local util = require("util")
 vim.g.mapleader = " "
 
 local not_vscode = vim.g.vscode == nil
+local in_vscode = vim.g.vscode ~= nil
+local vsc = {}
+if not_vscode then
+else
+  vsc = require("vscode-neovim")
+end
 
 local keymap = {}
 
@@ -82,13 +88,29 @@ wk.register({
 --
 -- Window action
 --
-wk.register({
-  name = "Window Action",
-  ["<A-h>"] = { "<C-w>h", "Move To Left Window" },
-  ["<A-j>"] = { "<C-w>j", "Move To Down Window" },
-  ["<A-k>"] = { "<C-w>k", "Move To Up Window" },
-  ["<A-l>"] = { "<C-w>l", "Move To Right Window" },
-}, {})
+
+if not_vscode then
+  wk.register({
+    name = "Window Action",
+    ["<A-h>"] = { "<C-w>h", "Move To Left Window" },
+    ["<A-j>"] = { "<C-w>j", "Move To Down Window" },
+    ["<A-k>"] = { "<C-w>k", "Move To Up Window" },
+    ["<A-l>"] = { "<C-w>l", "Move To Right Window" },
+  }, {})
+else
+  local move = function(direction)
+    return function()
+      vsc.action("workbench.action.navigate" .. direction)
+    end
+  end
+  wk.register({
+    name = "Window Action",
+    ["<A-h>"] = { move("Left"), "Move To Left Window" },
+    ["<A-j>"] = { move("Down"), "Move To Down Window" },
+    ["<A-k>"] = { move("Up"), "Move To Up Window" },
+    ["<A-l>"] = { move("Right"), "Move To Right Window" },
+  }, {})
+end
 
 --
 -- Terminal
@@ -378,7 +400,6 @@ if not_vscode then
     }, { prefix = "<Leader>f" })
   end
 else
-  local vsc = require("vscode-neovim")
   local find_files = function()
     vsc.action("workbench.action.quickOpen")
   end
