@@ -55,14 +55,15 @@ if not_vscode then
 end
 auto_bind("<C-a>", "ggVG", opts)
 vim.keymap.set("n", "<C-i>", "<C-a>", opts)
--- vim.keymap.set("v", "<C-c>", "y", opts)
 vim.keymap.set("i", "<C-h>", "<Left>", opts)
 vim.keymap.set("i", "<C-j>", "<Down>", opts)
 vim.keymap.set("i", "<C-k>", "<Up>", opts)
 vim.keymap.set("i", "<C-l>", "<Right>", opts)
 -- Enable highlight when searching
 vim.keymap.set("n", "/", "<Cmd>:set hlsearch<CR>/", { silent = false, noremap = true })
-
+if not_vscode then
+  vim.keymap.set("v", "<C-c>", "y", opts)
+end
 --
 -- Quick fix map
 --
