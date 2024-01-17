@@ -24,17 +24,15 @@ return require("packer").startup(function(use)
     end,
   })
 
-  --- Everything below won't be loaded in vscode!
-  if util.is_in_vscode() then
-    return
-  end
-
   -- Lualine
   use({
     "nvim-lualine/lualine.nvim",
     requires = { "kyazdani42/nvim-web-devicons", "SmiteshP/nvim-navic" },
     config = function()
       require("plugin-config.lualine-config")
+    end,
+    cond = function()
+      return vim.g.vscode ~= nil
     end,
   })
 
@@ -44,6 +42,9 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.tokyonight-config")
     end,
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
 
   -- Auto indent
@@ -51,6 +52,9 @@ return require("packer").startup(function(use)
     "nmac427/guess-indent.nvim",
     config = function()
       require("plugin-config.guess-indent-config")
+    end,
+    cond = function()
+      return vim.g.vscode ~= nil
     end,
   })
 
@@ -63,6 +67,9 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.nvim-tree-config")
     end,
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
 
   -- Buffer Line
@@ -72,6 +79,9 @@ return require("packer").startup(function(use)
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
       require("plugin-config.buffer-line-config")
+    end,
+    cond = function()
+      return vim.g.vscode ~= nil
     end,
   })
 
@@ -84,6 +94,9 @@ return require("packer").startup(function(use)
       requires = {
         "neovim/nvim-lspconfig",
       },
+      cond = function()
+        return vim.g.vscode ~= nil
+      end,
     },
     -- Mason
     {
@@ -91,12 +104,18 @@ return require("packer").startup(function(use)
       requires = {
         "neovim/nvim-lspconfig",
       },
+      cond = function()
+        return vim.g.vscode ~= nil
+      end,
     },
     {
       "williamboman/mason-lspconfig.nvim",
       requires = {
         "neovim/nvim-lspconfig",
       },
+      cond = function()
+        return vim.g.vscode ~= nil
+      end,
     },
     -- Null-ls
     -- "jose-elias-alvarez/null-ls.nvim",
@@ -105,12 +124,18 @@ return require("packer").startup(function(use)
       requires = {
         "neovim/nvim-lspconfig",
       },
+      cond = function()
+        return vim.g.vscode ~= nil
+      end,
     },
     {
       "jay-babu/mason-null-ls.nvim",
       requires = {
         "neovim/nvim-lspconfig",
       },
+      cond = function()
+        return vim.g.vscode ~= nil
+      end,
     },
     -- Signature help when completing
     {
@@ -118,6 +143,9 @@ return require("packer").startup(function(use)
       requires = {
         "neovim/nvim-lspconfig",
       },
+      cond = function()
+        return vim.g.vscode ~= nil
+      end,
     },
     -- Pretty ui when renaming
     {
@@ -125,6 +153,9 @@ return require("packer").startup(function(use)
       requires = {
         "neovim/nvim-lspconfig",
       },
+      cond = function()
+        return vim.g.vscode ~= nil
+      end,
     },
     -- Code navigation at status bar
     {
@@ -132,6 +163,9 @@ return require("packer").startup(function(use)
       requires = {
         "neovim/nvim-lspconfig",
       },
+      cond = function()
+        return vim.g.vscode ~= nil
+      end,
     },
     -- Rust tools
     {
@@ -139,6 +173,9 @@ return require("packer").startup(function(use)
       requires = {
         "neovim/nvim-lspconfig",
       },
+      cond = function()
+        return vim.g.vscode ~= nil
+      end,
     },
     -- Many LSP related thing won't be correctly configured here.
     -- Configure them in init.lua instead.
@@ -152,9 +189,15 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.trouble-config")
     end,
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
   use({
     "kyazdani42/nvim-web-devicons",
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
 
   -- Auto complete
@@ -163,24 +206,45 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.nvim-cmp-config")
     end,
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
   use({
     "hrsh7th/cmp-nvim-lsp",
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
   use({
     "hrsh7th/cmp-buffer",
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
   use({
     "hrsh7th/cmp-path",
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
   use({
     "hrsh7th/cmp-cmdline",
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
   use({
     "hrsh7th/cmp-vsnip",
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
   use({
     "hrsh7th/vim-vsnip",
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
 
   -- Input Enhance
@@ -189,6 +253,9 @@ return require("packer").startup(function(use)
     requires = "hrsh7th/nvim-cmp",
     config = function()
       require("plugin-config.autopairs-config")
+    end,
+    cond = function()
+      return vim.g.vscode ~= nil
     end,
   })
   use({
@@ -199,6 +266,9 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.nvim-ts-autotag-config")
     end,
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
 
   -- Tree Sitter Syntax Highlight
@@ -206,6 +276,9 @@ return require("packer").startup(function(use)
     "nvim-treesitter/nvim-treesitter",
     config = function()
       require("plugin-config.treesitter-config")
+    end,
+    cond = function()
+      return vim.g.vscode ~= nil
     end,
   })
   use({
@@ -216,6 +289,9 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.ts-context-comment-config")
     end,
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
   use({
     "Wansmer/treesj",
@@ -225,6 +301,9 @@ return require("packer").startup(function(use)
         use_default_keymaps = false,
       })
     end,
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
 
   -- Auto Comment
@@ -232,6 +311,9 @@ return require("packer").startup(function(use)
     "terrortylor/nvim-comment",
     config = function()
       require("plugin-config.comment-config")
+    end,
+    cond = function()
+      return vim.g.vscode ~= nil
     end,
   })
 
@@ -245,6 +327,9 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.telescope-config")
     end,
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
   use({
     "nvim-telescope/telescope-file-browser.nvim",
@@ -257,6 +342,9 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.osc52-config")
     end,
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
 
   -- Terminal
@@ -265,6 +353,9 @@ return require("packer").startup(function(use)
     tag = "*",
     config = function()
       require("plugin-config.terminal-config")
+    end,
+    cond = function()
+      return vim.g.vscode ~= nil
     end,
   })
 
@@ -276,6 +367,9 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.dashboard-config")
     end,
+    cond = function()
+      return vim.g.vscode ~= nil
+    end,
   })
 
   -- CMake
@@ -284,6 +378,9 @@ return require("packer").startup(function(use)
     requires = { "mfussenegger/nvim-dap" },
     config = function()
       require("plugin-config.cmake-config")
+    end,
+    cond = function()
+      return vim.g.vscode ~= nil
     end,
   })
 
@@ -294,6 +391,7 @@ return require("packer").startup(function(use)
     config = function()
       require("plugin-config.nvim-surround-config")
     end,
+    -- cond = function() return vim.g.vscode ~=nil end
   })
 
   -- Git
@@ -302,6 +400,9 @@ return require("packer").startup(function(use)
     "lewis6991/gitsigns.nvim",
     config = function()
       require("plugin-config.git")
+    end,
+    cond = function()
+      return vim.g.vscode ~= nil
     end,
   })
 
