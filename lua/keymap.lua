@@ -93,10 +93,10 @@ wk.register({
 if not_vscode then
   wk.register({
     name = "Window Action",
-    ["<A-h>"] = { "<C-w>h", "Move To Left Window" },
-    ["<A-j>"] = { "<C-w>j", "Move To Down Window" },
-    ["<A-k>"] = { "<C-w>k", "Move To Up Window" },
-    ["<A-l>"] = { "<C-w>l", "Move To Right Window" },
+        ["<A-h>"] = { "<C-w>h", "Move To Left Window" },
+        ["<A-j>"] = { "<C-w>j", "Move To Down Window" },
+        ["<A-k>"] = { "<C-w>k", "Move To Up Window" },
+        ["<A-l>"] = { "<C-w>l", "Move To Right Window" },
   }, {})
 else
   local move = function(direction)
@@ -106,10 +106,10 @@ else
   end
   wk.register({
     name = "Window Action",
-    ["<A-h>"] = { move("Left"), "Move To Left Window" },
-    ["<A-j>"] = { move("Down"), "Move To Down Window" },
-    ["<A-k>"] = { move("Up"), "Move To Up Window" },
-    ["<A-l>"] = { move("Right"), "Move To Right Window" },
+        ["<A-h>"] = { move("Left"), "Move To Left Window" },
+        ["<A-j>"] = { move("Down"), "Move To Down Window" },
+        ["<A-k>"] = { move("Up"), "Move To Up Window" },
+        ["<A-l>"] = { move("Right"), "Move To Right Window" },
   }, {})
 end
 
@@ -360,17 +360,17 @@ if not_vscode then
       end
     end)
     local keys = {
-      ["<C-u>"] = smart_scroll_up,
-      ["<C-d>"] = smart_scroll_down,
-      ["<C-n>"] = smart_next,
+          ["<C-u>"] = smart_scroll_up,
+          ["<C-d>"] = smart_scroll_down,
+          ["<C-n>"] = smart_next,
       -- ["<C-j>"] = smart_next,
-      ["<C-p>"] = smart_prev,
+          ["<C-p>"] = smart_prev,
       -- ["<C-k>"] = smart_prev,
-      ["<C-Space>"] = cmp.mapping.complete(),
-      ["<CR>"] = smart_cr,
-      ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-      ["<C-e>"] = cmp.mapping.abort(),
-      ["<Esc>"] = smart_esc,
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<CR>"] = smart_cr,
+          ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+          ["<C-e>"] = cmp.mapping.abort(),
+          ["<Esc>"] = smart_esc,
     }
     return keys
   end
@@ -476,6 +476,7 @@ if not_vscode then
   end
   auto_bind("<A-1>", "<Cmd>NvimTreeToggle<CR>", opts) -- insert mode bind is buggy
   auto_bind("<C-_>", "<Cmd>CommentToggle<CR>", opts)
+  vim.keymap.set("v", "<C-_>", "<Cmd>'<,'>CommentToggle<CR>", opts)
 
   -- vim.keymap.set("n", "<F9>", dap.continue, opts)
   -- vim.keymap.set("n", "<F8>", dap.step_over, opts)
