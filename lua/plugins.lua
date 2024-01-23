@@ -10,6 +10,7 @@ local ensure_packer = function()
 end
 
 local packer_bootstrap = ensure_packer()
+
 local util = require("util")
 
 return require("packer").startup(function(use)
@@ -29,7 +30,7 @@ return require("packer").startup(function(use)
     "kylechui/nvim-surround",
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     config = function()
-      require("plugin-config.nvim-surround-config")
+      require("plugin-config.nvim-surround-config").setup()
     end,
   })
 
@@ -44,7 +45,7 @@ return require("packer").startup(function(use)
     "nvim-lualine/lualine.nvim",
     requires = { "kyazdani42/nvim-web-devicons", "SmiteshP/nvim-navic" },
     config = function()
-      require("plugin-config.lualine-config")
+      require("plugin-config.lualine-config").setup()
     end,
   })
 
@@ -52,7 +53,7 @@ return require("packer").startup(function(use)
   use({
     "folke/tokyonight.nvim",
     config = function()
-      require("plugin-config.tokyonight-config")
+      require("plugin-config.tokyonight-config").setup()
     end,
   })
 
@@ -60,7 +61,7 @@ return require("packer").startup(function(use)
   use({
     "nmac427/guess-indent.nvim",
     config = function()
-      require("plugin-config.guess-indent-config")
+      require("plugin-config.guess-indent-config").setup()
     end,
   })
 
@@ -71,7 +72,7 @@ return require("packer").startup(function(use)
       "nvim-tree/nvim-web-devicons", -- optional, for file icons
     },
     config = function()
-      require("plugin-config.nvim-tree-config")
+      require("plugin-config.nvim-tree-config").setup()
     end,
   })
 
@@ -81,7 +82,7 @@ return require("packer").startup(function(use)
     tag = "v2.*",
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
-      require("plugin-config.buffer-line-config")
+      require("plugin-config.buffer-line-config").setup()
     end,
   })
 
@@ -160,7 +161,7 @@ return require("packer").startup(function(use)
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
-      require("plugin-config.trouble-config")
+      require("plugin-config.trouble-config").setup()
     end,
   })
   use({
@@ -171,7 +172,7 @@ return require("packer").startup(function(use)
   use({
     "hrsh7th/nvim-cmp",
     config = function()
-      require("plugin-config.nvim-cmp-config")
+      require("plugin-config.nvim-cmp-config").setup()
     end,
   })
   use({
@@ -198,7 +199,7 @@ return require("packer").startup(function(use)
     "windwp/nvim-autopairs",
     requires = "hrsh7th/nvim-cmp",
     config = function()
-      require("plugin-config.autopairs-config")
+      require("plugin-config.autopairs-config").setup()
     end,
   })
   use({
@@ -207,7 +208,7 @@ return require("packer").startup(function(use)
       "nvim-treesitter/nvim-treesitter",
     },
     config = function()
-      require("plugin-config.nvim-ts-autotag-config")
+      require("plugin-config.nvim-ts-autotag-config").setup()
     end,
   })
 
@@ -215,7 +216,7 @@ return require("packer").startup(function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
     config = function()
-      require("plugin-config.treesitter-config")
+      require("plugin-config.treesitter-config").setup()
     end,
   })
   use({
@@ -224,7 +225,7 @@ return require("packer").startup(function(use)
       "nvim-treesitter/nvim-treesitter",
     },
     config = function()
-      require("plugin-config.ts-context-comment-config")
+      require("plugin-config.ts-context-comment-config").setup()
     end,
   })
   use({
@@ -241,7 +242,7 @@ return require("packer").startup(function(use)
   use({
     "terrortylor/nvim-comment",
     config = function()
-      require("plugin-config.comment-config")
+      require("plugin-config.comment-config").setup()
     end,
   })
 
@@ -253,7 +254,7 @@ return require("packer").startup(function(use)
       "nvim-lua/plenary.nvim",
     },
     config = function()
-      require("plugin-config.telescope-config")
+      require("plugin-config.telescope-config").setup()
     end,
   })
   use({
@@ -265,7 +266,7 @@ return require("packer").startup(function(use)
   use({
     "ojroques/nvim-osc52",
     config = function()
-      require("plugin-config.osc52-config")
+      require("plugin-config.osc52-config").setup()
     end,
   })
 
@@ -274,7 +275,7 @@ return require("packer").startup(function(use)
     "akinsho/toggleterm.nvim",
     tag = "*",
     config = function()
-      require("plugin-config.terminal-config")
+      require("plugin-config.terminal-config").setup()
     end,
   })
 
@@ -284,7 +285,7 @@ return require("packer").startup(function(use)
     event = "VimEnter",
     requires = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("plugin-config.dashboard-config")
+      require("plugin-config.dashboard-config").setup()
     end,
   })
 
@@ -293,7 +294,7 @@ return require("packer").startup(function(use)
     "Civitasv/cmake-tools.nvim",
     requires = { "mfussenegger/nvim-dap" },
     config = function()
-      require("plugin-config.cmake-config")
+      require("plugin-config.cmake-config").setup()
     end,
   })
 
@@ -302,7 +303,7 @@ return require("packer").startup(function(use)
   use({
     "lewis6991/gitsigns.nvim",
     config = function()
-      require("plugin-config.git")
+      require("plugin-config.git").setup()
     end,
   })
 

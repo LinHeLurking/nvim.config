@@ -1,7 +1,7 @@
+require("plugins")
 require("base")
 require("keymap")
-require("plugins")
-require("plugin-config.clipboard-config")
+require("plugin-config.clipboard-config").setup()
 
 if not vim.g.vscode then
   require("plugin-config.ui-config")

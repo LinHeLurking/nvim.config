@@ -1,5 +1,10 @@
-if vim.g.vscode ~= nil then
-  return
+local M = {}
+M.setup = function()
+  if vim.g.vscode ~= nil then
+    return
+  end
+  
+  require("hop").setup({})
 end
 
-require("hop").setup({})
+return M
