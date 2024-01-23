@@ -3,13 +3,13 @@ M.setup = function()
   if vim.g.vscode ~= nil then
     return
   end
-  
+
   local util = require("util")
-  
+
   vim.opt.termguicolors = true
-  
+
   local buffer_del_switch_focus = util.buffer_del_switch_focus
-  
+
   require("bufferline").setup({
     options = {
       mode = "buffers", -- "buffers" | "tabs". set to "tabs" to only show tabpages instead
@@ -80,17 +80,25 @@ M.setup = function()
           separator = true,
         },
       },
-      color_icons = true, -- true | false, -- whether or not to add the filetype icon highlights
-      show_buffer_icons = true, -- true | false, -- disable filetype icons for buffers
+      color_icons = true,          -- true | false, -- whether or not to add the filetype icon highlights
+      show_buffer_icons = true,    -- true | false, -- disable filetype icons for buffers
       show_buffer_close_icons = true, -- true | false,
-      show_buffer_default_icon = false, -- true | false, -- whether or not an unrecognised filetype should show a default icon
-      show_close_icon = true, --true | false,
+      get_element_icon = function(element)
+        -- element consists of {filetype: string, path: string, extension: string, directory: string}
+        -- This can be used to change how bufferline fetches the icon
+        -- for an element e.g. a buffer or a tab.
+        -- e.g.
+        local icon, hl =
+            require("nvim-web-devicons").get_icon_by_filetype(element.filetype, { default = false })
+        return icon, hl
+      end,
+      show_close_icon = true,    --true | false,
       show_tab_indicators = true, -- true | false,
       show_duplicate_prefix = true, -- true | false, -- whether to show duplicate buffer prefix
       persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
       -- can also be a table containing 2 custom separators
       -- [focused and unfocused]. eg: { '|', '|' }
-      separator_style = "thin", -- "slant" | "thick" | "thin" | { 'any', 'any' },
+      separator_style = "thin",   -- "slant" | "thick" | "thin" | { 'any', 'any' },
       enforce_regular_tabs = false, -- false | true,
       always_show_bufferline = true, -- true | false,
       hover = {
