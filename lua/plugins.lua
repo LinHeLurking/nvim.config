@@ -25,7 +25,7 @@ return require("packer").startup(function(use)
     end,
   })
 
-    -- NVim Surround
+  -- NVim Surround
   use({
     "kylechui/nvim-surround",
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -34,11 +34,18 @@ return require("packer").startup(function(use)
     end,
   })
 
+  -- OSC52 supper for better copy action (in SSH)
+  use({
+    "ojroques/nvim-osc52",
+    config = function()
+      require("plugin-config.osc52-config")
+    end,
+  })
 
-  -- Everything below will not be loaded when in vscode 
-  if vim.g.vscode ~= nil then 
+  -- Everything below will not be loaded when in vscode
+  if vim.g.vscode ~= nil then
     return
-  end 
+  end
 
   -- Lualine
   use({
@@ -260,14 +267,6 @@ return require("packer").startup(function(use)
   use({
     "nvim-telescope/telescope-file-browser.nvim",
     requires = { "nvim-telescope/telescope.nvim" },
-  })
-
-  -- OSC52 supper for better copy action (in SSH)
-  use({
-    "ojroques/nvim-osc52",
-    config = function()
-      require("plugin-config.osc52-config").setup()
-    end,
   })
 
   -- Terminal
