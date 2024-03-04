@@ -33,7 +33,7 @@ M.setup = function()
     if in_vscode then
       vim.g.clipboard = {
         name = "vsc-clip",
-        copy = { ["+"] = { "clip.exe" },["*"] = { "clip.exe" } },
+        copy = { ["+"] = osc_copy,["*"] = osc_copy },
         paste = { ["+"] = simple_paste,["*"] = simple_paste },
       }
     else
