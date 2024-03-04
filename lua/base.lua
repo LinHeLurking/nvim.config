@@ -40,3 +40,15 @@ if not vim.g.vscode then
     vim.g.python3_host_prog = conda .. "/bin/python"
   end
 end
+
+-- Install `im-select` using scoop:
+-- scoop bucket add im-select https://github.com/daipeihust/im-select
+-- scoop install im-select 
+local has_im_select = vim.fn.executable("im-select.exe")
+if has_im_select then
+  -- 1033 is english, 2052 is chinese
+  vim.api.nvim_command("autocmd VimEnter * !im-select.exe 1033")
+  vim.api.nvim_command("autocmd InsertEnter * :silent :!im-select.exe 2052")
+  vim.api.nvim_command("autocmd InsertLeave * :silent :!im-select.exe 1033")
+  vim.api.nvim_command("autocmd VimLeave * !im-select.exe 2052")
+end
