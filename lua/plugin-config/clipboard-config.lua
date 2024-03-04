@@ -12,6 +12,10 @@ M.setup = function()
     require("osc52").copy(table.concat(lines, "\n"))
   end
 
+  -- placeholder to prevent matching extra provider
+  local function useless_copy(lines, _)
+  end
+
   local pwsh_paste = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))'
   local simple_paste = function()
     return {
@@ -24,25 +28,35 @@ M.setup = function()
     local home = os.getenv("HOME")
     local wsl_paste = { home .. "/.config/nvim/sh/nvim_paste.sh" }
 
-    vim.g.clipboard = {
-      name = "wsl-clip",
-      copy = { ["+"] = osc_copy,["*"] = osc_copy },
-      paste = { ["+"] = wsl_paste,["*"] = wsl_paste },
-    }
-  elseif in_windows then
-    if in_vscode then
-      -- vim.g.clipboard = {
-      --   name = "vsc-clip",
-      --   copy = { ["+"] = osc_copy,["*"] = osc_copy },
-      --   paste = { ["+"] = simple_paste,["*"] = simple_paste },
-      -- }
+    if not in_vscode then
+      vim.g.clipboard = {
+        name = "wsl-clip",
+        copy = { ["+"] = osc_copy,["*"] = osc_copy },
+        paste = { ["+"] = wsl_paste,["*"] = wsl_paste },
+      }
     else
       vim.g.clipboard = {
-        name = "win-clip",
-        copy = { ["+"] = osc_copy,["*"] = osc_copy },
+        name = "vsc-clip",
+        copy = { ["+"] = useless_copy,["*"] = useless_copy },
         paste = { ["+"] = simple_paste,["*"] = simple_paste },
       }
+      -- when neovim is used behind vscode, force sync clipboard.
+      local clip = "/mnt/c/WINDOWS/system32/clip.exe"
+      if vim.fn.executable(clip) then
+        vim.cmd([[
+          augroup WSLYank
+          autocmd!
+          autocmd TextYankPost * if v:event.operator ==# 'y' | call system("iconv -t utf16 | /mnt/c/WINDOWS/system32/clip.exe", @0) | endif
+          augroup END
+        ]])
+      end
     end
+  elseif in_windows then
+    vim.g.clipboard = {
+      name = "win-clip",
+      copy = { ["+"] = osc_copy,["*"] = osc_copy },
+      paste = { ["+"] = simple_paste,["*"] = simple_paste },
+    }
   elseif in_linux then
     vim.g.clipboard = {
       name = "linux-clip",
