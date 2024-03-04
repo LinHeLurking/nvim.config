@@ -5,7 +5,8 @@ vim.opt.relativenumber = true
 
 vim.opt.scrolloff = 5
 
-vim.opt.clipboard = "unnamedplus"
+-- vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard:append("unnamedplus")
 
 vim.opt.incsearch = true
 vim.opt.ignorecase = true

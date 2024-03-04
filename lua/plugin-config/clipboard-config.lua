@@ -31,11 +31,11 @@ M.setup = function()
     }
   elseif in_windows then
     if in_vscode then
-      vim.g.clipboard = {
-        name = "vsc-clip",
-        copy = { ["+"] = osc_copy,["*"] = osc_copy },
-        paste = { ["+"] = simple_paste,["*"] = simple_paste },
-      }
+      -- vim.g.clipboard = {
+      --   name = "vsc-clip",
+      --   copy = { ["+"] = osc_copy,["*"] = osc_copy },
+      --   paste = { ["+"] = simple_paste,["*"] = simple_paste },
+      -- }
     else
       vim.g.clipboard = {
         name = "win-clip",
