@@ -24,51 +24,47 @@ M.setup = function()
     }
   end
 
-  if in_wsl then
+  local function set_yank_autocmd()
+    local clip = nil
+    if in_wsl then
+      clip = "/mnt/c/WINDOWS/system32/clip.exe"
+    else
+      clip = "clip.exe"
+    end
+    local clip_cmd = [["iconv -t utf16 | sed \"1s/^\\xFF\\xFE//\" | ]] .. clip .. "\""
+    local autogroup_cmd = [[
+          augroup YankClipEXE
+          autocmd!
+        ]] .. "autocmd TextYankPost * call system(" .. clip_cmd .. ", @0)\n" .. [[
+          augroup END
+        ]]
+
+    if clip and vim.fn.executable(clip) then
+      vim.cmd(autogroup_cmd)
+    end
+  end
+
+  --
+  if in_vscode then
+    vim.g.clipboard = {
+      name = "vsc-clip",
+      copy = { ["+"] = useless_copy,["*"] = useless_copy },
+      paste = { ["+"] = simple_paste,["*"] = simple_paste },
+    }
+    set_yank_autocmd()
+  elseif in_wsl then
     local home = os.getenv("HOME")
     local wsl_paste = { home .. "/.config/nvim/sh/nvim_paste.sh" }
-
-    if not in_vscode then
-      vim.g.clipboard = {
-        name = "wsl-clip",
-        copy = { ["+"] = osc_copy,["*"] = osc_copy },
-        paste = { ["+"] = wsl_paste,["*"] = wsl_paste },
-      }
-    else
-      vim.g.clipboard = {
-        name = "vsc-clip",
-        copy = { ["+"] = useless_copy,["*"] = useless_copy },
-        paste = { ["+"] = simple_paste,["*"] = simple_paste },
-      }
-      -- when neovim is used behind vscode, force sync clipboard.
-      local clip = "/mnt/c/WINDOWS/system32/clip.exe"
-      if vim.fn.executable(clip) then
-        vim.cmd([[
-          augroup WSLYank
-          autocmd!
-          autocmd TextYankPost * if v:event.operator ==# 'y' | call system("iconv -t utf16 | /mnt/c/WINDOWS/system32/clip.exe", @0) | endif
-          augroup END
-        ]])
-      end
-    end
-  elseif in_windows then
     vim.g.clipboard = {
-      name = "win-clip",
+      name = "wsl-clip",
+      copy = { ["+"] = osc_copy,["*"] = osc_copy },
+      paste = { ["+"] = wsl_paste,["*"] = wsl_paste },
+    }
+  else
+    vim.g.clipboard = {
+      name = "general-clip",
       copy = { ["+"] = osc_copy,["*"] = osc_copy },
       paste = { ["+"] = simple_paste,["*"] = simple_paste },
-    }
-  elseif in_linux then
-    vim.g.clipboard = {
-      name = "linux-clip",
-      copy = { ["+"] = osc_copy,["*"] = osc_copy },
-      -- This is a simple paste function. It does not interact with system clipboard.
-      paste = { ["+"] = simple_paste,["*"] = simple_paste },
-    }
-  elseif in_macos then
-    vim.g.clipboard = {
-      name = "mac-clip",
-      copy = { ["+"] = osc_copy,["*"] = osc_copy },
-      paste = { ["+"] = "pbpaste",["*"] = "pbpaste" },
     }
   end
 end
