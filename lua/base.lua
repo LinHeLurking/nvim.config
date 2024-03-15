@@ -14,6 +14,10 @@ vim.opt.smartcase = true
 vim.opt.hlsearch = true
 vim.opt.showmatch = true
 
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Tab sizes are better managed by plugins automatically
 
 -- Only set if not in vscode

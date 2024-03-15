@@ -51,14 +51,6 @@ M.setup = function()
             )
           end,
         },
-        -- dap = {
-        --   adapter = {
-        --     type = "executable",
-        --     -- Use dap-config detected full-versioned lldb-vscode
-        --     command = dap_config.lldb_vscode,
-        --     name = "rust-tools-lldb",
-        --   },
-        -- },
         tools = {
           inlay_hints = {
             auto = true,

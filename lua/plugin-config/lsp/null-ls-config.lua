@@ -73,7 +73,9 @@ M.setup = function()
       local capability = null_ls.builtins[category]
       -- eslint_d is supported by extra tools
       if vim.fn.executable("eslint_d") == 1 then
-        local entry = require("none-ls." .. category .. ".eslint_d")
+        local entry = require("none-ls." .. category .. ".eslint_d").with({
+          condition = eslint_cond,
+        })
         table.insert(ideal_sources, entry)
       end
     end
@@ -115,10 +117,14 @@ M.setup = function()
     return ideal_sources
   end
 
-  null_ls.setup({
-    sources = setup_sources(),
-    border = "single",
-  })
+  vim.loop.new_work(function()
+    null_ls.setup({
+      sources = setup_sources(),
+      border = "single",
+    })
+  end, function()
+  end
+  )
 end
 
 return M

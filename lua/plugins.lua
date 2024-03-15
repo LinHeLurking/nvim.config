@@ -47,6 +47,7 @@ local get_plugins = function()
         require("plugin-config.lualine-config").setup()
       end,
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
     -- tokyonight theme
     {
@@ -63,8 +64,6 @@ local get_plugins = function()
         require("plugin-config.guess-indent-config").setup()
       end,
       cond = not_vsc,
-      lazy = true,
-      cmd = "GuessIndent",
     },
     -- nvim tree file explorer
     {
@@ -76,6 +75,8 @@ local get_plugins = function()
         require("plugin-config.nvim-tree-config").setup()
       end,
       cond = not_vsc,
+      cmd = { "NvimTreeOpen", "NvimTreeClose", "NvimTreeToggle", "NvimTreeFocus", "NvimTreeRefresh"},
+      event = {"DirChangedPre", "BufEnter"},
     },
     -- buffer line
     {
@@ -86,6 +87,7 @@ local get_plugins = function()
         require("plugin-config.buffer-line-config").setup()
       end,
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
     --
     -- LSP related settings
@@ -100,6 +102,7 @@ local get_plugins = function()
         require("plugin-config.lsp.basic-lsp").setup()
       end,
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
     -- mason
     {
@@ -111,6 +114,7 @@ local get_plugins = function()
         require("plugin-config.lsp.mason-config").setup()
       end,
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile", "CmdlineChanged" },
     },
     {
       "williamboman/mason-lspconfig.nvim",
@@ -121,6 +125,7 @@ local get_plugins = function()
         require("plugin-config.lsp.mason-lsp-config").setup()
       end,
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
     -- null-ls
     {
@@ -129,9 +134,9 @@ local get_plugins = function()
         "neovim/nvim-lspconfig",
         "nvimtools/none-ls-extras.nvim",
       },
-      config = function()
-      end,
+      config = function() end,
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
     {
       "jay-babu/mason-null-ls.nvim",
@@ -143,6 +148,7 @@ local get_plugins = function()
         require("plugin-config.lsp.null-ls-config").setup()
       end,
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
     -- signature help when completing
     {
@@ -154,6 +160,7 @@ local get_plugins = function()
         require("plugin-config.lsp.lsp-signature-config").setup()
       end,
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
     -- pretty ui when renaming
     {
@@ -165,6 +172,7 @@ local get_plugins = function()
         require("plugin-config.lsp.dressing-config").setup()
       end,
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
     -- code navigation at status bar
     {
@@ -176,6 +184,7 @@ local get_plugins = function()
         require("plugin-config.lsp.nvim-navic-config").setup()
       end,
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
     -- rust tools
     {
@@ -184,7 +193,7 @@ local get_plugins = function()
         "neovim/nvim-lspconfig",
       },
       cond = not_vsc,
-      lazy = true,
+      event = { "BufReadPost", "BufNewFile" },
     },
     -- trouble
     {
@@ -194,8 +203,8 @@ local get_plugins = function()
         require("plugin-config.trouble-config").setup()
       end,
       cond = not_vsc,
-      lazy = true,
       cmd = "TroubleToggle",
+      event = { "BufReadPost", "BufNewFile" },
     },
     -- auto complete related settings
     {
@@ -204,30 +213,37 @@ local get_plugins = function()
         require("plugin-config.nvim-cmp-config").setup()
       end,
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile", "CmdlineChanged" },
     },
     {
       "hrsh7th/cmp-nvim-lsp",
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
     {
       "hrsh7th/cmp-buffer",
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
     {
       "hrsh7th/cmp-path",
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile", "CmdlineChanged" },
     },
     {
       "hrsh7th/cmp-cmdline",
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile", "CmdlineChanged" },
     },
     {
       "hrsh7th/cmp-vsnip",
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
     {
       "hrsh7th/vim-vsnip",
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
     -- input enhance
     {
@@ -237,6 +253,7 @@ local get_plugins = function()
         require("plugin-config.autopairs-config").setup()
       end,
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
     {
       "windwp/nvim-ts-autotag",
@@ -247,6 +264,7 @@ local get_plugins = function()
         require("plugin-config.nvim-ts-autotag-config").setup()
       end,
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
     -- tree sitter syntax highlight
     {
@@ -255,6 +273,7 @@ local get_plugins = function()
         require("plugin-config.treesitter-config").setup()
       end,
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
     {
       "JoosepAlviste/nvim-ts-context-commentstring",
@@ -265,7 +284,7 @@ local get_plugins = function()
         require("plugin-config.ts-context-comment-config").setup()
       end,
       cond = not_vsc,
-      lazy = true,
+      event = { "BufReadPost", "BufNewFile" },
     },
     -- auto comment
     {
@@ -274,8 +293,8 @@ local get_plugins = function()
         require("plugin-config.comment-config").setup()
       end,
       cond = not_vsc,
-      lazy = true,
       cmd = "CommentToggle",
+      event = { "BufReadPost", "BufNewFile" },
     },
     -- telescope
     {
@@ -284,10 +303,8 @@ local get_plugins = function()
       dependencies = {
         "nvim-lua/plenary.nvim",
       },
-      config = function()
-        require("plugin-config.telescope-config").setup()
-      end,
       cond = not_vsc,
+      cmd = "Telescope",
     },
     -- terminal
     {
@@ -297,9 +314,8 @@ local get_plugins = function()
         require("plugin-config.terminal-config").setup()
       end,
       cond = not_vsc,
-      lazy = true,
       cmd = "ToggleTerm",
-      keys = { "<F60>", "<A-F12>" }
+      keys = { "<F60>", "<A-F12>" },
     },
     -- dashboard
     {
@@ -318,6 +334,7 @@ local get_plugins = function()
         require("plugin-config.git").setup()
       end,
       cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
     },
   }
   return plugins
@@ -325,7 +342,9 @@ end
 
 M.setup = function()
   bootstrap_lazy()
-  require("lazy").setup(get_plugins())
+  require("lazy").setup(get_plugins(), {
+    ui = { border = "single" },
+  })
 end
 
 -- return M

@@ -263,23 +263,23 @@ if not_vscode then
       -- key mappings for actions in the trouble list
       -- map to {} to remove a mapping, for example:
       -- close = {},
-      close = "q",                  -- close the list
-      cancel = "<esc>",             -- cancel the preview and get back to your last window / buffer / cursor
-      refresh = "r",                -- manually refresh
-      jump = { "<cr>", "<tab>" },   -- jump to the diagnostic or open / close folds
-      open_split = { "<c-x>" },     -- open buffer in new split
-      open_vsplit = { "<c-v>" },    -- open buffer in new vsplit
-      open_tab = { "<c-t>" },       -- open buffer in new tab
-      jump_close = { "o" },         -- jump to the diagnostic and close the list
-      toggle_mode = "m",            -- toggle between "workspace" and "document" diagnostics mode
-      toggle_preview = "P",         -- toggle auto_preview
-      hover = "K",                  -- opens a small popup with the full multiline message
-      preview = "p",                -- preview the diagnostic location
+      close = "q", -- close the list
+      cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
+      refresh = "r", -- manually refresh
+      jump = { "<cr>", "<tab>" }, -- jump to the diagnostic or open / close folds
+      open_split = { "<c-x>" }, -- open buffer in new split
+      open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
+      open_tab = { "<c-t>" }, -- open buffer in new tab
+      jump_close = { "o" }, -- jump to the diagnostic and close the list
+      toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
+      toggle_preview = "P", -- toggle auto_preview
+      hover = "K", -- opens a small popup with the full multiline message
+      preview = "p", -- preview the diagnostic location
       close_folds = { "zM", "zm" }, -- close all folds
-      open_folds = { "zR", "zr" },  -- open all folds
+      open_folds = { "zR", "zr" }, -- open all folds
       toggle_fold = { "zA", "za" }, -- toggle fold of current file
-      previous = "k",               -- previous item
-      next = "j",                   -- next item
+      previous = "k", -- previous item
+      next = "j", -- next item
     },
   }
   wk.register({
@@ -363,20 +363,17 @@ end
 --
 
 if not_vscode then
-  keymap.telscope_set_map = function()
-    local telescope = require("telescope.builtin")
-    wk.register({
-      name = "Find Everything",
-      c = { telescope.commands, "Find Commands" },
-      k = { telescope.keymaps, "Find Keymaps" },
-      f = { telescope.find_files, "Find Files" },
-      g = { telescope.live_grep, "Live Grep" },
-      b = { telescope.buffers, "Buffers" },
-      h = { telescope.help_tags, "Help Tags" },
-      r = { telescope.oldfiles, "Recent Files" },
-      s = { telescope.lsp_document_symbols, "Document Symbols" },
-    }, { prefix = "<Leader>f" })
-  end
+  wk.register({
+    name = "Find Everything",
+    c = { "<Cmd>Telescope commands<CR>", "Find Commands" },
+    k = { "<Cmd>Telescope keymaps<CR>", "Find Keymaps" },
+    f = { "<Cmd>Telescope find_files<CR>", "Find Files" },
+    g = { "<Cmd>Telescope live_grep<CR>", "Live Grep" },
+    b = { "<Cmd>Telescope buffers<CR>", "Buffers" },
+    h = { "<Cmd>Telescope help_tags<CR>", "Help Tags" },
+    r = { "<Cmd>Telescope oldfiles<CR>", "Recent Files" },
+    s = { "<Cmd>Telescope lsp_document_symbols<CR>", "Document Symbols" },
+  }, { prefix = "<Leader>f" })
 else
   local find_files = function()
     vsc.action("workbench.action.quickOpen")
