@@ -243,12 +243,12 @@ if not_vscode then
       -- t = { vim.lsp.buf.type_definition, "Type Definition" },
     }, { prefix = "g", buffer = bufnr })
     -- Refactor related mappings
-    wk.register({
-      name = "Refactor",
-      r = { vim.lsp.buf.rename, "Rename" },
-      f = { async_format, "Format" },
-      a = { vim.lsp.buf.code_action, "Code Action" },
-    }, { prefix = "<Leader>r", buffer = bufnr })
+    vim.keymap.set(
+      "n",
+      "<Leader>r",
+      vim.lsp.buf.code_action,
+      { noremap = true, silent = true, desc = "Refactor Actions", buffer = bufnr }
+    )
   end
   keymap.signature_help_select_next = "<A-n>"
 end
