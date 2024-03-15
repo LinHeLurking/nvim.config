@@ -39,8 +39,8 @@ M.setup = function()
         -- tabnr (tabs only)   | int        | the "handle" of the tab, can be converted to its ordinal number using: `vim.api.nvim_tabpage_get_number(buf.tabnr)`
       end,
       max_name_length = 18,
-      max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
-      truncate_names = true, -- whether or not tab names should be truncated
+      max_prefix_length = 15,   -- prefix used when a buffer is de-duplicated
+      truncate_names = true,    -- whether or not tab names should be truncated
       tab_size = 18,
       diagnostics = "nvim_lsp", -- false | "nvim_lsp" | "coc",
       diagnostics_update_in_insert = true,
@@ -80,8 +80,8 @@ M.setup = function()
           separator = true,
         },
       },
-      color_icons = true,          -- true | false, -- whether or not to add the filetype icon highlights
-      show_buffer_icons = true,    -- true | false, -- disable filetype icons for buffers
+      color_icons = true,             -- true | false, -- whether or not to add the filetype icon highlights
+      show_buffer_icons = true,       -- true | false, -- disable filetype icons for buffers
       show_buffer_close_icons = true, -- true | false,
       get_element_icon = function(element)
         -- element consists of {filetype: string, path: string, extension: string, directory: string}
@@ -92,14 +92,14 @@ M.setup = function()
             require("nvim-web-devicons").get_icon_by_filetype(element.filetype, { default = false })
         return icon, hl
       end,
-      show_close_icon = true,    --true | false,
-      show_tab_indicators = true, -- true | false,
+      show_close_icon = true,       --true | false,
+      show_tab_indicators = true,   -- true | false,
       show_duplicate_prefix = true, -- true | false, -- whether to show duplicate buffer prefix
-      persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+      persist_buffer_sort = true,   -- whether or not custom sorted buffers should persist
       -- can also be a table containing 2 custom separators
       -- [focused and unfocused]. eg: { '|', '|' }
-      separator_style = "thin",   -- "slant" | "thick" | "thin" | { 'any', 'any' },
-      enforce_regular_tabs = false, -- false | true,
+      separator_style = "thin",      -- "slant" | "thick" | "thin" | { 'any', 'any' },
+      enforce_regular_tabs = false,  -- false | true,
       always_show_bufferline = true, -- true | false,
       hover = {
         enabled = true,

@@ -3,11 +3,11 @@ M.setup = function()
   if vim.g.vscode ~= nil then
     return
   end
-  
+
   local cmp = require("cmp")
-  
+
   local keymap = require("keymap").cmp_keys()
-  
+
   cmp.setup({
     enabled = function()
       local buf_filter = vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
@@ -40,7 +40,7 @@ M.setup = function()
       { name = "buffer" },
     }),
   })
-  
+
   -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline({ "/", "?" }, {
     mapping = cmp.mapping.preset.cmdline(),
@@ -48,7 +48,7 @@ M.setup = function()
       { name = "buffer" },
     },
   })
-  
+
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
@@ -58,7 +58,7 @@ M.setup = function()
       { name = "cmdline" },
     }),
   })
-  
+
   -- DAP completion
   -- cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
   --   sources = {
@@ -67,6 +67,5 @@ M.setup = function()
   --     { name = "buffer" },
   --   },
   -- })
-
 end
 return M

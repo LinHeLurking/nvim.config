@@ -3,8 +3,8 @@ M.setup = function()
   if vim.g.vscode ~= nil then
     return
   end
-  
-  -- 
+
+  --
   -- Naciv
   --
   local navic = require("nvim-navic")
@@ -14,7 +14,6 @@ M.setup = function()
     depth_limit = 0,
     depth_limit_indicator = "..",
   })
-  
 end
 
 return M

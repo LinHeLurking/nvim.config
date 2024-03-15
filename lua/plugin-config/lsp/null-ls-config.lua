@@ -35,7 +35,7 @@ M.setup = function()
   local setup_sources = function()
     local ideal_sources = {}
     -- General spell check
-    if vim.fn.executable("codespell") then
+    if vim.fn.executable("codespell") == 1 then
       local entry = null_ls.builtins.diagnostics.codespell.with({
         extra_args = {
           -- Suppress warnings for some words
@@ -45,7 +45,7 @@ M.setup = function()
       table.insert(ideal_sources, entry)
     end
     -- Python lint
-    if vim.fn.executable("pylint") then
+    if vim.fn.executable("pylint") == 1 then
       local entry = null_ls.builtins.diagnostics.pylint.with({
         extra_args = {
           -- Suppress docstring warning (C0111) :P
@@ -72,14 +72,14 @@ M.setup = function()
     for i, category in ipairs({ "diagnostics", "formatting", "code_actions" }) do
       local capability = null_ls.builtins[category]
       -- eslint_d is supported by extra tools
-      if vim.fn.executable("eslint_d") then
+      if vim.fn.executable("eslint_d") == 1 then
         local entry = require("none-ls." .. category .. ".eslint_d")
         table.insert(ideal_sources, entry)
       end
     end
     for i, category in ipairs({ "formatting" }) do
       local capability = null_ls.builtins[category]
-      if vim.fn.executable("prettierd") then
+      if vim.fn.executable("prettierd") == 1 then
         local entry = capability.prettierd.with({
           condition = prettier_cond,
         })
@@ -88,27 +88,27 @@ M.setup = function()
     end
 
     -- Json format
-    if vim.fn.executable("jq") then
+    if vim.fn.executable("jq") == 1 then
       -- jq is supported by extra tools
       local entry = require("none-ls.formatting.jq")
       table.insert(ideal_sources, entry)
     end
     -- Lua format
-    if vim.fn.executable("stylua") then
+    if vim.fn.executable("stylua") == 1 then
       local entry = null_ls.builtins.formatting.stylua
       table.insert(ideal_sources, entry)
     end
     -- C/C++ format
-    if vim.fn.executable("clang_format") then
+    if vim.fn.executable("clang_format") == 1 then
       local entry = null_ls.builtins.formatting.clang_format
       table.insert(ideal_sources, entry)
     end
     -- Python format
-    if vim.fn.executable("black") then
+    if vim.fn.executable("black") == 1 then
       local entry = null_ls.builtins.formatting.black
       table.insert(ideal_sources, entry)
     end
-    if vim.fn.executable("isort") then
+    if vim.fn.executable("isort") == 1 then
       local entry = null_ls.builtins.formatting.isort
       table.insert(ideal_sources, entry)
     end

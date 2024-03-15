@@ -48,8 +48,8 @@ M.setup = function()
   if in_vscode then
     vim.g.clipboard = {
       name = "vsc-clip",
-      copy = { ["+"] = useless_copy,["*"] = useless_copy },
-      paste = { ["+"] = simple_paste,["*"] = simple_paste },
+      copy = { ["+"] = useless_copy, ["*"] = useless_copy },
+      paste = { ["+"] = simple_paste, ["*"] = simple_paste },
     }
     set_yank_autocmd()
   elseif in_wsl then
@@ -57,15 +57,17 @@ M.setup = function()
     local wsl_paste = { home .. "/.config/nvim/sh/nvim_paste.sh" }
     vim.g.clipboard = {
       name = "wsl-clip",
-      copy = { ["+"] = osc_copy,["*"] = osc_copy },
-      paste = { ["+"] = wsl_paste,["*"] = wsl_paste },
+      copy = { ["+"] = osc_copy, ["*"] = osc_copy },
+      paste = { ["+"] = wsl_paste, ["*"] = wsl_paste },
     }
   else
     vim.g.clipboard = {
       name = "general-clip",
-      copy = { ["+"] = osc_copy,["*"] = osc_copy },
-      paste = { ["+"] = simple_paste,["*"] = simple_paste },
+      copy = { ["+"] = osc_copy, ["*"] = osc_copy },
+      paste = { ["+"] = simple_paste, ["*"] = simple_paste },
     }
   end
 end
-return M
+
+-- return M
+M.setup()

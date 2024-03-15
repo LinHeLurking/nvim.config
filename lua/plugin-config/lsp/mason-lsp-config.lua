@@ -3,22 +3,22 @@ M.setup = function()
   if vim.g.vscode ~= nil then
     return
   end
-  
+
   local keymap = require("keymap")
-  
+
   local navic = require("nvim-navic")
-  
+
   local on_attach_base = function(client, bufnr)
     keymap.lsp_set_map(client, bufnr)
     if client.server_capabilities.documentSymbolProvider then
       navic.attach(client, bufnr)
     end
   end
-  
+
   -- local dap_config = require("plugin-config.dap-config")
-  
+
   local num_index_cpu = math.min(math.floor(#vim.loop.cpu_info() / 2), 16)
-  
+
   require("mason-lspconfig").setup()
   require("mason-lspconfig").setup_handlers({
     -- The first entry (without a key) will be the default handler
@@ -38,7 +38,7 @@ M.setup = function()
         server = {
           on_attach = function(client, bufnr)
             on_attach_base(client, bufnr)
-  
+
             -- Overwrite some keymaps
             -- Hover actions
             vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions, { buffer = bufnr })

@@ -95,10 +95,10 @@ wk.register({
 if not_vscode then
   wk.register({
     name = "Window Action",
-        ["<A-h>"] = { "<C-w>h", "Move To Left Window" },
-        ["<A-j>"] = { "<C-w>j", "Move To Down Window" },
-        ["<A-k>"] = { "<C-w>k", "Move To Up Window" },
-        ["<A-l>"] = { "<C-w>l", "Move To Right Window" },
+    ["<A-h>"] = { "<C-w>h", "Move To Left Window" },
+    ["<A-j>"] = { "<C-w>j", "Move To Down Window" },
+    ["<A-k>"] = { "<C-w>k", "Move To Up Window" },
+    ["<A-l>"] = { "<C-w>l", "Move To Right Window" },
   }, {})
 else
   local move = function(direction)
@@ -108,10 +108,10 @@ else
   end
   wk.register({
     name = "Window Action",
-        ["<A-h>"] = { move("Left"), "Move To Left Window" },
-        ["<A-j>"] = { move("Down"), "Move To Down Window" },
-        ["<A-k>"] = { move("Up"), "Move To Up Window" },
-        ["<A-l>"] = { move("Right"), "Move To Right Window" },
+    ["<A-h>"] = { move("Left"), "Move To Left Window" },
+    ["<A-j>"] = { move("Down"), "Move To Down Window" },
+    ["<A-k>"] = { move("Up"), "Move To Up Window" },
+    ["<A-l>"] = { move("Right"), "Move To Right Window" },
   }, {})
 end
 
@@ -263,23 +263,23 @@ if not_vscode then
       -- key mappings for actions in the trouble list
       -- map to {} to remove a mapping, for example:
       -- close = {},
-      close = "q",               -- close the list
-      cancel = "<esc>",          -- cancel the preview and get back to your last window / buffer / cursor
-      refresh = "r",             -- manually refresh
-      jump = { "<cr>", "<tab>" }, -- jump to the diagnostic or open / close folds
-      open_split = { "<c-x>" },  -- open buffer in new split
-      open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
-      open_tab = { "<c-t>" },    -- open buffer in new tab
-      jump_close = { "o" },      -- jump to the diagnostic and close the list
-      toggle_mode = "m",         -- toggle between "workspace" and "document" diagnostics mode
-      toggle_preview = "P",      -- toggle auto_preview
-      hover = "K",               -- opens a small popup with the full multiline message
-      preview = "p",             -- preview the diagnostic location
+      close = "q",                  -- close the list
+      cancel = "<esc>",             -- cancel the preview and get back to your last window / buffer / cursor
+      refresh = "r",                -- manually refresh
+      jump = { "<cr>", "<tab>" },   -- jump to the diagnostic or open / close folds
+      open_split = { "<c-x>" },     -- open buffer in new split
+      open_vsplit = { "<c-v>" },    -- open buffer in new vsplit
+      open_tab = { "<c-t>" },       -- open buffer in new tab
+      jump_close = { "o" },         -- jump to the diagnostic and close the list
+      toggle_mode = "m",            -- toggle between "workspace" and "document" diagnostics mode
+      toggle_preview = "P",         -- toggle auto_preview
+      hover = "K",                  -- opens a small popup with the full multiline message
+      preview = "p",                -- preview the diagnostic location
       close_folds = { "zM", "zm" }, -- close all folds
-      open_folds = { "zR", "zr" }, -- open all folds
+      open_folds = { "zR", "zr" },  -- open all folds
       toggle_fold = { "zA", "za" }, -- toggle fold of current file
-      previous = "k",            -- previous item
-      next = "j",                -- next item
+      previous = "k",               -- previous item
+      next = "j",                   -- next item
     },
   }
   wk.register({
@@ -342,17 +342,17 @@ if not_vscode then
       end
     end)
     local keys = {
-          ["<C-u>"] = smart_scroll_up,
-          ["<C-d>"] = smart_scroll_down,
-          ["<C-n>"] = smart_next,
+      ["<C-u>"] = smart_scroll_up,
+      ["<C-d>"] = smart_scroll_down,
+      ["<C-n>"] = smart_next,
       -- ["<C-j>"] = smart_next,
-          ["<C-p>"] = smart_prev,
+      ["<C-p>"] = smart_prev,
       -- ["<C-k>"] = smart_prev,
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<CR>"] = smart_cr,
-          ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-          ["<C-e>"] = cmp.mapping.abort(),
-          ["<Esc>"] = smart_esc,
+      ["<C-Space>"] = cmp.mapping.complete(),
+      ["<CR>"] = smart_cr,
+      ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+      ["<C-e>"] = cmp.mapping.abort(),
+      ["<Esc>"] = smart_esc,
     }
     return keys
   end
@@ -409,17 +409,11 @@ end
 
 if not_vscode then
   keymap.dashboard_shortcut = {
-    -- {
-    --   desc = " Projects",
-    --   key = "p",
-    --   group = "Label",
-    --   action = "Telescope project",
-    -- },
     {
       desc = "󰚰 Update",
       key = "u",
       group = "Label",
-      action = "PackerUpdate",
+      action = "Lazy update",
     },
     {
       desc = " Settings",

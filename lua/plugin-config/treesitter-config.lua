@@ -3,10 +3,10 @@ M.setup = function()
   if vim.g.vscode ~= nil then
     return
   end
-  
+
   local util = require("util")
   local keymap = require("keymap")
-  
+
   require("nvim-treesitter.configs").setup({
     ensure_installed = {},
     -- context_commentstring = {

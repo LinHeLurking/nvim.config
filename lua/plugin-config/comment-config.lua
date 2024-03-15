@@ -3,8 +3,8 @@ M.setup = function()
   if vim.g.vscode ~= nil then
     return
   end
-  
-  
+
+
   require("nvim_comment").setup({
     hook = function()
       local filetype = vim.api.nvim_buf_get_option(0, "filetype")
@@ -22,7 +22,7 @@ M.setup = function()
       end
     end,
   })
-  
+
   -- Prefer // in C/C++ comments
   vim.api.nvim_create_autocmd({ "BufEnter", "BufFilePost" }, {
     pattern = { "*.c", "*.cpp", "*.cxx", "*.cc", "*.h", "*.hpp" },

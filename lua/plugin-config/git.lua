@@ -3,7 +3,7 @@ M.setup = function()
   if vim.g.vscode ~= nil then
     return
   end
-  
+
   require("gitsigns").setup({
     current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
     current_line_blame_opts = {
