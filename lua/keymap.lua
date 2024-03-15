@@ -64,9 +64,11 @@ vim.keymap.set("n", "/", "<Cmd>:set hlsearch<CR>/", { silent = false, noremap = 
 if not_vscode then
   vim.keymap.set("v", "<C-c>", "y", opts)
 end
+
 --
 -- Quick fix map
 --
+
 if not_vscode then
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "qf",
@@ -221,8 +223,6 @@ end
 --
 
 if not_vscode then
-  local tsj = require("treesj")
-
   keymap.lsp_set_map = function(client, bufnr)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
@@ -248,27 +248,9 @@ if not_vscode then
       r = { vim.lsp.buf.rename, "Rename" },
       f = { async_format, "Format" },
       a = { vim.lsp.buf.code_action, "Code Action" },
-      s = { tsj.split, "Split Lines" },
-      j = { tsj.join, "Join Lines" },
     }, { prefix = "<Leader>r", buffer = bufnr })
   end
   keymap.signature_help_select_next = "<A-n>"
-end
-
---
--- CMake
---
-
-if not_vscode then
-  wk.register({
-    name = "CMake",
-    g = { "<Cmd>CMakeGenerate<CR>", "Configure" },
-    b = { "<Cmd>CMakeBuild<CR>", "Build" },
-    c = { "<Cmd>CMakeClean<CR>", "Clean" },
-    r = { "<Cmd>CMakeRun<CR>", "Run" },
-    d = { "<Cmd>CMakeDebug<CR>", "Debug" },
-    p = { "<Cmd>CMakeSelectConfigurePreset<CR>", "Configure Presets" },
-  }, { prefix = "<Leader>m" })
 end
 
 --
@@ -477,22 +459,6 @@ if not_vscode then
   auto_bind("<A-1>", "<Cmd>NvimTreeToggle<CR>", opts) -- insert mode bind is buggy
   auto_bind("<C-_>", "<Cmd>CommentToggle<CR>", opts)
   vim.keymap.set("v", "<C-_>", "<Cmd>'<,'>CommentToggle<CR>", opts)
-
-  -- vim.keymap.set("n", "<F9>", dap.continue, opts)
-  -- vim.keymap.set("n", "<F8>", dap.step_over, opts)
-  -- vim.keymap.set("n", "<F7>", dap.step_into, opts)
-  -- -- <F19> is <S-F7> in Linux
-  -- if util.is_in_linux() then
-  --   vim.keymap.set("n", "<F19>", dap.step_out, opts)
-  -- else
-  --   vim.keymap.set("n", "<S-F7>", dap.step_out, opts)
-  -- end
-  -- -- <F14> is <C-F2> in Linux
-  -- if util.is_in_linux() then
-  --   vim.keymap.set("n", "<F14>", dap.terminate, opts)
-  -- else
-  --   vim.keymap.set("n", "<S-F2>", dap.terminate, opts)
-  -- end
 end
 
 return keymap

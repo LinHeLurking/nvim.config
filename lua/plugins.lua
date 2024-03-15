@@ -236,15 +236,6 @@ return require("packer").startup(function(use)
       require("plugin-config.ts-context-comment-config").setup()
     end,
   })
-  use({
-    "Wansmer/treesj",
-    requires = { "nvim-treesitter" },
-    config = function()
-      require("treesj").setup({
-        use_default_keymaps = false,
-      })
-    end,
-  })
 
   -- Auto Comment
   use({
@@ -289,17 +280,7 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- CMake
-  use({
-    "Civitasv/cmake-tools.nvim",
-    requires = { "mfussenegger/nvim-dap" },
-    config = function()
-      require("plugin-config.cmake-config").setup()
-    end,
-  })
-
   -- Git
-  -- use("f-person/git-blame.nvim")
   use({
     "lewis6991/gitsigns.nvim",
     config = function()
