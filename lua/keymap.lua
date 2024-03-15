@@ -365,10 +365,6 @@ end
 if not_vscode then
   keymap.telscope_set_map = function()
     local telescope = require("telescope.builtin")
-    -- local project = require("telescope").extensions.project
-    -- local show_prj = function()
-    --   project.project({ display_type = "full" })
-    -- end
     wk.register({
       name = "Find Everything",
       c = { telescope.commands, "Find Commands" },
@@ -379,7 +375,6 @@ if not_vscode then
       h = { telescope.help_tags, "Help Tags" },
       r = { telescope.oldfiles, "Recent Files" },
       s = { telescope.lsp_document_symbols, "Document Symbols" },
-      -- p = { show_prj, "Project" },
     }, { prefix = "<Leader>f" })
   end
 else

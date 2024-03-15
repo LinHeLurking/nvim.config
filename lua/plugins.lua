@@ -256,10 +256,6 @@ return require("packer").startup(function(use)
       require("plugin-config.telescope-config").setup()
     end,
   })
-  use({
-    "nvim-telescope/telescope-file-browser.nvim",
-    requires = { "nvim-telescope/telescope.nvim" },
-  })
 
   -- Terminal
   use({
