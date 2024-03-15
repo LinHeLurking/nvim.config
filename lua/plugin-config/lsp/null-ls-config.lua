@@ -3,13 +3,19 @@ M.setup = function()
   if vim.g.vscode ~= nil then
     return
   end
-  
+
   local null_ls = require("null-ls")
-  
+
   local eslint_cond = function(utils)
-    return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".rslintrs.yaml", ".eslintrc.yml", ".eslintrc.json" })
+    return utils.root_has_file({
+      ".eslintrc.js",
+      ".eslintrc.cjs",
+      ".rslintrs.yaml",
+      ".eslintrc.yml",
+      ".eslintrc.json",
+    })
   end
-  
+
   local prettier_cond = function(utils)
     return utils.root_has_file({
       ".prettierrc",
@@ -25,40 +31,22 @@ M.setup = function()
       ".prettierrc.toml",
     })
   end
-  
-  null_ls.setup({
-    sources = {
-      -- General spell check
-      null_ls.builtins.diagnostics.codespell.with({
+
+  local setup_sources = function()
+    local ideal_sources = {}
+    -- General spell check
+    if vim.fn.executable("codespell") then
+      local entry = null_ls.builtins.diagnostics.codespell.with({
         extra_args = {
           -- Suppress warnings for some words
           "-L ans,crate,crates",
         },
-      }),
-      -- Lua
-      null_ls.builtins.formatting.stylua,
-      -- Javascript/HTML/CSS
-      null_ls.builtins.code_actions.eslint_d.with({
-        condition = eslint_cond,
-      }),
-      null_ls.builtins.diagnostics.eslint_d.with({
-        condition = eslint_cond,
-      }),
-      null_ls.builtins.formatting.eslint_d.with({
-        condition = eslint_cond,
-      }),
-      null_ls.builtins.formatting.prettierd.with({
-        condition = prettier_cond,
-      }),
-      -- Json
-      null_ls.builtins.formatting.jq,
-      null_ls.builtins.diagnostics.jsonlint,
-      -- C/C++
-      null_ls.builtins.formatting.clang_format,
-      -- Python
-      null_ls.builtins.formatting.black,
-      null_ls.builtins.formatting.isort,
-      null_ls.builtins.diagnostics.pylint.with({
+      })
+      table.insert(ideal_sources, entry)
+    end
+    -- Python lint
+    if vim.fn.executable("pylint") then
+      local entry = null_ls.builtins.diagnostics.pylint.with({
         extra_args = {
           -- Suppress docstring warning (C0111) :P
           --
@@ -77,8 +65,58 @@ M.setup = function()
           -- Suppress snake name check rules for 1 or 2 length names :P
           "--good-names-rgxs=^[_a-z][_a-z0-9]?$",
         },
-      }),
-    },
+      })
+      table.insert(ideal_sources, entry)
+    end
+    -- JS/TS/HTML/CSS
+    for i, category in ipairs({ "diagnostics", "formatting", "code_actions" }) do
+      local capability = null_ls.builtins[category]
+      -- eslint_d is supported by extra tools
+      if vim.fn.executable("eslint_d") then
+        local entry = require("none-ls." .. category .. ".eslint_d")
+        table.insert(ideal_sources, entry)
+      end
+    end
+    for i, category in ipairs({ "formatting" }) do
+      local capability = null_ls.builtins[category]
+      if vim.fn.executable("prettierd") then
+        local entry = capability.prettierd.with({
+          condition = prettier_cond,
+        })
+        table.insert(ideal_sources, entry)
+      end
+    end
+
+    -- Json format
+    if vim.fn.executable("jq") then
+      -- jq is supported by extra tools
+      local entry = require("none-ls.formatting.jq")
+      table.insert(ideal_sources, entry)
+    end
+    -- Lua format
+    if vim.fn.executable("stylua") then
+      local entry = null_ls.builtins.formatting.stylua
+      table.insert(ideal_sources, entry)
+    end
+    -- C/C++ format
+    if vim.fn.executable("clang_format") then
+      local entry = null_ls.builtins.formatting.clang_format
+      table.insert(ideal_sources, entry)
+    end
+    -- Python format
+    if vim.fn.executable("black") then
+      local entry = null_ls.builtins.formatting.black
+      table.insert(ideal_sources, entry)
+    end
+    if vim.fn.executable("isort") then
+      local entry = null_ls.builtins.formatting.isort
+      table.insert(ideal_sources, entry)
+    end
+    return ideal_sources
+  end
+
+  null_ls.setup({
+    sources = setup_sources(),
     border = "single",
   })
 end

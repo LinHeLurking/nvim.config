@@ -122,6 +122,7 @@ return require("packer").startup(function(use)
       "nvimtools/none-ls.nvim",
       requires = {
         "neovim/nvim-lspconfig",
+        "nvimtools/none-ls-extras.nvim",
       },
     },
     {
