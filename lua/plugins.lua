@@ -28,6 +28,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.nvim-surround-config").setup()
       end,
+      event = { "VeryLazy" },
     },
     -- OSC52 clipboard support
     {
@@ -35,6 +36,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.osc52-config")
       end,
+      event = { "VeryLazy" },
     },
     --
     -- everything below will not be loaded when in vscode
@@ -64,6 +66,7 @@ local get_plugins = function()
         require("plugin-config.guess-indent-config").setup()
       end,
       cond = not_vsc,
+      event = { "VeryLazy" },
     },
     -- nvim tree file explorer
     {
@@ -75,8 +78,8 @@ local get_plugins = function()
         require("plugin-config.nvim-tree-config").setup()
       end,
       cond = not_vsc,
-      cmd = { "NvimTreeOpen", "NvimTreeClose", "NvimTreeToggle", "NvimTreeFocus", "NvimTreeRefresh"},
-      event = {"DirChangedPre", "BufEnter"},
+      cmd = { "NvimTreeOpen", "NvimTreeClose", "NvimTreeToggle", "NvimTreeFocus", "NvimTreeRefresh" },
+      event = { "DirChangedPre", "BufEnter" },
     },
     -- buffer line
     {
@@ -114,7 +117,7 @@ local get_plugins = function()
         require("plugin-config.lsp.mason-config").setup()
       end,
       cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile", "CmdlineChanged" },
+      event = { "VeryLazy" },
     },
     {
       "williamboman/mason-lspconfig.nvim",
@@ -193,7 +196,7 @@ local get_plugins = function()
         "neovim/nvim-lspconfig",
       },
       cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile" },
+      event = { "BufEnter *.rs" },
     },
     -- trouble
     {
@@ -204,7 +207,6 @@ local get_plugins = function()
       end,
       cond = not_vsc,
       cmd = "TroubleToggle",
-      event = { "BufReadPost", "BufNewFile" },
     },
     -- auto complete related settings
     {
@@ -213,37 +215,37 @@ local get_plugins = function()
         require("plugin-config.nvim-cmp-config").setup()
       end,
       cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile", "CmdlineChanged" },
+      event = { "InsertEnter", "CmdlineChanged" },
     },
     {
       "hrsh7th/cmp-nvim-lsp",
       cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile" },
+      event = { "InsertEnter" },
     },
     {
       "hrsh7th/cmp-buffer",
       cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile" },
+      event = { "InsertEnter" },
     },
     {
       "hrsh7th/cmp-path",
       cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile", "CmdlineChanged" },
+      event = { "InsertEnter", "CmdlineChanged" },
     },
     {
       "hrsh7th/cmp-cmdline",
       cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile", "CmdlineChanged" },
+      event = { "InsertEnter", "CmdlineChanged" },
     },
     {
       "hrsh7th/cmp-vsnip",
       cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile" },
+      event = { "InsertEnter" },
     },
     {
       "hrsh7th/vim-vsnip",
       cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile" },
+      event = { "InsertEnter" },
     },
     -- input enhance
     {
@@ -253,7 +255,7 @@ local get_plugins = function()
         require("plugin-config.autopairs-config").setup()
       end,
       cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile" },
+      event = { "InsertEnter" },
     },
     {
       "windwp/nvim-ts-autotag",
@@ -264,7 +266,7 @@ local get_plugins = function()
         require("plugin-config.nvim-ts-autotag-config").setup()
       end,
       cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile" },
+      event = { "InsertEnter" },
     },
     -- tree sitter syntax highlight
     {
