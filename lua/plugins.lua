@@ -338,6 +338,12 @@ local get_plugins = function()
       cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
+    -- rainbow paranthesises
+    {
+      "HiPhish/rainbow-delimiters.nvim",
+      cond = not_vsc,
+      event = { "BufReadPost", "BufNewFile" },
+    },
   }
   return plugins
 end
