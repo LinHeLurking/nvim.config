@@ -97,7 +97,7 @@ M.setup = function()
           python = {
             analysis = {
               autoSearchPaths = true,
-              diagnosticMode = "workspace",
+              diagnosticMode = "openFilesOnly",
               useLibraryCodeForTypes = true,
               -- Most of code types are missing. VSCode disables it by default :P
               typeCheckingMode = "off",
