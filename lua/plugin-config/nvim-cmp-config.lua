@@ -39,6 +39,11 @@ M.setup = function()
     }, {
       { name = "buffer" },
     }),
+    view = {
+      docs = {
+        auto_open = true,
+      },
+    },
   })
 
   -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
@@ -58,14 +63,5 @@ M.setup = function()
       { name = "cmdline" },
     }),
   })
-
-  -- DAP completion
-  -- cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
-  --   sources = {
-  --     { name = "dap" },
-  --     { name = "nvim_lsp" },
-  --     { name = "buffer" },
-  --   },
-  -- })
 end
 return M
