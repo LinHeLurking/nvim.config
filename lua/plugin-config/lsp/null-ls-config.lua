@@ -117,14 +117,10 @@ M.setup = function()
     return ideal_sources
   end
 
-  vim.loop.new_work(function()
-    null_ls.setup({
-      sources = setup_sources(),
-      border = "single",
-    })
-  end, function()
-  end
-  )
+  null_ls.setup({
+    sources = setup_sources(),
+    border = "single",
+  })
 end
 
 return M
