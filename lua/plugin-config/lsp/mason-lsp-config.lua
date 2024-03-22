@@ -19,6 +19,11 @@ M.setup = function()
 
   local num_index_cpu = math.min(math.floor(#vim.loop.cpu_info() / 2), 16)
 
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = { "documentation", "detail", "additionalTextEdits" },
+  }
   require("mason-lspconfig").setup()
   require("mason-lspconfig").setup_handlers({
     -- The first entry (without a key) will be the default handler
@@ -27,6 +32,7 @@ M.setup = function()
     function(server_name) -- default handler (optional)
       require("lspconfig")[server_name].setup({
         on_attach = on_attach_base,
+        capabilities = capabilities,
       })
     end,
     -- Next, you can provide targeted overrides for specific servers.
@@ -35,6 +41,7 @@ M.setup = function()
       local rust_tools = require("rust-tools")
       rust_tools.setup({
         on_attach = on_attach_base,
+        capabilities = capabilities,
         server = {
           on_attach = function(client, bufnr)
             on_attach_base(client, bufnr)
@@ -61,6 +68,7 @@ M.setup = function()
     ["lua_ls"] = function()
       require("lspconfig").lua_ls.setup({
         on_attach = on_attach_base,
+        capabilities = capabilities,
         settings = {
           Lua = {
             diagnostics = {
@@ -73,18 +81,19 @@ M.setup = function()
     ["clangd"] = function()
       require("lspconfig").clangd.setup({
         on_attach = on_attach_base,
+        capabilities = capabilities,
         cmd = {
           "clangd",
-          "--all-scopes-completion",
+          -- "--all-scopes-completion",
           "--background-index",
           "-j=" .. num_index_cpu,
           "--clang-tidy",
-          "--completion-style=bundled",
+          "--completion-style=detailed",
           "--header-insertion=iwyu",
           "--pretty",
           "--pch-storage=memory",
           "--header-insertion-decorators",
-          "--function-arg-placeholders=true",
+          "--function-arg-placeholders",
           "--fallback-style=Google",
           "--enable-config",
         },
@@ -93,6 +102,7 @@ M.setup = function()
     ["pyright"] = function()
       require("lspconfig").pyright.setup({
         on_attach = on_attach_base,
+        capabilities = capabilities,
         settings = {
           python = {
             analysis = {

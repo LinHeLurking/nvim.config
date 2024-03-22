@@ -216,7 +216,26 @@ local get_plugins = function()
       end,
       cond = not_vsc,
       event = { "InsertEnter", "CmdlineChanged" },
+      dependencies = {
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        -- "hrsh7th/cmp-vsnip",
+        -- "hrsh7th/vim-vsnip",
+        "L3MON4D3/LuaSnip",
+        "saadparwaiz1/cmp_luasnip",
+      },
     },
+    {
+    "L3MON4D3/LuaSnip",
+    -- follow latest release.
+    version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    -- install jsregexp (optional!).
+    build = "make install_jsregexp",
+    config = function()
+      require("plugin-config.lualine-config").setup()
+    end
+  },
     {
       "hrsh7th/cmp-nvim-lsp",
       cond = not_vsc,
@@ -238,12 +257,12 @@ local get_plugins = function()
       event = { "InsertEnter", "CmdlineChanged" },
     },
     {
-      "hrsh7th/cmp-vsnip",
+      "saadparwaiz1/cmp_luasnip",
       cond = not_vsc,
       event = { "InsertEnter" },
     },
     {
-      "hrsh7th/vim-vsnip",
+      "L3MON4D3/LuaSnip",
       cond = not_vsc,
       event = { "InsertEnter" },
     },
