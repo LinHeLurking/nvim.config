@@ -59,7 +59,7 @@ vim.keymap.set("i", "<C-h>", "<Left>", opts)
 vim.keymap.set("i", "<C-j>", "<Down>", opts)
 vim.keymap.set("i", "<C-k>", "<Up>", opts)
 vim.keymap.set("i", "<C-l>", "<Right>", opts)
-vim.keymap.set("i", "  ", "<Esc>", opts)
+vim.keymap.set("i", "jj", "<Esc>", opts)
 -- Enable highlight when searching
 vim.keymap.set("n", "/", "<Cmd>:set hlsearch<CR>/", { silent = false, noremap = true })
 if not_vscode then
