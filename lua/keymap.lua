@@ -50,7 +50,6 @@ if not_vscode then
     vim.api.nvim_win_set_cursor(0, pos)
   end
   auto_bind("<C-s>", smart_save, opts)
-  -- auto_bind("<S-Tab>", "<Cmd>< <CR>", opts)
   auto_bind("<C-z>", "u", opts)
 end
 auto_bind("<C-a>", "ggVG", opts)
@@ -60,6 +59,85 @@ vim.keymap.set("i", "<C-j>", "<Down>", opts)
 vim.keymap.set("i", "<C-k>", "<Up>", opts)
 vim.keymap.set("i", "<C-l>", "<Right>", opts)
 vim.keymap.set("i", "jj", "<Esc>", opts)
+-- Delete indent for whole line
+local delete_indent = function()
+  local unpack = unpack or table.unpack
+  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+  if vim.bo.expandtab == true then
+    -- indent with spaces
+    local line = vim.api.nvim_get_current_line()
+    if line:sub(1, col - 1) == string.rep(" ", col - 1) then
+      -- <BS> automatically delete according to indent if it's in the front of line
+      vim.api.nvim_input("<BS>")
+    else
+      local width = math.min(col - 1, vim.bo.shiftwidth)
+      local segment = line:sub(col - width, col - 1)
+      local cnt = 0
+      for i = width, 1, -1 do
+        if segment:sub(i, i) ~= " " then
+          break
+        end
+        cnt = cnt + 1
+      end
+      if cnt == width then
+        vim.api.nvim_input(string.rep("<BS>", width))
+      else
+        vim.cmd("<")
+      end
+    end
+  else
+    -- indent with tabs
+    if col > 0 then
+      vim.api.nvim_input("<BS>")
+    end
+  end
+end
+local smart_s_tab = function()
+  if in_vscode then
+    delete_indent()
+  else
+    local luasnip = require("luasnip")
+    if luasnip.in_snippet() and luasnip.jumpable(-1) then
+      luasnip.jump(-1)
+    else
+      delete_indent()
+    end
+  end
+end
+vim.keymap.set({ "i", "v", "s" }, "<S-Tab>", smart_s_tab, opts)
+-- Insert indent at cursor
+local insert_indent = function()
+  local indent = ""
+  if vim.bo.expandtab == true then
+    -- indent with spaces
+    local width = vim.bo.shiftwidth
+    indent = string.rep(" ", width)
+  else
+    -- indent with tabs
+    indent = "\t"
+  end
+  vim.api.nvim_input(indent)
+end
+local smart_tab = function()
+  if in_vscode then
+    insert_indent()
+  else
+    local cmp = require("cmp")
+    local luasnip = require("luasnip")
+    if cmp.visible() then
+      local entry = cmp.get_selected_entry()
+      if not entry then
+        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+      end
+      cmp.confirm()
+    elseif luasnip.in_snippet() and luasnip.jumpable(1) then
+      luasnip.jump(1)
+    else
+      insert_indent()
+    end
+  end
+end
+vim.keymap.set({ "i", "v", "s" }, "<Tab>", smart_tab, opts)
 -- Enable highlight when searching
 vim.keymap.set("n", "/", "<Cmd>:set hlsearch<CR>/", { silent = false, noremap = true })
 if not_vscode then
@@ -264,23 +342,23 @@ if not_vscode then
       -- key mappings for actions in the trouble list
       -- map to {} to remove a mapping, for example:
       -- close = {},
-      close = "q",                  -- close the list
-      cancel = "<esc>",             -- cancel the preview and get back to your last window / buffer / cursor
-      refresh = "r",                -- manually refresh
-      jump = { "<cr>", "<tab>" },   -- jump to the diagnostic or open / close folds
-      open_split = { "<c-x>" },     -- open buffer in new split
-      open_vsplit = { "<c-v>" },    -- open buffer in new vsplit
-      open_tab = { "<c-t>" },       -- open buffer in new tab
-      jump_close = { "o" },         -- jump to the diagnostic and close the list
-      toggle_mode = "m",            -- toggle between "workspace" and "document" diagnostics mode
-      toggle_preview = "P",         -- toggle auto_preview
-      hover = "K",                  -- opens a small popup with the full multiline message
-      preview = "p",                -- preview the diagnostic location
+      close = "q",               -- close the list
+      cancel = "<esc>",          -- cancel the preview and get back to your last window / buffer / cursor
+      refresh = "r",             -- manually refresh
+      jump = { "<cr>", "<tab>" }, -- jump to the diagnostic or open / close folds
+      open_split = { "<c-x>" },  -- open buffer in new split
+      open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
+      open_tab = { "<c-t>" },    -- open buffer in new tab
+      jump_close = { "o" },      -- jump to the diagnostic and close the list
+      toggle_mode = "m",         -- toggle between "workspace" and "document" diagnostics mode
+      toggle_preview = "P",      -- toggle auto_preview
+      hover = "K",               -- opens a small popup with the full multiline message
+      preview = "p",             -- preview the diagnostic location
       close_folds = { "zM", "zm" }, -- close all folds
-      open_folds = { "zR", "zr" },  -- open all folds
+      open_folds = { "zR", "zr" }, -- open all folds
       toggle_fold = { "zA", "za" }, -- toggle fold of current file
-      previous = "k",               -- previous item
-      next = "j",                   -- next item
+      previous = "k",            -- previous item
+      next = "j",                -- next item
     },
   }
   wk.register({
@@ -299,13 +377,7 @@ end
 
 if not_vscode then
   keymap.cmp_keys = function()
-    local luasnip = require("luasnip")
     local cmp = require("cmp")
-    local has_words_before = function()
-      unpack = unpack or table.unpack
-      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-    end
     local smart_esc = cmp.mapping(function(fallback)
       if cmp.visible() then
         return cmp.abort()
@@ -313,40 +385,18 @@ if not_vscode then
         fallback()
       end
     end)
-    local smart_tab = cmp.mapping(function(fallback)
-      if cmp.visible then
-        local entry = cmp.get_selected_entry()
-        if not entry then
-          cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-        end
-        cmp.confirm()
-      elseif luasnip.in_snippet() and luasnip.locally_jumpable(1) then
-        luasnip.jump(1)
-      else
-        fallback()
-      end
-    end, { "i", "s" })
     local keys = {
       ["<C-u>"] = cmp.mapping.scroll_docs(-5),
       ["<C-d>"] = cmp.mapping.scroll_docs(5),
       ["<C-n>"] = cmp.mapping.select_next_item(),
       ["<C-p>"] = cmp.mapping.select_prev_item(),
-      ["<Tab>"] = smart_tab,
+      -- It conflicts with tab mappings outside.
+      -- ["<Tab>"] = smart_tab,
       ["<C-e>"] = cmp.mapping.abort(),
       ["<Esc>"] = smart_esc,
     }
     return keys
   end
-  local snippet_jump = function(direction)
-    return function()
-      local luasnip = require("luasnip")
-      if luasnip.in_snippet() and luasnip.locally_jumpable(direction) then
-        luasnip.jump(direction)
-      end
-    end
-  end
-  vim.keymap.set("n", "<Tab>", snippet_jump(1), opts)
-  vim.keymap.set("n", "<S-Tab>", snippet_jump(-1), opts)
 end
 
 --
