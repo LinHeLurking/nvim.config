@@ -84,11 +84,15 @@ M.setup = function()
         capabilities = capabilities,
         cmd = {
           "clangd",
-          -- "--all-scopes-completion",
+          "--all-scopes-completion",
           "--background-index",
           "-j=" .. num_index_cpu,
           "--clang-tidy",
           "--completion-style=detailed",
+          -- Sometimes symbols are defined in internal-only headers.
+          -- And you should include some interface headers instead.
+          -- Clangd won't recognise it.
+          -- `iwyu` config may insert interface headers.
           "--header-insertion=iwyu",
           "--pretty",
           "--pch-storage=memory",
