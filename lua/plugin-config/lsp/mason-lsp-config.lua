@@ -93,7 +93,7 @@ M.setup = function()
           -- And you should include some interface headers instead.
           -- Clangd won't recognise it.
           -- `iwyu` config may insert interface headers.
-          "--header-insertion=iwyu",
+          "--header-insertion=never",
           "--pretty",
           "--pch-storage=memory",
           "--header-insertion-decorators",
