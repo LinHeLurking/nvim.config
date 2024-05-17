@@ -44,7 +44,7 @@ local get_plugins = function()
     -- lualine
     {
       "nvim-lualine/lualine.nvim",
-      dependencies = { "kyazdani42/nvim-web-devicons", "SmiteshP/nvim-navic" },
+      dependencies = { "nvim-tree/nvim-web-devicons", "SmiteshP/nvim-navic" },
       config = function()
         require("plugin-config.lualine-config").setup()
       end,
@@ -84,8 +84,9 @@ local get_plugins = function()
     -- buffer line
     {
       "akinsho/bufferline.nvim",
-      version = "*",
-      dependencies = "kyazdani42/nvim-web-devicons",
+      -- version = "*",
+      branch = "main",
+      dependencies = "nvim-tree/nvim-web-devicons",
       config = function()
         require("plugin-config.buffer-line-config").setup()
       end,
@@ -180,7 +181,7 @@ local get_plugins = function()
     -- code navigation at status bar
     {
       "SmiteshP/nvim-navic",
-      requires = {
+      dependencies = {
         "neovim/nvim-lspconfig",
       },
       config = function()
@@ -192,7 +193,7 @@ local get_plugins = function()
     -- rust tools
     {
       "simrat39/rust-tools.nvim",
-      requires = {
+      dependencies = {
         "neovim/nvim-lspconfig",
       },
       cond = not_vsc,
@@ -201,7 +202,7 @@ local get_plugins = function()
     -- trouble
     {
       "folke/trouble.nvim",
-      dependencies = "kyazdani42/nvim-web-devicons",
+      dependencies = "nvim-tree/nvim-web-devicons",
       config = function()
         require("plugin-config.trouble-config").setup()
       end,
