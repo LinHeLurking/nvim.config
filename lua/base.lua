@@ -67,3 +67,9 @@ if has_im_select then
   vim.api.nvim_create_autocmd("InsertEnter", { callback = switch_back })
   vim.api.nvim_create_autocmd("VimLeave", { callback = switch_back })
 end
+
+-- Set c++ module file type
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.cppm", "*.ccm", "*.cxxm", "*.c++m" },
+  command = "setfiletype cpp",
+})
