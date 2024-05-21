@@ -227,15 +227,15 @@ local get_plugins = function()
       },
     },
     {
-    "L3MON4D3/LuaSnip",
-    -- follow latest release.
-    version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-    -- install jsregexp (optional!).
-    build = "make install_jsregexp",
-    config = function()
-      require("plugin-config.lualine-config").setup()
-    end
-  },
+      "L3MON4D3/LuaSnip",
+      -- follow latest release.
+      version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+      -- install jsregexp (optional!).
+      build = "make install_jsregexp",
+      config = function()
+        require("plugin-config.lualine-config").setup()
+      end,
+    },
     {
       "hrsh7th/cmp-nvim-lsp",
       cond = not_vsc,
@@ -362,6 +362,17 @@ local get_plugins = function()
       "HiPhish/rainbow-delimiters.nvim",
       cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
+    },
+    -- leap (smart jump)
+    {
+      "ggandor/leap.nvim",
+      dependencies = {
+        "tpope/vim-repeat",
+      },
+      config = function()
+        require("plugin-config.leap-config").setup()
+      end,
+      cond = not_vsc,
     },
   }
   return plugins

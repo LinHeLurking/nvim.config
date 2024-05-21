@@ -145,6 +145,15 @@ if not_vscode then
 end
 
 --
+-- Leap
+--
+if not_vscode then
+  wk.register({
+    j = { "<Plug>(leap)", "Jump Anywhere" },
+  }, { prefix = "<Leader>" })
+end
+
+--
 -- Quick fix map
 --
 
