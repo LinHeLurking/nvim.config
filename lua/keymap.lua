@@ -149,7 +149,7 @@ end
 --
 if not_vscode then
   wk.register({
-    j = { "<Plug>(leap)", "Jump Anywhere" },
+    j = { "<Cmd>:HopWord<CR>", "Jump Anywhere" },
   }, { prefix = "<Leader>" })
 end
 

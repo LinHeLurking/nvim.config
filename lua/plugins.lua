@@ -363,16 +363,14 @@ local get_plugins = function()
       cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
-    -- leap (smart jump)
     {
-      "ggandor/leap.nvim",
-      dependencies = {
-        "tpope/vim-repeat",
+      "smoka7/hop.nvim",
+      version = "*",
+      opts = {
+        keys = "etovxqpdygfblzhckisuran",
       },
-      config = function()
-        require("plugin-config.leap-config").setup()
-      end,
       cond = not_vsc,
+      cmd = { "HopWord", "HopChar1", "HopChar2", "HopLine" },
     },
   }
   return plugins
