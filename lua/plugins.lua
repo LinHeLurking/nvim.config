@@ -107,6 +107,16 @@ local get_plugins = function()
       cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
+    -- better lsp diagnostics
+    {
+      "dgagn/diagflow.nvim",
+      opts = {
+        show_borders = true,
+        toggle_event = { "InsertEnter", "InsertLeave", },
+        -- inline conflicts with git blame 
+        -- placement = "inline",
+      },
+    },
     -- mason
     {
       "williamboman/mason.nvim",
