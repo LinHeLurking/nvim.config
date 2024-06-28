@@ -372,11 +372,8 @@ if not_vscode then
   }
   wk.register({
     name = "Trouble",
-    x = { "<Cmd>TroubleToggle<CR>", "Toggle Trouble" },
-    w = { "<Cmd>TroubleToggle workspace_diagnostics<CR>", "Workspace Diagnostics" },
-    d = { "<Cmd>TroubleToggle document_diagnostics<CR>", "Document Diagnostics" },
-    l = { "<Cmd>TroubleToggle loclist<CR>", "Location List" },
-    q = { "<Cmd>TroubleToggle quickfix<CR>", "Quick Fix" },
+    d = { "<Cmd>Trouble diagnostics toggle focus=true filter.buf=0<CR>", "Document Diagnostics" },
+    q = { "<Cmd>Trouble quickfix toggle focus=true<CR>", "Quick Fix" },
   }, { prefix = "<Leader>x" })
 end
 

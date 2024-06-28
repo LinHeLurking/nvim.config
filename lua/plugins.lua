@@ -206,7 +206,7 @@ local get_plugins = function()
         require("plugin-config.trouble-config").setup()
       end,
       cond = not_vsc,
-      cmd = "TroubleToggle",
+      cmd = "Trouble",
     },
     -- auto complete related settings
     {
@@ -233,7 +233,7 @@ local get_plugins = function()
       -- install jsregexp (optional!).
       build = "make install_jsregexp",
       config = function()
-        require("plugin-config.lualine-config").setup()
+        require("plugin-config.luasnip-config").setup()
       end,
     },
     {
