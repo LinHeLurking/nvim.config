@@ -33,9 +33,9 @@ if not vim.g.vscode then
   end
 
   local zsh_test_handler = io.popen("command -v zsh")
-  local zsh_ver = zsh_test_handler and zsh_test_handler:read("*a")
-  if zsh_ver ~= nil and zsh_ver ~= "" then
-    vim.o.shell = "/bin/zsh"
+  local zsh_cmd = zsh_test_handler and zsh_test_handler:read("*a")
+  if zsh_cmd ~= nil and zsh_cmd ~= "" then
+    vim.o.shell = zsh_cmd:gsub("%s*", "")
   end
 
   -- Set python provider if it's in conda
