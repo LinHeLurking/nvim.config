@@ -9,7 +9,7 @@ M.setup = function()
   local navic = require("nvim-navic")
   require("lualine").setup({
     options = {
-      theme = "tokyonight",
+      theme = "tokyonight-day",
       icons_enabled = true,
       -- theme = "auto",
       component_separators = { left = "", right = "" },

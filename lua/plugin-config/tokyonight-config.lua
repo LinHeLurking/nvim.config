@@ -34,9 +34,6 @@ M.setup = function()
     --- function will be called with a ColorScheme table
     ---@param colors ColorScheme
     on_colors = function(colors)
-      -- inactive status line
-      -- light theme will automatically revert this color!
-      colors.bg_statusline = "#1c1c21"
     end,
     --- You can override specific highlights to use other groups or a hex color
     --- function will be called with a Highlights and ColorScheme table
@@ -53,7 +50,7 @@ M.setup = function()
       }
     end,
   })
-  vim.cmd([[colorscheme tokyonight]])
+  vim.cmd([[colorscheme tokyonight-day]])
   vim.cmd([[hi WinSeparator guifg=#7ea9e6]])
   vim.cmd([[hi NvimTreeWinSeparator guifg=#7ea9e6]])
 end
