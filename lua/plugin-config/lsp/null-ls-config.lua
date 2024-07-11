@@ -52,7 +52,7 @@ M.setup = function()
         extra_args = {
           -- Suppress docstring warning (C0111) :P
           --
-          -- Suppress wildcard-import warnning (W0401)
+          -- Suppress wildcard-import warning (W0401)
           --
           -- Import checking is problematic for packages written in C. (E0401)
           -- Disable it. Don't worry, pyright checks it right :P
@@ -122,6 +122,10 @@ M.setup = function()
     -- if vim.fn.executable("isort") == 1 then
     if 1 == 1 then
       local entry = null_ls.builtins.formatting.isort
+      table.insert(ideal_sources, entry)
+    end
+    if 1 == 1 then
+      local entry = null_ls.builtins.diagnostics.mypy
       table.insert(ideal_sources, entry)
     end
     return ideal_sources
