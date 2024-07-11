@@ -91,7 +91,7 @@ M.setup = function()
           "--background-index",
           "-j=" .. num_index_cpu,
           "--clang-tidy",
-          "--completion-style=detailed",
+          "--completion-style=bundled",
           -- Sometimes symbols are defined in internal-only headers.
           -- And you should include some interface headers instead.
           -- Clangd won't recognise it.
