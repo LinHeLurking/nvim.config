@@ -44,12 +44,10 @@ M.setup = function()
         ".cache",
       },
     },
-    -- Integrate with project.nvim
-    sync_root_with_cwd = true,
     respect_buf_cwd = true,
     update_focused_file = {
       enable = true,
-      update_root = true,
+      update_root = false,
       ignore_list = { "toggleterm", "term", ".cache", "node_modules" },
     },
     -- Profile
