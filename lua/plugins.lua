@@ -346,7 +346,7 @@ local get_plugins = function()
       end,
       cond = not_vsc,
       cmd = "ToggleTerm",
-      keys = { "<F60>", "<A-F12>" },
+      keys = { "<F60>", "<A-F12>", "C-\\" },
     },
     -- dashboard
     {

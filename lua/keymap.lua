@@ -224,10 +224,15 @@ keymap.term_toggle_key = function()
     return "<A-F12>"
   end
 end
+vim.keymap.set("n", keymap.term_toggle_key(), "<Cmd>:ToggleTerm direction=float<CR>", opts)
+vim.keymap.set("i", keymap.term_toggle_key(), "<Cmd>:ToggleTerm direction=float<CR>", opts)
+vim.keymap.set("t", keymap.term_toggle_key(), "<Cmd>:ToggleTerm direction=float<CR>", opts)
 
 keymap.set_term_keymap = function()
   local term_opts = { silent = true, noremap = true, buffer = 0 }
-  vim.keymap.set("t", "<Esc>", keymap.term_toggle_key() .. "<C-n>", term_opts)
+  vim.keymap.set("n", keymap.term_toggle_key(), "<Cmd>:ToggleTerm direction=float<CR>", opts)
+  vim.keymap.set("t", keymap.term_toggle_key(), "<Cmd>:ToggleTerm direction=float<CR>", opts)
+  vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", term_opts)
   vim.keymap.set("t", "<A-h>", "<Cmd>wincmd h<CR>", term_opts)
   vim.keymap.set("t", "<A-j>", "<Cmd>wincmd j<CR>", term_opts)
   vim.keymap.set("t", "<A-k>", "<Cmd>wincmd k<CR>", term_opts)
