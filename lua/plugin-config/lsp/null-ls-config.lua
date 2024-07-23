@@ -125,7 +125,9 @@ M.setup = function()
       table.insert(ideal_sources, entry)
     end
     if 1 == 1 then
-      local entry = null_ls.builtins.diagnostics.mypy
+      local entry = null_ls.builtins.diagnostics.mypy.with({
+        extra_args = {"--disable-error-code=import-untyped"}
+      })
       table.insert(ideal_sources, entry)
     end
     return ideal_sources
