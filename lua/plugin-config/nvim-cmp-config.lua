@@ -5,8 +5,25 @@ M.setup = function()
   end
 
   local cmp = require("cmp")
+  local compare = require("cmp.config.compare")
+  local types = require("cmp.types")
 
   local keymap = require("keymap").cmp_keys()
+
+  local modified_kind_priority = {
+    [types.lsp.CompletionItemKind.Keyword] = 0, -- top
+    [types.lsp.CompletionItemKind.Snippet] = 0, -- top
+  }
+
+  local modified_kind = function(entry1, entry2)
+    local kind1 = entry1:get_kind()
+    local kind2 = entry2:get_kind()
+    kind1 = modified_kind_priority[kind1] or kind1
+    kind1 = modified_kind_priority[kind2] or kind2
+    if kind1 ~= kind2 then
+      return kind1 < kind2
+    end
+  end
 
   cmp.setup({
     enabled = function()
@@ -19,7 +36,7 @@ M.setup = function()
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
         -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
         -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
@@ -33,12 +50,23 @@ M.setup = function()
     sources = cmp.config.sources({
       { name = "nvim_lsp" },
       -- { name = "vsnip" }, -- For vsnip users.
-      { name = 'luasnip' }, -- For luasnip users.
+      { name = "luasnip" }, -- For luasnip users.
       -- { name = 'ultisnips' }, -- For ultisnips users.
       -- { name = 'snippy' }, -- For snippy users.
-    }, {
       { name = "buffer" },
+      { name = "path" },
     }),
+    sorting = {
+      comperators = {
+        compare.offset,
+        compare.exact,
+        compare.score,
+        compare.recently_used,
+        modified_kind,
+        compare.length,
+        compare.scopes,
+      },
+    },
     view = {
       docs = {
         auto_open = true,
