@@ -13,6 +13,7 @@ M.setup = function()
   local modified_kind_priority = {
     [types.lsp.CompletionItemKind.Keyword] = 0, -- top
     [types.lsp.CompletionItemKind.Snippet] = 0, -- top
+    [types.lsp.CompletionItemKind.Text] = 100, -- bottom
   }
 
   local modified_kind = function(entry1, entry2)
@@ -61,9 +62,9 @@ M.setup = function()
         compare.offset,
         compare.exact,
         compare.score,
+        compare.length,
         compare.recently_used,
         modified_kind,
-        compare.length,
         compare.scopes,
       },
     },
