@@ -62,10 +62,10 @@ M.setup = function()
         compare.offset,
         compare.exact,
         compare.score,
-        compare.length,
         compare.recently_used,
         modified_kind,
-        compare.scopes,
+        compare.sort_text,
+        compare.length,
       },
     },
     view = {
