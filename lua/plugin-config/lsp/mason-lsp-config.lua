@@ -123,6 +123,28 @@ M.setup = function()
         },
       })
     end,
+    ["yamlls"] = function()
+      require("lspconfig").yamlls.setup({
+        on_attach = function(client, bufnr)
+          client.server_capabilities.documentFormattingProvider = true
+          on_attach_base(client, bufnr)
+        end,
+        capabilities = capabilities,
+        settings = {
+          editor = {
+            tabSize = 2,
+          },
+          yaml = {
+            format = {
+              enable = true,
+            },
+            schemaStore = {
+              enable = true,
+            },
+          },
+        },
+      })
+    end,
   })
 end
 
