@@ -136,6 +136,7 @@ M.setup = function()
   null_ls.setup({
     sources = setup_sources(),
     border = "single",
+    temp_dir = "/tmp"
   })
 end
 
