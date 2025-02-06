@@ -377,9 +377,9 @@ local get_plugins = function()
     {
       "smoka7/hop.nvim",
       version = "*",
-      opts = {
-        keys = "etovxqpdygfblzhckisuran",
-      },
+      config = function ()
+        require("plugin-config.hop-config").setup()
+      end,
       cond = not_vsc,
       cmd = { "HopWord", "HopChar1", "HopChar2", "HopLine" },
     },

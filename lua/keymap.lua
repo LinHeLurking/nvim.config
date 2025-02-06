@@ -145,7 +145,7 @@ if not_vscode then
 end
 
 --
--- Leap
+-- Hop
 --
 if not_vscode then
   wk.add({
