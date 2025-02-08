@@ -14,7 +14,7 @@ M.setup = function()
       severity = { min = vim.diagnostic.severity.WARN },
     },
     virtual_text = {
-      severity = { min = vim.diagnostic.severity.INFO },
+      severity = { min = vim.diagnostic.severity.ERROR },
     },
   })
 end
