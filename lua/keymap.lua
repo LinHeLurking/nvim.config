@@ -171,8 +171,8 @@ end
 -- Some common seetting toggle
 --
 wk.add({
-  { "<Leader>c", group = "Change Settings" },
-  { "<Leader>ch", "<Cmd>:set hlsearch!<CR>", desc = "Toggle Highlight" },
+  { "<Leader>c",  group = "Change Settings" },
+  { "<Leader>ch", "<Cmd>:set hlsearch!<CR>",       desc = "Toggle Highlight" },
   { "<Leader>cr", "<Cmd>:set relativenumber!<CR>", desc = "Toggle Relative Number" },
 })
 
@@ -207,10 +207,10 @@ end
 
 if not_vscode then
   wk.add({
-    { "<Leader>t", group = "Terminal" },
-    { "<Leader>tf", "<Cmd>:ToggleTerm direction=float<CR>", desc = "Open Float Terminal" },
+    { "<Leader>t",  group = "Terminal" },
+    { "<Leader>tf", "<Cmd>:ToggleTerm direction=float<CR>",      desc = "Open Float Terminal" },
     { "<Leader>th", "<Cmd>:ToggleTerm direction=horizontal<CR>", desc = "Open Horizontal Terminal" },
-    { "<Leader>tv", "<Cmd>:ToggleTerm direction=vertical<CR>", desc = "Open Vertical Terminal" },
+    { "<Leader>tv", "<Cmd>:ToggleTerm direction=vertical<CR>",   desc = "Open Vertical Terminal" },
   })
 end
 
@@ -243,19 +243,21 @@ end
 if not_vscode then
   local gs = require("gitsigns")
   wk.add({
-    { "<Leader>g", group = "Git All in One" },
-    { "<Leader>gs", gs.stage_hunk, desc = "Stage Hunk" },
-    { "<Leader>gr", gs.reset_hunk, desc = "Reset Hunk" },
-    { "<Leader>gS", gs.stage_buffer, desc = "Stage Buffer" },
-    { "<Leader>gu", gs.undo_stage_hunk, desc = "Undo Stage Hunk" },
-    { "<Leader>gR", gs.reset_buffer, desc = "Reset Buffer" },
-    { "<Leader>gD", gs.toggle_deleted, desc = "Toggle Deleted" },
-    { "<Leader>gd", gs.diffthis, desc = "Diff This" },
+    { "<Leader>g",  group = "Git All in One" },
+    { "<Leader>gs", gs.stage_hunk,                desc = "Stage Hunk" },
+    { "<Leader>gr", gs.reset_hunk,                desc = "Reset Hunk" },
+    { "<Leader>gS", gs.stage_buffer,              desc = "Stage Buffer" },
+    { "<Leader>gu", gs.undo_stage_hunk,           desc = "Undo Stage Hunk" },
+    { "<Leader>gR", gs.reset_buffer,              desc = "Reset Buffer" },
+    { "<Leader>gD", gs.toggle_deleted,            desc = "Toggle Deleted" },
+    { "<Leader>gd", gs.diffthis,                  desc = "Diff This" },
+    { "<Leader>gb", gs.blame_line,                desc = "Blame Current Line" },
+    { "<Leader>gB", gs.blame,                     desc = "Blame All" },
+    { "<Leader>gt", gs.toggle_current_line_blame, desc = "Toggle Blame Virtual Text" },
   })
   local get_v_lines = function()
     local l1 = vim.api.nvim_buf_get_mark(0, "<")[1]
     local l2 = vim.api.nvim_buf_get_mark(0, ">")[1]
-    print(l1, l2)
     if l1 == nil or l2 == nil then
       return { nil, nil }
     end
@@ -296,11 +298,11 @@ end
 
 if not_vscode then
   wk.add({
-    { "<Leader>b", group = "Buffer Action" },
+    { "<Leader>b",  group = "Buffer Action" },
     { "<Leader>bl", "<Cmd>BufferLineCycleNext<CR>", desc = "Next Buffer" },
     { "<Leader>bh", "<Cmd>BufferLineCyclePrev<CR>", desc = "Previous Buffer" },
-    { "<Leader>bp", "<Cmd>BufferLinePick<CR>", desc = "Pick Buffer" },
-    { "<Leader>bc", close_cur_buf, desc = "Close Buffer" },
+    { "<Leader>bp", "<Cmd>BufferLinePick<CR>",      desc = "Pick Buffer" },
+    { "<Leader>bc", close_cur_buf,                  desc = "Close Buffer" },
   })
 end
 
@@ -322,11 +324,11 @@ if not_vscode then
       require("lsp_signature").toggle_float_win()
     end, { noremap = true, silent = true, desc = "Toggle Signature Window" })
     wk.add({
-      { "g", group = "Goto" },
-      { "gd", vim.lsp.buf.definition, desc = "Definition" },
-      { "gD", vim.lsp.buf.declaration, desc = "Declaration" },
-      { "gi", vim.lsp.buf.implementation, desc = "Implementation" },
-      { "gr", vim.lsp.buf.references, desc = "References" },
+      { "g",  group = "Goto" },
+      { "gd", vim.lsp.buf.definition,         desc = "Definition" },
+      { "gD", vim.lsp.buf.declaration,        desc = "Declaration" },
+      { "gi", vim.lsp.buf.implementation,     desc = "Implementation" },
+      { "gr", vim.lsp.buf.references,         desc = "References" },
       { "gt", "<Cmd>BufferLineCycleNext<CR>", desc = "Next Buffer" },
       { "gT", "<Cmd>BufferLineCyclePrev<CR>", desc = "Previous Buffer" },
     })
@@ -351,29 +353,29 @@ if not_vscode then
       -- key mappings for actions in the trouble list
       -- map to {} to remove a mapping, for example:
       -- close = {},
-      close = "q", -- close the list
-      cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-      refresh = "r", -- manually refresh
+      close = "q",               -- close the list
+      cancel = "<esc>",          -- cancel the preview and get back to your last window / buffer / cursor
+      refresh = "r",             -- manually refresh
       jump = { "<cr>", "<tab>" }, -- jump to the diagnostic or open / close folds
-      open_split = { "<c-x>" }, -- open buffer in new split
+      open_split = { "<c-x>" },  -- open buffer in new split
       open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
-      open_tab = { "<c-t>" }, -- open buffer in new tab
-      jump_close = { "o" }, -- jump to the diagnostic and close the list
-      toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-      toggle_preview = "P", -- toggle auto_preview
-      hover = "K", -- opens a small popup with the full multiline message
-      preview = "p", -- preview the diagnostic location
+      open_tab = { "<c-t>" },    -- open buffer in new tab
+      jump_close = { "o" },      -- jump to the diagnostic and close the list
+      toggle_mode = "m",         -- toggle between "workspace" and "document" diagnostics mode
+      toggle_preview = "P",      -- toggle auto_preview
+      hover = "K",               -- opens a small popup with the full multiline message
+      preview = "p",             -- preview the diagnostic location
       close_folds = { "zM", "zm" }, -- close all folds
       open_folds = { "zR", "zr" }, -- open all folds
       toggle_fold = { "zA", "za" }, -- toggle fold of current file
-      previous = "k", -- previous item
-      next = "j", -- next item
+      previous = "k",            -- previous item
+      next = "j",                -- next item
     },
   }
   wk.add({
-    { "<Leader>x", group = "Trouble" },
+    { "<Leader>x",  group = "Trouble" },
     { "<Leader>xd", "<Cmd>Trouble diagnostics toggle focus=true filter.buf=0<CR>", desc = "Document Diagnostics" },
-    { "<Leader>xq", "<Cmd>Trouble quickfix toggle focus=true<CR>", desc = "Quick Fix" },
+    { "<Leader>xq", "<Cmd>Trouble quickfix toggle focus=true<CR>",                 desc = "Quick Fix" },
   })
 end
 
@@ -411,14 +413,14 @@ end
 
 if not_vscode then
   wk.add({
-    { "<Leader>f", group = "Find Everything" },
-    { "<Leader>fc", "<Cmd>Telescope commands<CR>", desc = "Find Commands" },
-    { "<Leader>fk", "<Cmd>Telescope keymaps<CR>", desc = "Find Keymaps" },
-    { "<Leader>ff", "<Cmd>Telescope find_files<CR>", desc = "Find Files" },
-    { "<Leader>fg", "<Cmd>Telescope live_grep<CR>", desc = "Live Grep" },
-    { "<Leader>fb", "<Cmd>Telescope buffers<CR>", desc = "Buffers" },
-    { "<Leader>fh", "<Cmd>Telescope help_tags<CR>", desc = "Help Tags" },
-    { "<Leader>fr", "<Cmd>Telescope oldfiles<CR>", desc = "Recent Files" },
+    { "<Leader>f",  group = "Find Everything" },
+    { "<Leader>fc", "<Cmd>Telescope commands<CR>",             desc = "Find Commands" },
+    { "<Leader>fk", "<Cmd>Telescope keymaps<CR>",              desc = "Find Keymaps" },
+    { "<Leader>ff", "<Cmd>Telescope find_files<CR>",           desc = "Find Files" },
+    { "<Leader>fg", "<Cmd>Telescope live_grep<CR>",            desc = "Live Grep" },
+    { "<Leader>fb", "<Cmd>Telescope buffers<CR>",              desc = "Buffers" },
+    { "<Leader>fh", "<Cmd>Telescope help_tags<CR>",            desc = "Help Tags" },
+    { "<Leader>fr", "<Cmd>Telescope oldfiles<CR>",             desc = "Recent Files" },
     { "<Leader>fs", "<Cmd>Telescope lsp_document_symbols<CR>", desc = "Document Symbols" },
   })
 else
@@ -438,12 +440,12 @@ else
     vsc.action("workbench.action.gotoSymbol")
   end
   wk.add({
-    { "<Leader>f", group = "Find Everything" },
-    { "<Leader>ff", find_files, desc = "Find Files" },
-    { "<Leader>fg", find_in_files, desc = "Live Grep" },
-    { "<Leader>fc", shortcuts, desc = "Shortcuts" },
-    { "<Leader>fr", recent_files, desc = "Recent Files" },
-    { "<Leader>fs", doc_symbol, desc = "Document Symbols" },
+    { "<Leader>f",  group = "Find Everything" },
+    { "<Leader>ff", find_files,               desc = "Find Files" },
+    { "<Leader>fg", find_in_files,            desc = "Live Grep" },
+    { "<Leader>fc", shortcuts,                desc = "Shortcuts" },
+    { "<Leader>fr", recent_files,             desc = "Recent Files" },
+    { "<Leader>fs", doc_symbol,               desc = "Document Symbols" },
   })
 end
 
