@@ -27,6 +27,10 @@ M.setup = function()
   capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = { "documentation", "detail", "additionalTextEdits" },
   }
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
   require("mason-lspconfig").setup()
   require("mason-lspconfig").setup_handlers({
     -- The first entry (without a key) will be the default handler

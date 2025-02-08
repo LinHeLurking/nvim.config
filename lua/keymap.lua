@@ -313,7 +313,12 @@ end
 if not_vscode then
   keymap.lsp_set_map = function(client, bufnr)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+    vim.keymap.set("n", "K", function()
+      local winid = require("ufo").peekFoldedLinesUnderCursor()
+      if not winid then
+        vim.lsp.buf.hover()
+      end
+    end, bufopts)
     vim.keymap.set(
       "n",
       "<Leader>k",
@@ -331,6 +336,24 @@ if not_vscode then
       { "gr", vim.lsp.buf.references,         desc = "References" },
       { "gt", "<Cmd>BufferLineCycleNext<CR>", desc = "Next Buffer" },
       { "gT", "<Cmd>BufferLineCyclePrev<CR>", desc = "Previous Buffer" },
+    })
+    -- Fold mappings
+    wk.add({
+      mode = "n",
+      {
+        "zR",
+        function()
+          require("ufo").openAllFolds()
+        end,
+        desc = "Open All Folds",
+      },
+      {
+        "zM",
+        function()
+          require("ufo").closeAllFolds()
+        end,
+        desc = "Close All Folds",
+      },
     })
     -- Refactor related mappings
     vim.keymap.set(

@@ -377,11 +377,21 @@ local get_plugins = function()
     {
       "smoka7/hop.nvim",
       version = "*",
-      config = function ()
+      config = function()
         require("plugin-config.hop-config").setup()
       end,
       cond = not_vsc,
       cmd = { "HopWord", "HopChar1", "HopChar2", "HopLine" },
+    },
+    -- modern fold
+    {
+      "kevinhwang91/nvim-ufo",
+      dependencies = { "kevinhwang91/promise-async", "neovim/nvim-lspconfig" },
+      config = function()
+        require("plugin-config.nvim-ufo-config").setup()
+      end,
+      cond = not_vsc,
+      event = { "BufNewFile", "BufReadPost" },
     },
   }
   return plugins
