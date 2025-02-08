@@ -128,12 +128,17 @@ M.setup = function()
         on_attach = on_attach_base,
         capabilities = capabilities,
         settings = {
-          python = {
+          basedpyright = {
             analysis = {
               autoSearchPaths = true,
               diagnosticMode = "openFilesOnly",
               useLibraryCodeForTypes = true,
               typeCheckingMode = "recommended",
+              diagnosticSeverityOverrides = {
+                reportUnusedImport = "information",
+                reportUnusedCallResult = "hint",
+                reportUnknownVariableType = "hint",
+              }
             },
           },
         },

@@ -7,5 +7,15 @@ M.setup = function()
 
   -- Globally override LSP floating window.
   require("lspconfig.ui.windows").default_options.border = "single"
+
+  -- Disable some annoying lsp ui.
+  vim.diagnostic.config({
+    underline = {
+      severity = { min = vim.diagnostic.severity.WARN },
+    },
+    virtual_text = {
+      severity = { min = vim.diagnostic.severity.INFO },
+    },
+  })
 end
 return M
