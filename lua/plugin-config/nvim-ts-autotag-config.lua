@@ -7,10 +7,11 @@ M.setup = function()
   require("nvim-ts-autotag").setup()
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
+    underline = {
+      severity = { min = vim.diagnostic.severity.WARN },
+    },
     virtual_text = {
-      spacing = 5,
-      severity_limit = "Warning",
+      severity = { min = vim.diagnostic.severity.ERROR },
     },
     update_in_insert = true,
   })
