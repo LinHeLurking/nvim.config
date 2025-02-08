@@ -124,7 +124,7 @@ M.setup = function()
       })
     end,
     ["basedpyright"] = function()
-      require("lspconfig").pyright.setup({
+      require("lspconfig").basedpyright.setup({
         on_attach = on_attach_base,
         capabilities = capabilities,
         settings = {
