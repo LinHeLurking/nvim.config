@@ -66,7 +66,7 @@ local get_plugins = function()
         require("plugin-config.guess-indent-config").setup()
       end,
       cond = not_vsc,
-      event = { "VeryLazy" },
+      event = { "BufReadPost", "BufNewFile" },
     },
     -- nvim tree file explorer
     {
