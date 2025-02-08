@@ -123,6 +123,22 @@ M.setup = function()
         },
       })
     end,
+    ["basedpyright"] = function()
+      require("lspconfig").pyright.setup({
+        on_attach = on_attach_base,
+        capabilities = capabilities,
+        settings = {
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              diagnosticMode = "openFilesOnly",
+              useLibraryCodeForTypes = true,
+              typeCheckingMode = "recommended",
+            },
+          },
+        },
+      })
+    end,
     ["yamlls"] = function()
       require("lspconfig").yamlls.setup({
         on_attach = function(client, bufnr)
