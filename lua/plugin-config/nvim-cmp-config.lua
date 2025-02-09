@@ -10,19 +10,15 @@ M.setup = function()
 
   local keymap = require("keymap").cmp_keys()
 
-  local modified_kind_priority = {
-    [types.lsp.CompletionItemKind.Keyword] = 0, -- top
-    [types.lsp.CompletionItemKind.Snippet] = 0, -- top
-    [types.lsp.CompletionItemKind.Text] = 100, -- bottom
-  }
-
-  local modified_kind = function(entry1, entry2)
+  local keyword_first = function(entry1, entry2)
     local kind1 = entry1:get_kind()
     local kind2 = entry2:get_kind()
-    kind1 = modified_kind_priority[kind1] or kind1
-    kind1 = modified_kind_priority[kind2] or kind2
-    if kind1 ~= kind2 then
-      return kind1 < kind2
+    local e1_kwd = kind1 == cmp.lsp.CompletionItemKind.Keyword
+    local e2_kwd = kind2 == cmp.lsp.CompletionItemKind.Keyword
+    if e1_kwd and not e2_kwd then
+      return true
+    elseif not e1_kwd and e2_kwd then
+      return false
     end
   end
 
@@ -49,21 +45,20 @@ M.setup = function()
     confirmation = { completeopt = "menu,menuone,noinsert" },
     mapping = cmp.mapping.preset.insert(keymap),
     sources = cmp.config.sources({
-      { name = "nvim_lsp" },
-      -- { name = "vsnip" }, -- For vsnip users.
-      { name = "luasnip" }, -- For luasnip users.
-      -- { name = 'ultisnips' }, -- For ultisnips users.
-      -- { name = 'snippy' }, -- For snippy users.
-      { name = "buffer" },
-      { name = "path" },
+      { name = "nvim_lsp", priority = 1000 },
+      { name = "luasnip",  priority = 750 }, -- For luasnip users.
+      { name = "buffer",   priroity = 500 },
+      { name = "path",     priority = 250 },
     }),
     sorting = {
-      comperators = {
+      comparators = {
+        keyword_first,
+        compare.score,
         compare.offset,
         compare.exact,
-        compare.score,
         compare.recently_used,
-        modified_kind,
+        compare.locality,
+        compare.kind,
         compare.sort_text,
         compare.length,
       },

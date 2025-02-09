@@ -234,6 +234,7 @@ local get_plugins = function()
         -- "hrsh7th/vim-vsnip",
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
+        "neovim/nvim-lspconfig",
       },
     },
     {
@@ -248,31 +249,37 @@ local get_plugins = function()
     },
     {
       "hrsh7th/cmp-nvim-lsp",
+      dependencies = { "hrsh7th/nvim-cmp" },
       cond = not_vsc,
       event = { "InsertEnter" },
     },
     {
       "hrsh7th/cmp-buffer",
+      dependencies = { "hrsh7th/nvim-cmp" },
       cond = not_vsc,
       event = { "InsertEnter" },
     },
     {
       "hrsh7th/cmp-path",
+      dependencies = { "hrsh7th/nvim-cmp" },
       cond = not_vsc,
       event = { "InsertEnter", "CmdlineChanged" },
     },
     {
       "hrsh7th/cmp-cmdline",
+      dependencies = { "hrsh7th/nvim-cmp" },
       cond = not_vsc,
       event = { "InsertEnter", "CmdlineChanged" },
     },
     {
       "saadparwaiz1/cmp_luasnip",
+      dependencies = { "hrsh7th/nvim-cmp" },
       cond = not_vsc,
       event = { "InsertEnter" },
     },
     {
       "L3MON4D3/LuaSnip",
+      dependencies = { "hrsh7th/nvim-cmp" },
       cond = not_vsc,
       event = { "InsertEnter" },
     },
