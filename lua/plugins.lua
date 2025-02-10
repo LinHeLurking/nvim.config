@@ -65,6 +65,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.guess-indent-config").setup()
       end,
+      dependencies = { "neovim/nvim-lspconfig" },
       cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
