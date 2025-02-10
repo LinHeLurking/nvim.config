@@ -139,6 +139,7 @@ M.setup = function()
               useLibraryCodeForTypes = true,
               typeCheckingMode = "recommended",
               diagnosticSeverityOverrides = {
+                reportMissingParameterType = "information",
                 reportAny = "hint",
                 reportPossiblyUnboundVariable = "information",
                 reportAttributeAccessIssue = "information",
