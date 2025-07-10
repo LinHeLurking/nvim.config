@@ -130,17 +130,6 @@ local get_plugins = function()
       cond = not_vsc,
       event = { "VeryLazy" },
     },
-    {
-      "williamboman/mason-lspconfig.nvim",
-      dependencies = {
-        "neovim/nvim-lspconfig",
-      },
-      config = function()
-        require("plugin-config.lsp.mason-lsp-config").setup()
-      end,
-      cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile" },
-    },
     -- null-ls
     {
       "nvimtools/none-ls.nvim",
