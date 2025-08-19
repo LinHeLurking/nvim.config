@@ -16,8 +16,6 @@ local bootstrap_lazy = function()
 end
 
 local get_plugins = function()
-  local is_vsc = vim.g.vscode ~= nil
-  local not_vsc = not is_vsc
   local plugins = {
     -- which key
     { "folke/which-key.nvim" },
@@ -38,9 +36,6 @@ local get_plugins = function()
       end,
       event = { "VeryLazy" },
     },
-    --
-    -- everything below will not be loaded when in vscode
-    --
     -- lualine
     {
       "nvim-lualine/lualine.nvim",
@@ -48,7 +43,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.lualine-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
     -- tokyonight theme
@@ -57,7 +52,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.tokyonight-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
     },
     -- guess indent
     {
@@ -66,7 +61,7 @@ local get_plugins = function()
         require("plugin-config.guess-indent-config").setup()
       end,
       dependencies = { "neovim/nvim-lspconfig" },
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
     -- nvim tree file explorer
@@ -78,7 +73,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.nvim-tree-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       cmd = { "NvimTreeOpen", "NvimTreeClose", "NvimTreeToggle", "NvimTreeFocus", "NvimTreeRefresh" },
       event = { "DirChangedPre", "BufEnter" },
     },
@@ -90,7 +85,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.buffer-line-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
     --
@@ -105,7 +100,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.lsp.basic-lsp").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
     -- better lsp diagnostics
@@ -127,7 +122,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.lsp.mason-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "VeryLazy" },
     },
     -- null-ls
@@ -138,7 +133,7 @@ local get_plugins = function()
         "nvimtools/none-ls-extras.nvim",
       },
       config = function() end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
     {
@@ -150,7 +145,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.lsp.null-ls-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
     -- signature help when completing
@@ -162,7 +157,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.lsp.lsp-signature-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
     -- pretty ui when renaming
@@ -174,7 +169,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.lsp.dressing-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
     -- code navigation at status bar
@@ -186,7 +181,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.lsp.nvim-navic-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
     -- rust tools
@@ -195,7 +190,7 @@ local get_plugins = function()
       dependencies = {
         "neovim/nvim-lspconfig",
       },
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "BufEnter *.rs" },
     },
     -- trouble
@@ -205,7 +200,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.trouble-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       cmd = "Trouble",
     },
     -- auto complete related settings
@@ -214,7 +209,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.nvim-cmp-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "InsertEnter", "CmdlineChanged" },
       dependencies = {
         "hrsh7th/cmp-nvim-lsp",
@@ -240,37 +235,37 @@ local get_plugins = function()
     {
       "hrsh7th/cmp-nvim-lsp",
       dependencies = { "hrsh7th/nvim-cmp" },
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "InsertEnter" },
     },
     {
       "hrsh7th/cmp-buffer",
       dependencies = { "hrsh7th/nvim-cmp" },
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "InsertEnter" },
     },
     {
       "hrsh7th/cmp-path",
       dependencies = { "hrsh7th/nvim-cmp" },
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "InsertEnter", "CmdlineChanged" },
     },
     {
       "hrsh7th/cmp-cmdline",
       dependencies = { "hrsh7th/nvim-cmp" },
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "InsertEnter", "CmdlineChanged" },
     },
     {
       "saadparwaiz1/cmp_luasnip",
       dependencies = { "hrsh7th/nvim-cmp" },
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "InsertEnter" },
     },
     {
       "L3MON4D3/LuaSnip",
       dependencies = { "hrsh7th/nvim-cmp" },
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "InsertEnter" },
     },
     -- input enhance
@@ -280,7 +275,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.autopairs-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "InsertEnter" },
     },
     {
@@ -291,7 +286,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.nvim-ts-autotag-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "InsertEnter" },
     },
     -- tree sitter syntax highlight
@@ -300,7 +295,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.treesitter-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
     {
@@ -311,7 +306,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.ts-context-comment-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
     -- auto comment
@@ -320,7 +315,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.comment-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       cmd = "CommentToggle",
       event = { "BufReadPost", "BufNewFile" },
     },
@@ -331,7 +326,7 @@ local get_plugins = function()
       dependencies = {
         "nvim-lua/plenary.nvim",
       },
-      cond = not_vsc,
+      -- cond = not_vsc,
       -- cmd = "Telescope",
       event = { "VeryLazy" },
     },
@@ -342,7 +337,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.terminal-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       cmd = "ToggleTerm",
       keys = { "<F60>", "<A-F12>", "C-\\" },
     },
@@ -354,7 +349,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.dashboard-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
     },
     -- git
     {
@@ -362,13 +357,13 @@ local get_plugins = function()
       config = function()
         require("plugin-config.git").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
     -- rainbow paranthesises
     {
       "HiPhish/rainbow-delimiters.nvim",
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },
     },
     {
@@ -377,7 +372,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.hop-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       cmd = { "HopWord", "HopChar1", "HopChar2", "HopLine" },
     },
     -- modern fold
@@ -387,7 +382,7 @@ local get_plugins = function()
       config = function()
         require("plugin-config.nvim-ufo-config").setup()
       end,
-      cond = not_vsc,
+      -- cond = not_vsc,
       event = { "BufNewFile", "BufReadPost" },
     },
   }
