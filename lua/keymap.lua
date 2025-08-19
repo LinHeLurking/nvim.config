@@ -144,6 +144,16 @@ if not_vscode then
   vim.keymap.set("v", "<C-c>", "y", opts)
 end
 
+-- 
+-- Avante.nvim
+--
+
+if not_vscode then
+  wk.add({
+    {"<Leader>a", group="🤖 Avante"},
+  })
+end
+
 --
 -- Hop
 --
