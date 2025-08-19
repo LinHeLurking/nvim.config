@@ -385,6 +385,8 @@ local get_plugins = function()
       -- cond = not_vsc,
       event = { "BufNewFile", "BufReadPost" },
     },
+    -- avante.nvim
+    require("ai").avante_config,
   }
   return plugins
 end
