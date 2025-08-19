@@ -39,7 +39,6 @@ M.setup = function()
     if client.server_capabilities.inlayHintProvider then
       vim.lsp.inlay_hint.enable(true)
     end
-
   end
   local lsp_servers = {
     lua_ls = {
@@ -100,29 +99,7 @@ M.setup = function()
             autoSearchPaths = true,
             diagnosticMode = "openFilesOnly",
             useLibraryCodeForTypes = true,
-            typeCheckingMode = "recommended",
-            diagnosticSeverityOverrides = {
-              reportMissingParameterType = "information",
-              reportAny = "hint",
-              reportPossiblyUnboundVariable = "information",
-              reportAttributeAccessIssue = "information",
-              reportGeneralTypeIssues = "hint",
-              reportOptionalMemberAccess = "hint",
-              reportReturnType = "warning",
-              reportMissingTypeArgument = "information",
-              reportUnusedImport = "information",
-              reportUnusedCallResult = "hint",
-              reportUnknownVariableType = "hint",
-              reportAssignmentType = "information",
-              reportDeprecated = "information",
-              reportUnannotatedClassAttribute = false,
-              reportUnknownMemberType = "hint",
-              reportArgumentType = "hint",
-              reportUnknownArgumentType = "hint",
-              reportUnknownParameterType = "hint",
-              reportImplicitOverride = false,
-              reportIncompatibleMethodOverride = "warning",
-            },
+            typeCheckingMode = "off",
           },
         },
       },

@@ -62,7 +62,7 @@ local get_plugins = function()
       end,
       dependencies = { "neovim/nvim-lspconfig" },
       -- cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile" },
+      -- event = { "BufReadPost", "BufNewFile" },
     },
     -- nvim tree file explorer
     {
