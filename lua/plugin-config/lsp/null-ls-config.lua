@@ -45,32 +45,6 @@ M.setup = function()
       })
       table.insert(ideal_sources, entry)
     end
-    -- Python lint
-    if vim.fn.executable("pylint") == 1 then
-    -- if 1 == 1 then
-      local entry = null_ls.builtins.diagnostics.pylint.with({
-        extra_args = {
-          -- Suppress docstring warning (C0111) :P
-          --
-          -- Suppress wildcard-import warning (W0401)
-          --
-          -- Import checking is problematic for packages written in C. (E0401)
-          -- Disable it. Don't worry, pyright checks it right :P
-          --
-          -- Suppress warning about `too many locals` (R0914)
-          -- Suppress warning about `to many arguments` (R0913)
-          -- Suppress warning about `to few public methods` (R0903)
-          -- Suppress warning about `unspecified encoding` (W1514)
-          --
-          -- Suppress `undefined-variable` because pylint wrongly report it for some imports. (E0602)
-          -- Don't worry, pyright still handles it.
-          "--disable=C0111,E0401,R0914,E0602,W0401,R0913,R0903,W1514",
-          -- Suppress snake name check rules for 1 or 2 length names :P
-          "--good-names-rgxs=^[_a-z][_a-z0-9]?$",
-        },
-      })
-      table.insert(ideal_sources, entry)
-    end
     -- JS/TS/HTML/CSS
     for i, category in ipairs({ "diagnostics", "formatting", "code_actions" }) do
       local capability = null_ls.builtins[category]
@@ -119,17 +93,6 @@ M.setup = function()
       local entry = null_ls.builtins.formatting.black
       table.insert(ideal_sources, entry)
     end
-    if vim.fn.executable("isort") == 1 then
-    -- if 1 == 1 then
-      local entry = null_ls.builtins.formatting.isort
-      table.insert(ideal_sources, entry)
-    end
-    -- if 1 == 1 then
-    --   local entry = null_ls.builtins.diagnostics.mypy.with({
-    --     extra_args = {"--disable-error-code=import-untyped"}
-    --   })
-    --   table.insert(ideal_sources, entry)
-    -- end
     return ideal_sources
   end
 
