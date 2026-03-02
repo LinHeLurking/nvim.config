@@ -110,8 +110,47 @@ if [ ! -d "$CONFIG_DIR" ]; then
 fi
 
 # ------------------------------------------------------------
-# 4. 完成
+# 4. 验证安装，处理 FUSE 缺失
 # ------------------------------------------------------------
 echo ""
-echo "[3/3] Done."
-"$NVIM_BIN" --version 2>/dev/null | head -1 || true
+echo "[3/3] Verifying installation..."
+
+NVIM_VERSION_OUTPUT=$("$NVIM_BIN" --version 2>&1)
+NVIM_VERSION_EXIT=$?
+
+if [ $NVIM_VERSION_EXIT -eq 0 ]; then
+    echo "$NVIM_VERSION_OUTPUT" | head -1
+    echo ""
+    echo "Done."
+else
+    # 检查是否为 FUSE 错误
+    if echo "$NVIM_VERSION_OUTPUT" | grep -qi "fuse\|libfuse\|AppImage"; then
+        echo "    Detected FUSE error. Extracting AppImage instead..."
+
+        APPIMAGE_DIR="$INSTALL_DIR/nvim_appimage"
+        APPIMAGE_FILE="$APPIMAGE_DIR/nvim.appimage"
+
+        mkdir -p "$APPIMAGE_DIR"
+        mv "$NVIM_BIN" "$APPIMAGE_FILE"
+        chmod +x "$APPIMAGE_FILE"
+
+        echo "    Extracting AppImage to $APPIMAGE_DIR/squashfs-root ..."
+        (cd "$APPIMAGE_DIR" && "$APPIMAGE_FILE" --appimage-extract >/dev/null)
+
+        APPRUN="$APPIMAGE_DIR/squashfs-root/AppRun"
+        if [ ! -f "$APPRUN" ]; then
+            echo "Error: AppRun not found at $APPRUN after extraction." >&2
+            exit 1
+        fi
+
+        ln -sf "$APPRUN" "$NVIM_BIN"
+        echo "    Symlink created: $NVIM_BIN -> $APPRUN"
+
+        "$NVIM_BIN" --version 2>/dev/null | head -1 || true
+        echo ""
+        echo "Done."
+    else
+        echo "Warning: nvim --version failed with unexpected error:" >&2
+        echo "$NVIM_VERSION_OUTPUT" >&2
+    fi
+fi
