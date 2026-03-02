@@ -296,7 +296,8 @@ local get_plugins = function()
         require("plugin-config.treesitter-config").setup()
       end,
       -- cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile" },
+      lazy = false,
+      build = ":TSUpdate",
     },
     {
       "JoosepAlviste/nvim-ts-context-commentstring",

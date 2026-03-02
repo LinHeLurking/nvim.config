@@ -7,7 +7,7 @@ M.setup = function()
   local util = require("util")
   local keymap = require("keymap")
 
-  require("nvim-treesitter.configs").setup({
+  require("nvim-treesitter").setup({
     ensure_installed = {},
     -- context_commentstring = {
     --   enable = true,
