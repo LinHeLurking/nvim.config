@@ -386,7 +386,7 @@ local get_plugins = function()
       event = { "BufNewFile", "BufReadPost" },
     },
     -- avante.nvim
-    require("ai").avante_config,
+    -- require("ai").avante_config,
   }
   return plugins
 end
