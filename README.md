@@ -6,11 +6,15 @@ My personal Neovim configuration.
 
 Run the following command to download Neovim and set up this config automatically:
 
-```bash
-# Using HTTPS (no SSH key required)
-bash <(curl -fsSL https://raw.githubusercontent.com/LinHeLurking/nvim.config/main/sh/install_nvim.sh) -p https
+**HTTPS** (no SSH key required):
 
-# Using SSH
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/LinHeLurking/nvim.config/main/sh/install_nvim.sh) -p https
+```
+
+**SSH**:
+
+```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/LinHeLurking/nvim.config/main/sh/install_nvim.sh) -p ssh
 ```
 
