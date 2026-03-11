@@ -392,6 +392,7 @@ local get_plugins = function()
       lazy = true,
       cmd = {
         "LazyGit",
+        "LazyGitLog",
         "LazyGitConfig",
         "LazyGitCurrentFile",
         "LazyGitFilter",
