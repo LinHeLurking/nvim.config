@@ -236,8 +236,14 @@ vim.keymap.set("n", keymap.term_toggle_key(), "<Cmd>:ToggleTerm direction=float<
 vim.keymap.set("i", keymap.term_toggle_key(), "<Cmd>:ToggleTerm direction=float<CR>", opts)
 vim.keymap.set("t", keymap.term_toggle_key(), "<Cmd>:ToggleTerm direction=float<CR>", opts)
 
-keymap.set_term_keymap = function()
-  local term_opts = { silent = true, noremap = true, buffer = 0 }
+keymap.set_term_keymap = function(event)
+  -- Skip if it's LazyGit
+  local buffer_name = event.file
+  if string.match(buffer_name, "term://.*lazygit") then
+    return
+  end
+
+  local term_opts = { silent = true, noremap = true, buffer = true }
   vim.keymap.set("n", keymap.term_toggle_key(), "<Cmd>:ToggleTerm direction=float<CR>", opts)
   vim.keymap.set("t", keymap.term_toggle_key(), "<Cmd>:ToggleTerm direction=float<CR>", opts)
   vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", term_opts)
@@ -300,6 +306,12 @@ if not_vscode then
       gs.next_hunk()
     end)
   end, { silent = true, noremap = true, desc = "Next git hunk" })
+  -- LazyGit 
+  wk.add({
+    {"<Leader>l", group="LazyGit"},
+    {"<Leader>lg", "<Cmd>LazyGit<CR>", desc="LazyGit"},
+    {"<Leader>ll", "<Cmd>LazyGitLog<CR>", desc="LazyGitLog"},
+  })
 end
 
 --
