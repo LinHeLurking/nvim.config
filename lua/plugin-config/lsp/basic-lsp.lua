@@ -104,6 +104,11 @@ M.setup = function()
         },
       },
     },
+    ty = {
+      on_attach = on_attach_base,
+      capabilities=capabilities,
+      -- settings = {ty={}}
+    },
     yamlls = {
       on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = true

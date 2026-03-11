@@ -323,7 +323,7 @@ local get_plugins = function()
     -- telescope
     {
       "nvim-telescope/telescope.nvim",
-      branch = "0.1.x",
+      tag = "v0.2.1",
       dependencies = {
         "nvim-lua/plenary.nvim",
       },
