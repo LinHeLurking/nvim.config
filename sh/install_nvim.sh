@@ -115,7 +115,7 @@ fi
 echo ""
 echo "[3/3] Verifying installation..."
 
-NVIM_VERSION_OUTPUT=$("$NVIM_BIN" --version 2>&1)
+NVIM_VERSION_OUTPUT=$("$NVIM_BIN" --version 2>&1) || true
 
 # 退出码不可靠（FUSE 错误时仍为 0），改为检查输出内容
 if echo "$NVIM_VERSION_OUTPUT" | grep -q "^NVIM v"; then
