@@ -278,38 +278,6 @@ local get_plugins = function()
       -- cond = not_vsc,
       event = { "InsertEnter" },
     },
-    {
-      "windwp/nvim-ts-autotag",
-      dependencies = {
-        "nvim-treesitter/nvim-treesitter",
-      },
-      config = function()
-        require("plugin-config.nvim-ts-autotag-config").setup()
-      end,
-      -- cond = not_vsc,
-      event = { "InsertEnter" },
-    },
-    -- tree sitter syntax highlight
-    {
-      "nvim-treesitter/nvim-treesitter",
-      config = function()
-        require("plugin-config.treesitter-config").setup()
-      end,
-      -- cond = not_vsc,
-      lazy = false,
-      build = ":TSUpdate",
-    },
-    {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-      dependencies = {
-        "nvim-treesitter/nvim-treesitter",
-      },
-      config = function()
-        require("plugin-config.ts-context-comment-config").setup()
-      end,
-      -- cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile" },
-    },
     -- auto comment
     {
       "terrortylor/nvim-comment",
