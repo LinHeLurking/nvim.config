@@ -324,6 +324,7 @@ if not_vscode then
     { "<Leader>bl", "<Cmd>BufferLineCycleNext<CR>", desc = "Next Buffer" },
     { "<Leader>bh", "<Cmd>BufferLineCyclePrev<CR>", desc = "Previous Buffer" },
     { "<Leader>bp", "<Cmd>BufferLinePick<CR>", desc = "Pick Buffer" },
+    {"<Leader>bk", "<Cmd>BufferLineCloseOthers<CR>", desc="Close Other Tabs but Keep This"},
     { "<Leader>bc", close_cur_buf, desc = "Close Buffer" },
   })
 end
