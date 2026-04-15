@@ -50,9 +50,17 @@ M.setup = function()
       }
     end,
   })
+  -- Thicker characters for splits
+  vim.opt.fillchars = {
+    vert = '┃', -- Or '█', '┃', '│'
+    horiz = '━',
+    vertleft = '┫',
+    vertright = '┣',
+    verthoriz = '╋',
+  }
   vim.cmd([[colorscheme tokyonight-day]])
-  vim.cmd([[hi WinSeparator guifg=#7ea9e6]])
-  vim.cmd([[hi NvimTreeWinSeparator guifg=#7ea9e6]])
+  vim.cmd([[hi WinSeparator guifg=#789ccf]])
+  vim.cmd([[hi NvimTreeWinSeparator guifg=#789ccf]])
 end
 
 return M
