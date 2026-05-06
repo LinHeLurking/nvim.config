@@ -4,8 +4,6 @@ M.setup = function()
   require("lspconfig.ui.windows").default_options.border = "single"
 
   -- Disable some annoying lsp ui.
-  -- Note that ts-autotag plugin also modifies diagnostic settings for sepcial reasons.
-  -- See: nvim-ts-autotag-config.lua for details
   vim.diagnostic.config({
     virtual_text = {
       severity = vim.diagnostic.severity.ERROR,
