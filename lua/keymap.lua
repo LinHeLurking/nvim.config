@@ -310,8 +310,9 @@ if not_vscode then
   -- LazyGit 
   wk.add({
     {"<Leader>l", group="LazyGit"},
-    {"<Leader>lg", "<Cmd>LazyGit<CR>", desc="LazyGit"},
-    {"<Leader>ll", "<Cmd>LazyGitLog<CR>", desc="LazyGitLog"},
+    {"<Leader>lg", "<Cmd>LazyGitCurrentFile<CR>", desc="LazyGit"},
+    {"<Leader>ll", "<Cmd>LazyGitLog<CR>", desc="Git Log"},
+    {"<Leader>lf", "<Cmd>LazyGitFilterCurrentFile<CR>", desc="Git Filter Current File"}
   })
 end
 
