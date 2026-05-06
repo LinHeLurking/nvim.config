@@ -80,13 +80,6 @@ M.setup = function()
         },
       },
     },
-    ty = {
-      settings = {
-        ty = {
-          diagnosticMode = "workspace"
-        }
-      }
-    }
   }
 
   for name, cfg in pairs(lsp_servers) do
