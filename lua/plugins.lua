@@ -125,29 +125,6 @@ local get_plugins = function()
       -- cond = not_vsc,
       event = { "VeryLazy" },
     },
-    -- null-ls
-    {
-      "nvimtools/none-ls.nvim",
-      dependencies = {
-        "neovim/nvim-lspconfig",
-        "nvimtools/none-ls-extras.nvim",
-      },
-      config = function() end,
-      -- cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile" },
-    },
-    {
-      "jay-babu/mason-null-ls.nvim",
-      dependencies = {
-        "neovim/nvim-lspconfig",
-        "nvimtools/none-ls.nvim",
-      },
-      config = function()
-        require("plugin-config.lsp.null-ls-config").setup()
-      end,
-      -- cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile" },
-    },
     -- signature help when completing
     {
       "ray-x/lsp_signature.nvim",
