@@ -335,6 +335,12 @@ end
 
 if not_vscode then
   keymap.lsp_set_map = function(bufnr)
+    -- Skip unsupported buffers. 
+    local bufname = vim.api.nvim_buf_get_name(bufnr)
+    if bufname:sub(1, #"term://") == "term://" then
+      return
+    end
+
     -- Enable completion triggered by <c-x><c-o>
     vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
