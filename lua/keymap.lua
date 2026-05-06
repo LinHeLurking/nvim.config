@@ -173,6 +173,7 @@ if not_vscode then
     callback = function()
       local qf_opts = { noremap = true, silent = true }
       vim.api.nvim_buf_set_keymap(0, "n", "q", "<Cmd>q<CR>", qf_opts)
+      vim.api.nvim_buf_set_keymap(0, "n", "<CR>", "<CR><cmd>cclose<CR>", qf_opts)
     end,
   })
 end
