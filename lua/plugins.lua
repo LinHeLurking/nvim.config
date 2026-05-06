@@ -125,6 +125,15 @@ local get_plugins = function()
       -- cond = not_vsc,
       event = { "VeryLazy" },
     },
+    -- auto matically enable mason installed lsp servers.
+    {
+      "mason-org/mason-lspconfig.nvim",
+      opts = {},
+      dependencies = {
+        { "mason-org/mason.nvim", opts = {} },
+        "neovim/nvim-lspconfig",
+      },
+    },
     -- signature help when completing
     {
       "ray-x/lsp_signature.nvim",

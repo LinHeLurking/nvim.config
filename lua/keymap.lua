@@ -334,14 +334,12 @@ end
 --
 
 if not_vscode then
-  keymap.lsp_set_map = function(client, bufnr)
+  keymap.lsp_set_map = function(bufnr)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Lsp keymaps
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    -- vim.keymap.set("n", "K", function()
-    --   local winid = require("ufo").peekFoldedLinesUnderCursor()
-    --   if not winid then
-    --     vim.lsp.buf.hover()
-    --   end
-    -- end, bufopts)
     vim.keymap.set(
       "n",
       "<Leader>k",

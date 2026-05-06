@@ -16,27 +16,16 @@ M.setup = function()
 
   local num_index_cpu = math.min(math.floor(#vim.loop.cpu_info() / 2), 16)
 
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = { "documentation", "detail", "additionalTextEdits" },
-  }
-  capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true,
-  }
   local keymap = require("keymap")
-
-  local function on_attach_base(client, buf)
-    keymap.lsp_set_map(client, bufnr)
-    if client.server_capabilities.inlayHintProvider then
-      vim.lsp.inlay_hint.enable(true)
+  vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+    callback = function(ev)
+      keymap.lsp_set_map(ev.buf)
     end
-  end
+  })
+
   local lsp_servers = {
     lua_ls = {
-      on_attach = on_attach_base,
-      capabilities = capabilities,
       settings = {
         Lua = {
           diagnostics = {
@@ -46,8 +35,6 @@ M.setup = function()
       },
     },
     clangd = {
-      on_attach = on_attach_base,
-      capabilities = capabilities,
       cmd = {
         "clangd",
         "--all-scopes-completion",
@@ -69,8 +56,6 @@ M.setup = function()
       },
     },
     pyright = {
-      on_attach = on_attach_base,
-      capabilities = capabilities,
       settings = {
         python = {
           analysis = {
@@ -84,8 +69,6 @@ M.setup = function()
       },
     },
     basedpyright = {
-      on_attach = on_attach_base,
-      capabilities = capabilities,
       settings = {
         basedpyright = {
           analysis = {
@@ -97,35 +80,9 @@ M.setup = function()
         },
       },
     },
-    ty = {
-      on_attach = on_attach_base,
-      capabilities=capabilities,
-      -- settings = {ty={}}
-    },
-    yamlls = {
-      on_attach = function(client, bufnr)
-        client.server_capabilities.documentFormattingProvider = true
-        on_attach_base(client, bufnr)
-      end,
-      capabilities = capabilities,
-      settings = {
-        editor = {
-          tabSize = 2,
-        },
-        yaml = {
-          format = {
-            enable = true,
-          },
-          schemaStore = {
-            enable = true,
-          },
-        },
-      },
-    },
   }
 
   for name, cfg in pairs(lsp_servers) do
-    vim.lsp.enable(name)
     vim.lsp.config(name, cfg)
   end
 end
