@@ -6,7 +6,6 @@ M.setup = function()
 
 
   -- Lualine config
-  local navic = require("nvim-navic")
   require("lualine").setup({
     options = {
       theme = "tokyonight-day",
@@ -30,17 +29,6 @@ M.setup = function()
     sections = {
       lualine_a = { "mode" },
       lualine_b = { "branch", "diff", "diagnostics" },
-      lualine_c = {
-        "filename",
-        {
-          function()
-            return navic.get_location()
-          end,
-          cond = function()
-            return navic.is_available()
-          end,
-        },
-      },
       lualine_x = { "encoding", "fileformat", "filetype" },
       lualine_y = { "progress" },
       lualine_z = { "location" },

@@ -39,7 +39,7 @@ local get_plugins = function()
     -- lualine
     {
       "nvim-lualine/lualine.nvim",
-      dependencies = { "nvim-tree/nvim-web-devicons", "SmiteshP/nvim-navic" },
+      dependencies = { "nvim-tree/nvim-web-devicons" },
       config = function()
         require("plugin-config.lualine-config").setup()
       end,
@@ -145,18 +145,6 @@ local get_plugins = function()
       },
       config = function()
         require("plugin-config.lsp.dressing-config").setup()
-      end,
-      -- cond = not_vsc,
-      event = { "BufReadPost", "BufNewFile" },
-    },
-    -- code navigation at status bar
-    {
-      "SmiteshP/nvim-navic",
-      dependencies = {
-        "neovim/nvim-lspconfig",
-      },
-      config = function()
-        require("plugin-config.lsp.nvim-navic-config").setup()
       end,
       -- cond = not_vsc,
       event = { "BufReadPost", "BufNewFile" },

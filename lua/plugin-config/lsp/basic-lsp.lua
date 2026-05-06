@@ -27,13 +27,8 @@ M.setup = function()
   }
   local keymap = require("keymap")
 
-  -- local navic = require("nvim-navic")
-
   local function on_attach_base(client, buf)
     keymap.lsp_set_map(client, bufnr)
-    -- if client.server_capabilities.documentSymbolProvider then
-    --   navic.attach(client, bufnr)
-    -- end
     if client.server_capabilities.inlayHintProvider then
       vim.lsp.inlay_hint.enable(true)
     end
