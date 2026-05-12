@@ -30,7 +30,24 @@ M.setup = function()
     -- This field is only relevant if direction is set to 'float'
   })
 
-  vim.api.nvim_create_autocmd("TermOpen", { pattern = { "term://*" }, callback = keymap.set_term_keymap })
+  local t_open_cb = function(event)
+    keymap.set_term_keymap(event)
+    -- Mark toggleterm buffers as not modified to allow :w and :wqa
+    vim.bo.buflisted = false
+    vim.bo.modified = false
+  end
+
+  -- Also mark as unmodified when entering terminal buffer
+  vim.api.nvim_create_autocmd('BufEnter', {
+    pattern = 'term://*toggleterm#*',
+    callback = function()
+      vim.bo.modified = false
+    end,
+  })
+
+  
+  -- Set terminal keymaps.
+  vim.api.nvim_create_autocmd("TermOpen", { pattern = { "term://*toggleterm#*" }, callback = t_open_cb })
 end
 
 return M
