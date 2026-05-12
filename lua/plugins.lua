@@ -350,8 +350,13 @@ local get_plugins = function()
       --   { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
       -- },
     },
-    -- avante.nvim
-    -- require("ai").avante_config,
+    -- Automatically switch input method
+    {
+      "keaising/im-select.nvim",
+      config = function()
+        require("im_select").setup({})
+      end,
+    }
   }
   return plugins
 end
